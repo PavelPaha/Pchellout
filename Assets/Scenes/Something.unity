@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 88208919}
   - component: {fileID: 88208918}
   - component: {fileID: 88208917}
+  - component: {fileID: 88208920}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -239,6 +240,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &88208920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88208916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0769e1852f7814045a360bd8ed5ab111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100
+  edgeMargin: 50
+  smoothTime: 0.3
 --- !u!1 &236987138
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +484,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.07499999, y: 0.16000003, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -1137,8 +1153,8 @@ Tilemap:
   - first: {x: 9, y: -8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1427,8 +1443,8 @@ Tilemap:
   - first: {x: 6, y: -6, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1617,8 +1633,8 @@ Tilemap:
   - first: {x: 8, y: -5, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1647,8 +1663,8 @@ Tilemap:
   - first: {x: 11, y: -5, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2187,8 +2203,8 @@ Tilemap:
   - first: {x: 9, y: -1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2566,15 +2582,19 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 161
+  - m_RefCount: 156
     m_Data: {fileID: 11400000, guid: f9a15e2c48b5dab42a493b805c7ad885, type: 2}
   - m_RefCount: 47
     m_Data: {fileID: 11400000, guid: 1b79ba95adc7f4d459fc3d9d6fa4c508, type: 2}
+  - m_RefCount: 5
+    m_Data: {fileID: 11400000, guid: bda302e7d74ef314abc36f0fb52ff7a9, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 161
+  - m_RefCount: 156
     m_Data: {fileID: 21300000, guid: 1589ce2e894cc594d8332422ca74a124, type: 3}
   - m_RefCount: 47
     m_Data: {fileID: 21300000, guid: 5bee3202b9c12c041b47689c152dd384, type: 3}
+  - m_RefCount: 5
+    m_Data: {fileID: 21300000, guid: 632b169b1c7bd2e4f886c0b5fc7d8c64, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 208
     m_Data:
@@ -2603,7 +2623,7 @@ Tilemap:
   m_Origin: {x: -9, y: -13, z: 0}
   m_Size: {x: 29, y: 16, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
+  m_TileOrientation: 6
   m_TileOrientationMatrix:
     e00: 1
     e01: 0
@@ -2612,7 +2632,7 @@ Tilemap:
     e10: 0
     e11: 1
     e12: 0
-    e13: 0
+    e13: 0.19
     e20: 0
     e21: 0
     e22: 1
@@ -2691,8 +2711,8 @@ Transform:
   m_GameObject: {fileID: 1426284444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2, y: 0.22, z: -1.38}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 602929279}
   m_Father: {fileID: 0}

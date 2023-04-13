@@ -1,4 +1,5 @@
 using UnityEngine;
+using Vector3 = System.Numerics.Vector3;
 
 public class Bee : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Bee : MonoBehaviour
 
         transform.position = Vector2.MoveTowards(transform.position, mousePosition, speed * Time.deltaTime);
 
+        transform.position += new UnityEngine.Vector3(0, 0, -transform.position.z-6);
         UpdateAnimationDirection();
         _previousPosition = transform.position;
     }

@@ -7,7 +7,6 @@ public class TileMapClickHandler : MonoBehaviour
 {
     public Tilemap tilemap; // Ссылка на Tilemap
     public GameObject objectPrefab; // Ссылка на ваш объект префаб
-    public int Delta = 3;
     void Update()
     {
         // Проверяем нажатие левой кнопки мыши
@@ -24,7 +23,7 @@ public class TileMapClickHandler : MonoBehaviour
             GameObject instance = Instantiate(objectPrefab, cellBottomLeftWorldPos, Quaternion.identity);
 
             // Устанавливаем позицию Z для объекта, чтобы избежать перекрытия с тайлами
-            // instance.transform.position = new Vector3(instance.transform.position.x, instance.transform.position.y, -1f);
+            instance.transform.position = new Vector3(instance.transform.position.x, instance.transform.position.y, -1f);
         }
     }
 

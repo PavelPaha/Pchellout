@@ -4,6 +4,7 @@ public class ToggleAnimationOnClick : MonoBehaviour
 {
     public Animator[] partAnimators;
     public string animationName;
+    public string reverseAnimationName;
 
     private bool isAnimationForward = true;
 
@@ -11,18 +12,14 @@ public class ToggleAnimationOnClick : MonoBehaviour
     {
         foreach (Animator animator in partAnimators)
         {
-            if (isAnimationForward)
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName(animationName))
             {
-                animator.Play(animationName, 0, 0f);
-                animator.speed = 1;
+                animator.Play(reverseAnimationName);
             }
             else
             {
-                animator.Play(animationName, 0, 1f);
-                animator.speed = -1;
+                animator.Play(animationName);
             }
         }
-
-        isAnimationForward = !isAnimationForward;
     }
 }

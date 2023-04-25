@@ -216,6 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 404814557}
+  - component: {fileID: 404814558}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Untagged
@@ -240,6 +241,24 @@ Transform:
   m_Father: {fileID: 1429303169}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &404814558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404814556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f207bd357b828f43983edb99a40c98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeStep: 0
+  lifePeriod: 10
+  maxNectarCount: 100000
+  nectarCount: 0
+  productionRate: 1
+  returningRate: 5
 --- !u!1 &742970501
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 809586165}
+  - component: {fileID: 809586166}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Untagged
@@ -356,6 +376,24 @@ Transform:
   m_Father: {fileID: 1429303169}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &809586166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809586164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f207bd357b828f43983edb99a40c98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeStep: 0
+  lifePeriod: 5
+  maxNectarCount: 30000
+  nectarCount: 0
+  productionRate: 1
+  returningRate: 5
 --- !u!1 &1111256541
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +638,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365755546}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8.23, y: 2.86, z: 0}
   m_LocalScale: {x: 0.27502114, y: 0.27502114, z: 0.27502114}
   m_ConstrainProportionsScale: 0
@@ -841,9 +879,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2083668808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2329e79d8e95b8e46a756b86941efba9, type: 3}
+  m_Script: {fileID: 11500000, guid: 54485ead9e241a84390f82b5d041619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetsParent: {fileID: 1429303168}
   spawnObject: {fileID: 1365755546}
-  speed: 4
+  speed: 3
+  nectarCount: 0
+  maxNectarCount: 10000

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BeeBotController : MonoBehaviour
+public class BeeBot : MonoBehaviour
 {
     [SerializeField] protected GameObject targetsParent;
     [SerializeField] protected GameObject spawnObject;

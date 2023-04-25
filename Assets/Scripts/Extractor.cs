@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CollectorController : BeeBotController
+public class ExtractorController : BeeBotController
 {
     private bool _goToTarget = true;
     private List<GameObject> _targets;
@@ -43,4 +43,9 @@ public class CollectorController : BeeBotController
         ((Vector2)(transform.position - target.transform.position)).magnitude < Delta;
 
     private bool IsAtSpawnLocation() => IsAtTargetLocation(spawnObject);
+
+    protected abstract class ExtractorState
+    {
+        
+    }
 }

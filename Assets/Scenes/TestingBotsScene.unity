@@ -217,8 +217,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1062941556}
   - component: {fileID: 1062941555}
-  - component: {fileID: 1062941557}
   - component: {fileID: 1062941558}
+  - component: {fileID: 1062941559}
+  - component: {fileID: 1062941557}
+  - component: {fileID: 1062941560}
+  - component: {fileID: 1062941561}
   m_Layer: 0
   m_Name: SunflowerFlower
   m_TagString: Untagged
@@ -328,10 +331,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeStep: 0
   lifePeriod: 5
-  maxNectarCount: 10000
+--- !u!114 &1062941559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062941553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176124c8a46ccf04eb5b15bd36d6deb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxNectarCount: 1000000
   nectarCount: 0
-  productionRate: 1
-  returningRate: 0
+  productionRate: 3
+  extractingRate: 0
+--- !u!61 &1062941560
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062941553}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.66, y: 9.68}
+    newSize: {x: 3.66, y: 9.68}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.66, y: 9.68}
+  m_EdgeRadius: 0
+--- !u!50 &1062941561
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062941553}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1111256541
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,8 +405,10 @@ GameObject:
   - component: {fileID: 1111256542}
   - component: {fileID: 1111256543}
   - component: {fileID: 1111256544}
+  - component: {fileID: 1111256547}
   - component: {fileID: 1111256545}
   - component: {fileID: 1111256546}
+  - component: {fileID: 1111256548}
   m_Layer: 0
   m_Name: DaisyFlower
   m_TagString: Untagged
@@ -433,10 +497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeStep: 0
   lifePeriod: 3
-  maxNectarCount: 10000
-  nectarCount: 0
-  productionRate: 1
-  returningRate: 0
 --- !u!95 &1111256545
 Animator:
   serializedVersion: 5
@@ -484,6 +544,43 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.16, y: 10.19}
   m_EdgeRadius: 0
+--- !u!114 &1111256547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111256541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176124c8a46ccf04eb5b15bd36d6deb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxNectarCount: 100000
+  nectarCount: 0
+  productionRate: 2
+  extractingRate: 0
+--- !u!50 &1111256548
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111256541}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1365755546
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,9 +735,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2083668811}
   - component: {fileID: 2083668810}
-  - component: {fileID: 2083668809}
   - component: {fileID: 2083668812}
+  - component: {fileID: 2083668814}
+  - component: {fileID: 2083668809}
   - component: {fileID: 2083668813}
+  - component: {fileID: 2083668815}
   m_Layer: 0
   m_Name: Extractor
   m_TagString: Untagged
@@ -751,10 +850,6 @@ MonoBehaviour:
   targetsParent: {fileID: 1429303168}
   spawnObject: {fileID: 1365755546}
   speed: 3
-  nectarCount: 0
-  maxNectarCount: 10000
-  _timeSinceExtractingStart: 0
-  _extractingStartTime: 0
 --- !u!61 &2083668813
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -781,3 +876,40 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.02, y: 1.02}
   m_EdgeRadius: 0
+--- !u!114 &2083668814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083668808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176124c8a46ccf04eb5b15bd36d6deb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxNectarCount: 100000
+  nectarCount: 0
+  productionRate: 0
+  extractingRate: 30
+--- !u!50 &2083668815
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083668808}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

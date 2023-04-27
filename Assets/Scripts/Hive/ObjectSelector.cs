@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public abstract class ObjectState
 {
@@ -10,55 +12,104 @@ public abstract class ObjectState
         this.objectSelector = objectSelector;
     }
 
-    public virtual void OnMouseDown() { }
-    public virtual void ShowInformation() { }
-    public virtual void HideInformation() { }
-    public virtual void SellObject() { }
+    public virtual void Do() { }
 }
 
-public class NotSelectedState : ObjectState
+public class HideInformationState : ObjectState
 {
-    public NotSelectedState(ObjectSelector objectSelector) : base(objectSelector)
+    public HideInformationState(ObjectSelector objectSelector) : base(objectSelector)
     {
     }
 
-    public override void OnMouseDown()
+    public override void Do()
     {
-        objectSelector.SelectedImage.gameObject.SetActive(true);
-        objectSelector.UnselectedImage.gameObject.SetActive(false);
-        objectSelector.ButtonsCanvas.SetActive(true);
-        objectSelector.SetState(new SelectedState(objectSelector));
+        objectSelector.Information.SetActive(false);
     }
 }
 
-public class SelectedState : ObjectState
+public class ShowInformation : ObjectState
 {
-    public SelectedState(ObjectSelector objectSelector) : base(objectSelector)
+    public ShowInformation(ObjectSelector objectSelector) : base(objectSelector)
     {
     }
 
-    public override void OnMouseDown()
+    public override void Do()
+    {
+        objectSelector.Information.SetActive(true);
+    }
+}
+
+public class SelectState: ObjectState
+{
+    public SelectState(ObjectSelector objectSelector) : base(objectSelector)
+    {
+    }
+
+    public override void Do()
+    {
+        var old = objectSelector.gameObject.transform.parent.gameObject.transform.GetComponent<Selector>()
+            .SelectedObject;
+        
+        if (old.Equals(objectSelector.gameObject))
+        {
+            objectSelector.SelectedImage.gameObject.SetActive(!objectSelector.SelectedImage.gameObject.activeSelf);
+            objectSelector.UnselectedImage.gameObject.SetActive(!objectSelector.UnselectedImage.gameObject.activeSelf);
+            objectSelector.ButtonsCanvas.SetActive(!objectSelector.ButtonsCanvas.activeSelf);
+        }
+        else if (old != null && SameState(old))
+        {
+            var selector = old.gameObject.GetComponent<ObjectSelector>();
+            selector.SelectedImage.gameObject.SetActive(false);
+            selector.UnselectedImage.gameObject.SetActive(true);
+            selector.ButtonsCanvas.SetActive(false);
+            objectSelector.SelectedImage.gameObject.SetActive(true);
+            objectSelector.UnselectedImage.gameObject.SetActive(false);
+            objectSelector.ButtonsCanvas.SetActive(true);
+        }
+        objectSelector.gameObject.transform.parent.gameObject.transform.GetComponent<Selector>()
+            .SelectedObject = objectSelector.gameObject;
+
+
+    }
+
+    private ObjectState ToggleState()
+    {
+        if (objectSelector.CurrentState is SelectState)
+            return new UnselectState(objectSelector);
+        return new SelectState(objectSelector);
+    }
+
+    private static bool SameState(GameObject old)
+    {
+        return old.gameObject.GetComponent<ObjectSelector>().CurrentState is SelectState;
+    }
+}
+
+public class UnselectState: ObjectState
+{
+    public UnselectState(ObjectSelector objectSelector) : base(objectSelector)
+    {
+    }
+
+    public override void Do()
     {
         objectSelector.SelectedImage.gameObject.SetActive(false);
         objectSelector.UnselectedImage.gameObject.SetActive(true);
         objectSelector.ButtonsCanvas.SetActive(false);
-        objectSelector.SetState(new NotSelectedState(objectSelector));
+    }
+}
+
+
+public class SellState: ObjectState
+{
+    public SellState(ObjectSelector objectSelector) : base(objectSelector)
+    {
     }
 
-    public override void ShowInformation()
+    public override void Do()
     {
-        objectSelector.Information.SetActive(true);
-    }
-
-    public override void HideInformation()
-    {
-        objectSelector.Information.SetActive(false);
-    }
-
-    public override void SellObject()
-    {
-        objectSelector.ButtonsCanvas.SetActive(false);
-        Object.Destroy(objectSelector.gameObject);
+        Object.Destroy(objectSelector.gameObject.transform.parent.gameObject.transform.GetComponent<Selector>()
+            .SelectedObject.gameObject);
     }
 }
 
@@ -73,7 +124,7 @@ public class ObjectSelector : MonoBehaviour
     public GameObject UnselectedImage;
 
     public ObjectState CurrentState;
-
+    
     private void Start()
     {
         SelectedImage = transform.GetChild(0).gameObject;
@@ -84,12 +135,15 @@ public class ObjectSelector : MonoBehaviour
 
         sellButton.onClick.AddListener(() =>
         {
-            CurrentState.SellObject();
+            SetState(new SellState(this));
+            CurrentState.Do();
         });
+        
 
         infoButton.onClick.AddListener(() =>
         {
-            CurrentState.ShowInformation();
+            SetState(new ShowInformation(this));
+            CurrentState.Do();
         });
 
         Information = ButtonsCanvas.transform.GetChild(1).gameObject;
@@ -97,12 +151,15 @@ public class ObjectSelector : MonoBehaviour
 
         hideButton.onClick.AddListener(() =>
         {
-            CurrentState.HideInformation();
+            SetState(new HideInformationState(this));
+            CurrentState.Do();
         });
-
+        
+        SelectedImage.SetActive(false);
+        UnselectedImage.SetActive(true);
         Information.SetActive(false);
         ButtonsCanvas.SetActive(false);
-        SetState(new NotSelectedState(this));
+        SetState(new SelectState(this));
     }
 
     public void SetState(ObjectState state)
@@ -112,6 +169,7 @@ public class ObjectSelector : MonoBehaviour
 
     private void OnMouseDown()
     {
-        CurrentState.OnMouseDown();
+        SetState(new SelectState(this));
+        CurrentState.Do();
     }
 }

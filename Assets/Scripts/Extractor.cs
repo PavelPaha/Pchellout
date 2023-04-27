@@ -24,6 +24,7 @@ public class Extractor : BeeBot
     void Update()
     {
         _timeSinceExtractingStart = Time.timeSinceLevelLoad - _extractingStartTime;
+        _targets = GetTargets();
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
@@ -32,6 +33,7 @@ public class Extractor : BeeBot
     private List<GameObject> GetTargets() => Enumerable
         .Range(0, targetsParent.transform.childCount)
         .Select(index => targetsParent.transform.GetChild(index).gameObject)
+        .Where(target => target.GetComponent<Flower>().lifeStep != LifeStep.Child)
         .ToList();
 
     private bool IsAtTargetLocation(GameObject target) =>
@@ -56,6 +58,8 @@ public class Extractor : BeeBot
 
         public override void MoveToTarget()
         {
+            if (_extractor._targets == null || _extractor._targets.Count == 0)
+                return;
             var target = _extractor._targets[_extractor._targetIndex];
             _extractor.MoveToTarget(target);
             if (_extractor.IsAtTargetLocation(target))
@@ -98,7 +102,7 @@ public class Extractor : BeeBot
 
         public override void ExtractNectar()
         {
-            if (_extractor._timeSinceExtractingStart > 5) 
+            if (_extractor._timeSinceExtractingStart > 5)
                 _extractor._extractorState = new MovingToSpawn(_extractor);
             //TODO
         }

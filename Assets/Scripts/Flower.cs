@@ -10,7 +10,7 @@ public enum LifeStep
 
 public class Flower : MonoBehaviour
 {
-    [SerializeField] protected LifeStep lifeStep;
+    [SerializeField] public LifeStep lifeStep;
     [SerializeField] protected float lifePeriod;
     [SerializeField] protected int maxNectarCount;
     [SerializeField] protected int nectarCount;
@@ -20,13 +20,15 @@ public class Flower : MonoBehaviour
     protected float initializationTime;
     protected float timeSinceInitialization;
     protected FlowerState flowerState;
+    protected Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        initializationTime = Time.timeSinceLevelLoad;
         lifeStep = LifeStep.Child;
+        initializationTime = Time.timeSinceLevelLoad;
         flowerState = new GrowingState(this);
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class Flower : MonoBehaviour
             case < LifeStep.Adult when timeSinceInitialization > lifePeriod:
                 lifeStep = LifeStep.Adult;
                 flowerState = new ProducingState(this);
+                animator.SetTrigger("IsAdult");
                 return;
             case < LifeStep.Aged when timeSinceInitialization > 2 * lifePeriod:
                 lifeStep = LifeStep.Aged;

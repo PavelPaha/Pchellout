@@ -993,6 +993,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 131899162892591047, guid: a75cd5a857a27f64aac87e4c55e10804, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1170372535988243618, guid: a75cd5a857a27f64aac87e4c55e10804, type: 3}
       propertyPath: m_Name
       value: BeeCollector
@@ -1057,6 +1061,18 @@ PrefabInstance:
       propertyPath: targetsParent
       value: 
       objectReference: {fileID: 1384328363}
+    - target: {fileID: 9012900152810697892, guid: a75cd5a857a27f64aac87e4c55e10804, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012900153102260686, guid: a75cd5a857a27f64aac87e4c55e10804, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012900153456606620, guid: a75cd5a857a27f64aac87e4c55e10804, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a75cd5a857a27f64aac87e4c55e10804, type: 3}
 --- !u!1 &1042770515

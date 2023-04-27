@@ -25,7 +25,6 @@ public class BasicBee : MonoBehaviour
 
     public void DestroyBee()
     {
-        Destroy(healthBarController.HealthBar);
         Destroy(gameObject);
     }
     void Update()

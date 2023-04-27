@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 
 public class ObjectSelector : MonoBehaviour
 {
+    //TODO: воспользоваться паттерном "State"
     private GameObject SelectedImage;
     private GameObject UnselectedImage;
     public GameObject ButtonsCanvas;
@@ -13,7 +14,7 @@ public class ObjectSelector : MonoBehaviour
     private Button SellObjectButton;
 
     private GameObject Information;
-    private bool _selected = false;
+    public bool Selected = false;
 
     private void Start()
     {
@@ -38,19 +39,19 @@ public class ObjectSelector : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!_selected)
+        if (!Selected)
         {
             SelectedImage.gameObject.SetActive(true);
             UnselectedImage.gameObject.SetActive(false);
             ButtonsCanvas.SetActive(true);
-            _selected = true;
+            Selected = true;
         }
         else
         {
             SelectedImage.gameObject.SetActive(false);
             UnselectedImage.gameObject.SetActive(true);
             ButtonsCanvas.SetActive(false);
-            _selected = false;
+            Selected = false;
         }
     }
 }

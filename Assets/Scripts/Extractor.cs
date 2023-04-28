@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Extractor : BeeBot
+public class Extractor : BasicBee
 {
     [SerializeField] private int nectarCount;
     [SerializeField] private int maxNectarCount;
@@ -28,6 +29,24 @@ public class Extractor : BeeBot
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
+    }
+    
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        DamageInCollisionWithEnemy(collision);
+    }
+
+    public void OnCollisionStay2D(Collision2D collisionInfo)
+    {
+        DamageInCollisionWithEnemy(collisionInfo);
+    }
+
+    private static void DamageInCollisionWithEnemy(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy")) // проверяем тег объекта, столкнувшегося с нашим
+        {
+            collision.gameObject.GetComponent<BasicBee>().Damage(1);
+        }
     }
 
     private List<GameObject> GetTargets() => Enumerable
@@ -102,6 +121,7 @@ public class Extractor : BeeBot
 
         public override void ExtractNectar()
         {
+            _extractor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             if (_extractor._timeSinceExtractingStart > 5)
                 _extractor._extractorState = new MovingToSpawn(_extractor);
             //TODO

@@ -14,8 +14,8 @@ public class BasicBee : MonoBehaviour
 
     protected const float Delta = 0.1f;
 
-    protected void UpdateAnimationDirection(Vector2 direction) =>
-        GetComponent<SpriteRenderer>().flipX = direction.x < 0.01f;
+    protected void UpdateAnimationDirection(Rigidbody2D rigidbody) =>
+        GetComponent<SpriteRenderer>().flipX = rigidbody.velocity.x < 0.01f;
 
     protected void MoveToTarget(GameObject target)
     {
@@ -25,6 +25,7 @@ public class BasicBee : MonoBehaviour
         Vector2 direction = (targetPosition - currentPosition).normalized;
         Vector2 moveForce = direction * speed - rigidbody.velocity;
         rigidbody.AddForce(moveForce, ForceMode2D.Impulse);
+        UpdateAnimationDirection(rigidbody);
     }
 
     protected void MoveToSpawn() => MoveToTarget(spawnObject);

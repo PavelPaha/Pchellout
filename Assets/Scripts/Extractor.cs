@@ -1,36 +1,28 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Extractor : BasicBee
 {
-    [SerializeField] private int nectarCount;
-    [SerializeField] private int maxNectarCount;
-
     private ExtractorState _extractorState;
-    [SerializeField] private float _timeSinceExtractingStart;
-    [SerializeField] private float _extractingStartTime;
-    private List<GameObject> _targets;
-    private int _targetIndex;
+    private NectarInventory _inventory;
+    private GameObject _target;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        _targets = GetTargets();
+        _inventory = GetComponent<NectarInventory>();
         _extractorState = new MovingToTargetState(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        _timeSinceExtractingStart = Time.timeSinceLevelLoad - _extractingStartTime;
-        _targets = GetTargets();
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
     }
-    
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         DamageInCollisionWithEnemy(collision);
@@ -49,11 +41,15 @@ public class Extractor : BasicBee
         }
     }
 
-    private List<GameObject> GetTargets() => Enumerable
-        .Range(0, targetsParent.transform.childCount)
-        .Select(index => targetsParent.transform.GetChild(index).gameObject)
-        .Where(target => target.GetComponent<Flower>().lifeStep != LifeStep.Child)
-        .ToList();
+    private void UpdateTarget()
+    {
+        _target = Enumerable
+            .Range(0, targetsParent.transform.childCount)
+            .Select(index => targetsParent.transform.GetChild(index).gameObject)
+            .Where(target => target.GetComponent<Flower>().lifeStep != LifeStep.Child)
+            .OrderByDescending(target => target.GetComponent<NectarInventory>().NectarCount)
+            .FirstOrDefault();
+    }
 
     private bool IsAtTargetLocation(GameObject target) =>
         ((Vector2)(transform.position - target.transform.position)).magnitude < Delta;
@@ -77,17 +73,13 @@ public class Extractor : BasicBee
 
         public override void MoveToTarget()
         {
-            if (_extractor._targets == null || _extractor._targets.Count == 0)
+            _extractor.UpdateTarget();
+            var target = _extractor._target;
+            if (target == null)
                 return;
-            var target = _extractor._targets[_extractor._targetIndex];
             _extractor.MoveToTarget(target);
             if (_extractor.IsAtTargetLocation(target))
-            {
-                _extractor._targetIndex = (_extractor._targetIndex + 1) % _extractor._targets.Count;
                 _extractor._extractorState = new ExtractingNectarState(_extractor);
-                _extractor._extractingStartTime = Time.timeSinceLevelLoad;
-                _extractor._timeSinceExtractingStart = 0;
-            }
         }
 
         public override void MoveToSpawn() { }
@@ -122,9 +114,11 @@ public class Extractor : BasicBee
         public override void ExtractNectar()
         {
             _extractor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            if (_extractor._timeSinceExtractingStart > 5)
+            _extractor._inventory.ExtractNectar(_extractor._target);
+            if (_extractor._inventory.IsFull || _extractor._target.GetComponent<NectarInventory>().NectarCount < 10)
+            {
                 _extractor._extractorState = new MovingToSpawn(_extractor);
-            //TODO
+            }
         }
     }
 }

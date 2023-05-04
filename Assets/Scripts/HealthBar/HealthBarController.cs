@@ -1,34 +1,34 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarController : MonoBehaviour
+public class HealthBarController: MonoBehaviour
 {
-    private Image _bar;
-    public int Health;
-    public float Margin = 0.5f;
-    public GameObject HealthBar;
+    public Image _bar;
     public float Fill;
-    
-    // Start is called before the first frame update
-    void Start()
+    private const int _maxHealth = 100;
+    private BasicBee _basicBee; 
+
+    private void Start()
     {
-        // HealthBar = Instantiate(HealthBar);
-        _bar = HealthBar.transform.Find("Bar").GetComponent<Image>();
         Fill = 1f;
+        _basicBee = GetComponent<BasicBee>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        var spriteHeight = GetComponent<Renderer>().bounds.size.y / 2;
-        HealthBar.transform.position = transform.position + new Vector3(0, spriteHeight + Margin, 0);
+        ChangeHealth(_basicBee.Health);
     }
 
-    public void DamageHealth(float damage)
+    public void ChangeHealth(float actual)
     {
-        Fill -= damage / Health;
+        Fill = actual / _maxHealth;
         _bar.fillAmount = Fill;
     }
-    
-    
+
+    public void AddLife(float percent)
+    {
+        Fill = Math.Min(1, Fill + percent);
+        _bar.fillAmount = Fill;
+    }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using DefaultNamespace;
 using UnityEngine;
 
 public class Extractor : BasicBee
@@ -18,6 +20,8 @@ public class Extractor : BasicBee
     // Update is called once per frame
     void Update()
     {
+        transform.rotation = Quaternion.identity;
+        
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
@@ -35,9 +39,13 @@ public class Extractor : BasicBee
 
     private static void DamageInCollisionWithEnemy(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) // проверяем тег объекта, столкнувшегося с нашим
+        try
         {
-            collision.gameObject.GetComponent<BasicBee>().Damage(1);
+            collision.gameObject.GetComponent<BeeEnemy>().Damage(5);
+        }
+        catch
+        {
+            throw new Exception($"Extractor столкнулся с объектом, у которого такие компоненты (но у него нет компонента BeeEnemy):  {String.Join(", ", collision.gameObject.GetComponents<Component>().Select(a => a.ToString()))}");
         }
     }
 

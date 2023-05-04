@@ -5,17 +5,24 @@ using UnityEngine.UI;
 public class HealthBarController: MonoBehaviour
 {
     public Image _bar;
-    public int Health;
     public float Fill;
+    private const int _maxHealth = 100;
+    private BasicBee _basicBee; 
 
     private void Start()
     {
         Fill = 1f;
+        _basicBee = GetComponent<BasicBee>();
     }
 
-    public void DamageHealth(float damage)
+    void Update()
     {
-        Fill -= damage / Health;
+        ChangeHealth(_basicBee.Health);
+    }
+
+    public void ChangeHealth(float actual)
+    {
+        Fill = actual / _maxHealth;
         _bar.fillAmount = Fill;
     }
 

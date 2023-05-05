@@ -21,7 +21,6 @@ public class ResourceMapper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HiveObjects.transform.DetachChildren();
         var actualHoneyCount = Globals.GameResources["honey"].Amount;
         var actualPollenCount = Globals.GameResources["pollen"].Amount;
         var honeyStorageCount = GetObjectsCount<IHoneyContainer>();

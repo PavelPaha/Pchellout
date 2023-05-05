@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DefaultNamespace;
+using Hive;
 using UnityEngine;
 
 public class Extractor : BasicBee
@@ -21,7 +22,6 @@ public class Extractor : BasicBee
     void Update()
     {
         transform.rotation = Quaternion.identity;
-
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
@@ -116,7 +116,7 @@ public class Extractor : BasicBee
             if (_extractor.IsAtSpawnLocation())
             {
                 _extractor._extractorState = new MovingToTargetState(_extractor);
-                
+                HiveResources.Honey = _extractor.gameObject.GetComponent<NectarInventory>().DeliverNectar(int.MaxValue);
             }
         }
 

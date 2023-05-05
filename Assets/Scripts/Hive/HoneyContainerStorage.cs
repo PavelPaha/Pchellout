@@ -2,10 +2,10 @@
 
 namespace Hive
 {
-    public class HoneyStorage: HiveObject, IContainHoney
+    public class HoneyContainerStorage : HiveObject, IHoneyContainer
     {
         public Sprite Picture;
-        public int HoneyCount;
+        public int Honey { get; set; }
         public override string GetName() => "Хранилище мёда";
 
         public override string GetDescription() => "Это хранилище мёда";
@@ -15,13 +15,6 @@ namespace Hive
         public override GameObject ShowSpecialInformation()
         {
             throw new System.NotImplementedException();
-        }
-
-        public int GetHoneyCount() => HoneyCount;
-
-        public void UpdateHoneyCount(int value)
-        {
-            HoneyCount = value;
         }
     }
 }

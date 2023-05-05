@@ -3183,9 +3183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4801063b9953144b42066cda2f10ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 803258764}
-  tile: {fileID: 11400000, guid: bda302e7d74ef314abc36f0fb52ff7a9, type: 2}
-  HiveTile: {fileID: 11400000, guid: f9a15e2c48b5dab42a493b805c7ad885, type: 2}
 --- !u!1 &875663965
 GameObject:
   m_ObjectHideFlags: 0
@@ -4330,6 +4327,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716670221}
   m_CullTransparentMesh: 1
+--- !u!1 &1758235238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758235239}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1758235239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758235238}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.19115494, y: -0.83424926, z: 0.44928578}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002719990
 GameObject:
   m_ObjectHideFlags: 0

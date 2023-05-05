@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Hive;
 using TMPro;
 using UnityEngine;
@@ -26,11 +24,11 @@ public class ResourceMapper : MonoBehaviour
         for (int i = 0; i < HiveObjects.transform.childCount; i++)
         {
             var current = HiveObjects.transform.GetChild(i).GetComponent<HiveObject>();
-            if (current is IContainHoney)
-                actualHoneyCount += ((IContainHoney)current).GetHoneyCount();
+            if (current is IHoneyContainer)
+                actualHoneyCount += ((IHoneyContainer)current).Honey;
 
-            if (current is IContainPollen)
-                actualPollenCount += ((IContainPollen)current).GetPollenCount();
+            if (current is IPollenContainer)
+                actualPollenCount += ((IPollenContainer)current).Pollen;
         }
 
         HiveResources.Honey = actualHoneyCount;

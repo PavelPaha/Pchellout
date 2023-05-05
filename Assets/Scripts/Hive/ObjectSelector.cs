@@ -75,22 +75,22 @@ public class ObjectSelector : MonoBehaviour
         Picture.sprite = SelectedItem.GetImage();
         _textMesh.text = $"{name}\n\n {description}";
 
-        if (SelectedItem is IContainHoney)
+        if (SelectedItem is IHoneyContainer)
         {
             HoneyTextMeshObject.SetActive(true);
-            var asHoney = ((IContainHoney)SelectedItem);
-            _honeyCount.text = asHoney.GetHoneyCount().ToString();
+            var asHoney = ((IHoneyContainer)SelectedItem);
+            _honeyCount.text = asHoney.Honey.ToString();
         }
         else
         {
             HoneyTextMeshObject.SetActive(false);
         }
 
-        if (SelectedItem is IContainPollen)
+        if (SelectedItem is IPollenContainer)
         {
             PollenTextMeshObject.SetActive(true);
-            var asPollen = ((IContainPollen)SelectedItem);
-            _pollenCount.text = asPollen.GetPollenCount().ToString();
+            var asPollen = ((IPollenContainer)SelectedItem);
+            _pollenCount.text = asPollen.Pollen.ToString();
         }
         else
         {

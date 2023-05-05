@@ -1,3 +1,4 @@
+using System.Linq;
 using Hive;
 using TMPro;
 using UnityEngine;
@@ -7,9 +8,10 @@ public class ResourceMapper : MonoBehaviour
     public GameObject HoneyTextMeshObject;
     public GameObject PollenTextMeshObject;
     public GameObject HiveObjects;
-    
+
     private TextMeshProUGUI _honeyTextMesh;
     private TextMeshProUGUI _pollenTextMesh;
+
     void Start()
     {
         _honeyTextMesh = HoneyTextMeshObject.GetComponent<TextMeshProUGUI>();
@@ -19,21 +21,28 @@ public class ResourceMapper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var actualHoneyCount = 0;
-        var actualPollenCount = 0;
-        for (int i = 0; i < HiveObjects.transform.childCount; i++)
+        HiveObjects.transform.DetachChildren();
+        var actualHoneyCount = Globals.GameResources["honey"].Amount;
+        var actualPollenCount = Globals.GameResources["pollen"].Amount;
+        var honeyStorageCount = GetObjectsCount<IHoneyContainer>();
+        var pollenStorageCount = GetObjectsCount<IPollenContainer>();
+        Debug.Log($"Honey is {honeyStorageCount}, Pollen is {pollenStorageCount}");
+        for (var i = 0; i < HiveObjects.transform.childCount; i++)
         {
-            var current = HiveObjects.transform.GetChild(i).GetComponent<HiveObject>();
+            var current = HiveObjects.transform.GetChild(i).GetComponent<HiveBuilding>();
             if (current is IHoneyContainer)
-                actualHoneyCount += ((IHoneyContainer)current).Honey;
+                ((IHoneyContainer)current).Honey = actualHoneyCount / honeyStorageCount;
 
             if (current is IPollenContainer)
-                actualPollenCount += ((IPollenContainer)current).Pollen;
+                ((IPollenContainer)current).Pollen = actualPollenCount / pollenStorageCount;
         }
 
-        HiveResources.Honey = actualHoneyCount;
-        HiveResources.Pollen = actualPollenCount;
-        _honeyTextMesh.text = HiveResources.Honey.ToString();
-        _pollenTextMesh.text = HiveResources.Pollen.ToString();
+        _honeyTextMesh.text = actualHoneyCount.ToString();
+        _pollenTextMesh.text = actualPollenCount.ToString();
     }
+
+    private int GetObjectsCount<T>() => Enumerable
+        .Range(0, HiveObjects.transform.childCount)
+        .Select(i => HiveObjects.transform.GetChild(i).GetComponent<HiveBuilding>())
+        .Count(obj => obj is T);
 }

@@ -3,17 +3,19 @@ using System;
 public class GameResource
 {
     public readonly string Name;
+    private int _amount;
 
     public int Amount
     {
-        get => Amount;
+        get => _amount;
         set
         {
             if (value < 0)
                 throw new ArgumentOutOfRangeException(nameof(value));
-            Amount = value;
+            _amount = value;
         }
     }
+
 
     public GameResource(string name, int initialAmount)
     {

@@ -2,7 +2,7 @@
 
 namespace Hive
 {
-    public class HoneyContainerStorage : HiveObject, IHoneyContainer
+    public class HoneyStorage : HiveBuilding, IHoneyContainer
     {
         public Sprite Picture;
         public int Honey { get; set; }

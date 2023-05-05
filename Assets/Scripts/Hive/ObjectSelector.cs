@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ObjectSelector : MonoBehaviour
 {
-    public HiveObject SelectedItem;
+    public HiveBuilding SelectedItem;
     public GameObject InformationWindow;
     public GameObject TextMeshItem;
     public Image Picture;
@@ -34,7 +34,7 @@ public class ObjectSelector : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            var current = transform.GetChild(i).transform.GetComponent<HiveObject>();
+            var current = transform.GetChild(i).transform.GetComponent<HiveBuilding>();
             if (current.Selected)
             {
                 if (SelectedItem == null)
@@ -52,7 +52,7 @@ public class ObjectSelector : MonoBehaviour
 
         if (!Enumerable.Range(0, transform.childCount)
                 .Select(x => transform.GetChild(x))
-                .Any(x => x.GetComponent<HiveObject>().Selected))
+                .Any(x => x.GetComponent<HiveBuilding>().Selected))
         {
             SelectedItem = null;
             HideMenu();

@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using DefaultNamespace;
-using Hive;
 using UnityEngine;
 
 public class Extractor : BasicBee
@@ -116,7 +115,9 @@ public class Extractor : BasicBee
             if (_extractor.IsAtSpawnLocation())
             {
                 _extractor._extractorState = new MovingToTargetState(_extractor);
-                HiveResources.Honey = _extractor.gameObject.GetComponent<NectarInventory>().DeliverNectar(int.MaxValue);
+                Globals.GameResources["pollen"].Amount += _extractor.gameObject
+                    .GetComponent<NectarInventory>()
+                    .DeliverNectar(int.MaxValue);
             }
         }
 

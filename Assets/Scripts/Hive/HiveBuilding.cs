@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
-public abstract class HiveObject : MonoBehaviour
+public abstract class HiveBuilding : MonoBehaviour
 {
     private GameObject SelectedImage;
     private GameObject UnselectedImage;
-    
+
     private GameObject Information;
-    public bool Selected = false;
+    public bool Selected;
 
     private void Start()
     {
@@ -54,5 +50,4 @@ public abstract class HiveObject : MonoBehaviour
     public abstract Sprite GetImage();
 
     public abstract GameObject ShowSpecialInformation();
-
 }

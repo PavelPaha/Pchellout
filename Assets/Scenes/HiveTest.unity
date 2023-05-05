@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 200051382}
   - component: {fileID: 200051381}
   m_Layer: 0
-  m_Name: "\u041E\u0431\u044A\u0435\u043A\u0442\u044B \u0432 \u0443\u043B\u044C\u0435"
+  m_Name: "\u041F\u043E\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0432 \u0443\u043B\u044C\u0435"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4030,7 +4030,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Selected: 0
   Picture: {fileID: 21300000, guid: 4d887706af121f44588cf0f64994d976, type: 3}
-  HoneyCount: 0
 --- !u!1 &1523133212
 GameObject:
   m_ObjectHideFlags: 0
@@ -4062,8 +4061,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  HoneyCount: 0
-  PollenCount: 0
   picture: {fileID: 21300000, guid: 6c8dc237b63c113419b9e1e94c6cece3, type: 3}
 --- !u!4 &1523133214
 Transform:

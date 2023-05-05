@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Hive
 {
-    public class Barracks: HiveObject
+    public class Barracks: HiveBuilding
     {
         public Sprite Picture;
         

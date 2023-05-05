@@ -13,5 +13,5 @@ public class BuildingData
     }
 
     public bool CanBuy() => Cost
-        .All(pair => pair.Value < Globals.GameResources[pair.Key].Amount);
+        .All(pair => pair.Value <= Globals.GameResources[pair.Key].Amount);
 }

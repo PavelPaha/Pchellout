@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BasicBee : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class BasicBee : MonoBehaviour
     public int Health = 100;
     [SerializeField] protected GameObject targetsParent;
     [SerializeField] protected GameObject spawnObject;
-    [SerializeField] protected float speed = 3;
+    [SerializeField] public float Speed = 3;
 
     protected const float Delta = 0.1f;
 
@@ -22,7 +23,7 @@ public class BasicBee : MonoBehaviour
         Vector2 targetPosition = target.transform.position;
         Vector2 currentPosition = rigidbody.position;
         Vector2 direction = (targetPosition - currentPosition).normalized;
-        Vector2 moveForce = direction * speed - rigidbody.velocity;
+        Vector2 moveForce = direction * Speed - rigidbody.velocity;
         rigidbody.AddForce(moveForce, ForceMode2D.Impulse);
         UpdateAnimationDirection(rigidbody);
     }

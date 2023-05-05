@@ -21,7 +21,6 @@ public class ResourceMapper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HiveObjects.transform.DetachChildren();
         var actualHoneyCount = Globals.GameResources["honey"].Amount;
         var actualPollenCount = Globals.GameResources["pollen"].Amount;
         var honeyStorageCount = GetObjectsCount<IHoneyContainer>();
@@ -31,10 +30,10 @@ public class ResourceMapper : MonoBehaviour
         {
             var current = HiveObjects.transform.GetChild(i).GetComponent<HiveBuilding>();
             if (current is IHoneyContainer)
-                ((IHoneyContainer)current).Honey = actualHoneyCount / honeyStorageCount;
+                ((IHoneyContainer)current).Honey = actualHoneyCount;
 
             if (current is IPollenContainer)
-                ((IPollenContainer)current).Pollen = actualPollenCount / pollenStorageCount;
+                ((IPollenContainer)current).Pollen = actualPollenCount;
         }
 
         _honeyTextMesh.text = actualHoneyCount.ToString();

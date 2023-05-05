@@ -90,7 +90,6 @@ public class Extractor : BasicBee
         {
             _extractor.UpdateTarget();
             var target = _extractor._target;
-            Debug.Log("Hahaha");
             if (target == null)
                 return;
             _extractor.MoveToTarget(target);

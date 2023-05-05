@@ -7,7 +7,6 @@ public class BasicBee : MonoBehaviour
 {
     public int CollisionForce = 20;
     public int Health = 100;
-    private HealthBarController healthBarController;
     [SerializeField] protected GameObject targetsParent;
     [SerializeField] protected GameObject spawnObject;
     [SerializeField] protected float speed = 3;
@@ -32,21 +31,19 @@ public class BasicBee : MonoBehaviour
     
     void Start()
     {
-        healthBarController = GetComponent<HealthBarController>();
-        healthBarController.Health = Health;
     }
 
-    void OnMouseDown(int damage = 20)
+    void Update()
     {
-        Damage(damage);
+        transform.rotation = Quaternion.identity;
     }
 
     public void Damage(int damage)
     {
         Health -= damage;
-        healthBarController.DamageHealth(damage);
         if (Health <= 0)
         {
+            Health = 0;
             DestroyBee();
         }
     }
@@ -55,11 +52,7 @@ public class BasicBee : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    void Update()
-    {
-        
-    }
-    
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         PushAway(collision);
@@ -68,12 +61,13 @@ public class BasicBee : MonoBehaviour
     {
         PushAway(collisionInfo);
     }
+    
 
     private void PushAway(Collision2D collision)
     {
-        var rb = GetComponent<Rigidbody2D>();
-        Vector3 normal = collision.contacts[0].normal;
-        rb.AddForce(normal * CollisionForce, ForceMode2D.Impulse);
+        // var rb = GetComponent<Rigidbody2D>();
+        // Vector3 normal = collision.contacts[0].normal;
+        // rb.AddForce(normal * CollisionForce, ForceMode2D.Impulse);
     }
 
 

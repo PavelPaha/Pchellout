@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3125384236576985497}
   - component: {fileID: 131899162892591047}
   - component: {fileID: 7250601194575042988}
-  - component: {fileID: 8013682658494095691}
   - component: {fileID: 2451320427867964683}
   m_Layer: 0
   m_Name: BeeCollector
@@ -49,13 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54485ead9e241a84390f82b5d041619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionForce: 20
+  Health: 100
   targetsParent: {fileID: 0}
   spawnObject: {fileID: 0}
   speed: 3
-  nectarCount: 0
-  maxNectarCount: 0
-  _timeSinceExtractingStart: 0
-  _extractingStartTime: 0
 --- !u!212 &131899162892591047
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -129,19 +126,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8013682658494095691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170372535988243618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5803c18832526484492bd1d81b24e957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 100
 --- !u!114 &2451320427867964683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,8 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 9012900153456606818}
-  Health: 0
   Fill: 0
+  MaxHealth: 0
 --- !u!1 &9012900152810697896
 GameObject:
   m_ObjectHideFlags: 0

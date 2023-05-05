@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,6 +15,7 @@ namespace DefaultNamespace
         void Update()
         {
             transform.rotation = Quaternion.identity;
+            
             _bees = Enumerable
                 .Range(0, BeesSource.transform.childCount)
                 .Select(index => BeesSource.transform.GetChild(index).gameObject)
@@ -44,19 +46,28 @@ namespace DefaultNamespace
         
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            DamageInCollisionWithBeeCollector(collision);
+            DamageInCollisionWithExtractor(collision);
         }
         
         public void OnCollisionStay2D(Collision2D collisionInfo)
         {
-            DamageInCollisionWithBeeCollector(collisionInfo);
+            //DamageInCollisionWithExtractor(collisionInfo);
         }
+        
 
-        private static void DamageInCollisionWithBeeCollector(Collision2D collision)
+        private static void DamageInCollisionWithExtractor(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("BeeCollector")) // проверяем тег объекта, столкнувшегося с нашим
+            // throw new Exception(collision.gameObject.tag);
+            // if (collision.gameObject.CompareTag("Extractor")) // проверяем тег объекта, столкнувшегося с нашим
+            // {
+            try
             {
-                collision.gameObject.GetComponent<BasicBee>().Damage(1);
+                collision.gameObject.GetComponent<Extractor>().Damage(20);
+            }
+            catch
+            {
+                
+                throw new Exception($"BeeEnemy столкнулся с объектом, у которого такие компоненты (но у него нет компонента Extractor):  {String.Join(", ", collision.gameObject.GetComponents<Component>().Select(a => a.ToString()))}");
             }
         }
     }

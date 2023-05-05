@@ -8,7 +8,7 @@ public class Extractor : BasicBee
     private ExtractorState _extractorState;
     private NectarInventory _inventory;
     private GameObject _target;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class Extractor : BasicBee
     void Update()
     {
         transform.rotation = Quaternion.identity;
-        
+
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
@@ -45,18 +45,26 @@ public class Extractor : BasicBee
         }
         catch
         {
-            throw new Exception($"Extractor столкнулся с объектом, у которого такие компоненты (но у него нет компонента BeeEnemy):  {String.Join(", ", collision.gameObject.GetComponents<Component>().Select(a => a.ToString()))}");
+            throw new Exception(
+                $"Extractor столкнулся с объектом, у которого такие компоненты (но у него нет компонента BeeEnemy):  {String.Join(", ", collision.gameObject.GetComponents<Component>().Select(a => a.ToString()))}");
         }
     }
 
     private void UpdateTarget()
     {
-        _target = Enumerable
-            .Range(0, targetsParent.transform.childCount)
-            .Select(index => targetsParent.transform.GetChild(index).gameObject)
-            .Where(target => target.GetComponent<Flower>().lifeStep != LifeStep.Child)
-            .OrderByDescending(target => target.GetComponent<NectarInventory>().NectarCount)
-            .FirstOrDefault();
+        try
+        {
+            _target = Enumerable
+                .Range(0, targetsParent.transform.childCount)
+                .Select(index => targetsParent.transform.GetChild(index).gameObject)
+                .Where(target => target.GetComponent<Flower>().lifeStep != LifeStep.Child)
+                .OrderByDescending(target => target.GetComponent<NectarInventory>().NectarCount)
+                .FirstOrDefault();
+        }
+        catch (Exception e)
+        {
+            throw new NotSupportedException("Extractor не может извлечь компонент из цели во время поиска цели", e);
+        }
     }
 
     private bool IsAtTargetLocation(GameObject target) =>
@@ -83,6 +91,7 @@ public class Extractor : BasicBee
         {
             _extractor.UpdateTarget();
             var target = _extractor._target;
+            Debug.Log("Hahaha");
             if (target == null)
                 return;
             _extractor.MoveToTarget(target);
@@ -105,7 +114,10 @@ public class Extractor : BasicBee
         {
             _extractor.MoveToSpawn();
             if (_extractor.IsAtSpawnLocation())
+            {
                 _extractor._extractorState = new MovingToTargetState(_extractor);
+                
+            }
         }
 
         public override void ExtractNectar() { }
@@ -124,9 +136,7 @@ public class Extractor : BasicBee
             _extractor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             _extractor._inventory.ExtractNectar(_extractor._target);
             if (_extractor._inventory.IsFull || _extractor._target.GetComponent<NectarInventory>().NectarCount < 10)
-            {
                 _extractor._extractorState = new MovingToSpawn(_extractor);
-            }
         }
     }
 }

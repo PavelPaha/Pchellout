@@ -140,7 +140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bar: {fileID: 9012900153456606818}
   Fill: 0
-  MaxHealth: 0
 --- !u!1 &9012900152810697896
 GameObject:
   m_ObjectHideFlags: 0

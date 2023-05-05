@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public enum LifeStep
 {
     Child = 0,
@@ -32,7 +33,6 @@ public class Flower : MonoBehaviour
         timeSinceInitialization = Time.timeSinceLevelLoad - initializationTime;
         UpdateLifePeriod();
         flowerState.ProduceNectar();
-        flowerState.ReturnNectar();
     }
 
     protected void UpdateLifePeriod()
@@ -54,7 +54,6 @@ public class Flower : MonoBehaviour
         }
 
         public abstract void ProduceNectar();
-        public abstract void ReturnNectar();
     }
 
     public class ProducingState : FlowerState
@@ -65,8 +64,6 @@ public class Flower : MonoBehaviour
         {
             _flower.inventory.ProduceNectar();
         }
-
-        public override void ReturnNectar() { }
     }
 
     public class IdleState : FlowerState
@@ -74,7 +71,5 @@ public class Flower : MonoBehaviour
         public IdleState(Flower flower) : base(flower) { }
 
         public override void ProduceNectar() { }
-
-        public override void ReturnNectar() { }
     }
 }

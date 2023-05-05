@@ -11,7 +11,8 @@ public class SceneChanger : MonoBehaviour
     
     private void OnMouseDown()
     {
-        SceneManager.LoadScene(TargetSceneName);
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+        SceneManager.LoadScene(TargetSceneName, LoadSceneMode.Additive);
     }
 }
 

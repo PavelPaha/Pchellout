@@ -1,175 +1,100 @@
-using System;
-using UnityEngine;
+using System.Linq;
+using Hive;
+using TMPro;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
-
-public abstract class ObjectState
-{
-    protected readonly ObjectSelector objectSelector;
-
-    public ObjectState(ObjectSelector objectSelector)
-    {
-        this.objectSelector = objectSelector;
-    }
-
-    public virtual void Do() { }
-}
-
-public class HideInformationState : ObjectState
-{
-    public HideInformationState(ObjectSelector objectSelector) : base(objectSelector)
-    {
-    }
-
-    public override void Do()
-    {
-        objectSelector.Information.SetActive(false);
-    }
-}
-
-public class ShowInformation : ObjectState
-{
-    public ShowInformation(ObjectSelector objectSelector) : base(objectSelector)
-    {
-    }
-
-    public override void Do()
-    {
-        objectSelector.Information.SetActive(true);
-    }
-}
-
-public class SelectState: ObjectState
-{
-    public SelectState(ObjectSelector objectSelector) : base(objectSelector)
-    {
-    }
-
-    public override void Do()
-    {
-        var old = objectSelector.gameObject.transform.parent.gameObject.transform.GetComponent<Selector>()
-            .SelectedObject;
-        
-        if (old.Equals(objectSelector.gameObject))
-        {
-            objectSelector.SelectedImage.gameObject.SetActive(!objectSelector.SelectedImage.gameObject.activeSelf);
-            objectSelector.UnselectedImage.gameObject.SetActive(!objectSelector.UnselectedImage.gameObject.activeSelf);
-            objectSelector.ButtonsCanvas.SetActive(!objectSelector.ButtonsCanvas.activeSelf);
-        }
-        else if (old != null && SameState(old))
-        {
-            var selector = old.gameObject.GetComponent<ObjectSelector>();
-            selector.SelectedImage.gameObject.SetActive(false);
-            selector.UnselectedImage.gameObject.SetActive(true);
-            selector.ButtonsCanvas.SetActive(false);
-            objectSelector.SelectedImage.gameObject.SetActive(true);
-            objectSelector.UnselectedImage.gameObject.SetActive(false);
-            objectSelector.ButtonsCanvas.SetActive(true);
-        }
-        objectSelector.gameObject.transform.parent.gameObject.transform.GetComponent<Selector>()
-            .SelectedObject = objectSelector.gameObject;
-
-
-    }
-
-    private ObjectState ToggleState()
-    {
-        if (objectSelector.CurrentState is SelectState)
-            return new UnselectState(objectSelector);
-        return new SelectState(objectSelector);
-    }
-
-    private static bool SameState(GameObject old)
-    {
-        return old.gameObject.GetComponent<ObjectSelector>().CurrentState is SelectState;
-    }
-}
-
-public class UnselectState: ObjectState
-{
-    public UnselectState(ObjectSelector objectSelector) : base(objectSelector)
-    {
-    }
-
-    public override void Do()
-    {
-        objectSelector.SelectedImage.gameObject.SetActive(false);
-        objectSelector.UnselectedImage.gameObject.SetActive(true);
-        objectSelector.ButtonsCanvas.SetActive(false);
-    }
-}
-
-
-public class SellState: ObjectState
-{
-    public SellState(ObjectSelector objectSelector) : base(objectSelector)
-    {
-    }
-
-    public override void Do()
-    {
-        Object.Destroy(objectSelector.gameObject.transform.parent.gameObject.transform.GetComponent<Selector>()
-            .SelectedObject.gameObject);
-    }
-}
-
-
-
+using UnityEngine;
 
 public class ObjectSelector : MonoBehaviour
 {
-    public GameObject ButtonsCanvas;
-    public GameObject Information;
-    public GameObject SelectedImage;
-    public GameObject UnselectedImage;
+    public HiveObject SelectedItem;
+    public GameObject InformationWindow;
+    public GameObject TextMeshItem;
+    public Image Picture;
 
-    public ObjectState CurrentState;
+    public GameObject HoneyTextMeshObject;
+    public GameObject PollenTextMeshObject;
+
+    private TextMeshProUGUI _honeyCount;
+    private TextMeshProUGUI _pollenCount;
+    private TextMeshProUGUI _textMesh;
     
     private void Start()
     {
-        SelectedImage = transform.GetChild(0).gameObject;
-        UnselectedImage = transform.GetChild(1).gameObject;
-        var sideBar = ButtonsCanvas.transform.GetChild(0);
-        var sellButton = sideBar.GetChild(1).GetComponent<Button>();
-        var infoButton = sideBar.GetChild(0).GetComponent<Button>();
-
-        sellButton.onClick.AddListener(() =>
-        {
-            SetState(new SellState(this));
-            CurrentState.Do();
-        });
-        
-
-        infoButton.onClick.AddListener(() =>
-        {
-            SetState(new ShowInformation(this));
-            CurrentState.Do();
-        });
-
-        Information = ButtonsCanvas.transform.GetChild(1).gameObject;
-        var hideButton = Information.transform.GetChild(0).GetComponent<Button>();
-
-        hideButton.onClick.AddListener(() =>
-        {
-            SetState(new HideInformationState(this));
-            CurrentState.Do();
-        });
-        
-        SelectedImage.SetActive(false);
-        UnselectedImage.SetActive(true);
-        Information.SetActive(false);
-        ButtonsCanvas.SetActive(false);
-        SetState(new SelectState(this));
+        SelectedItem = null;
+        _textMesh = TextMeshItem.GetComponent<TextMeshProUGUI>();
+        _honeyCount = HoneyTextMeshObject.GetComponent<TextMeshProUGUI>();
+        _pollenCount = PollenTextMeshObject.GetComponent<TextMeshProUGUI>();
+        // InformationWindow = Menu.transform.GetChild(1).GetComponent<GameObject>();
+        InformationWindow.SetActive(false);
+        HoneyTextMeshObject.SetActive(false);
+        PollenTextMeshObject.SetActive(false);
     }
 
-    public void SetState(ObjectState state)
+    private void Update()
     {
-        CurrentState = state;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            var current = transform.GetChild(i).transform.GetComponent<HiveObject>();
+            if (current.Selected)
+            {
+                if (SelectedItem == null)
+                {
+                    current.Select();
+                    SelectedItem = current;
+                }
+                else if (SelectedItem.name != current.name)
+                {
+                    SelectedItem.Unselect();
+                    SelectedItem = current;
+                }
+            }
+        }
+
+        if (!Enumerable.Range(0, transform.childCount)
+                .Select(x => transform.GetChild(x))
+                .Any(x => x.GetComponent<HiveObject>().Selected))
+        {
+            SelectedItem = null;
+            HideMenu();
+        }
+        else if (SelectedItem != null)
+            ShowMenu();
     }
 
-    private void OnMouseDown()
+    public void HideMenu()
     {
-        SetState(new SelectState(this));
-        CurrentState.Do();
+        InformationWindow.SetActive(false);
+        HoneyTextMeshObject.SetActive(false);
+        PollenTextMeshObject.SetActive(false);
+    }
+    public void ShowMenu()
+    {
+        InformationWindow.SetActive(true);
+        var name = SelectedItem.GetName();
+        var description = SelectedItem.GetDescription();
+        Picture.sprite = SelectedItem.GetImage();
+        _textMesh.text = $"{name}\n\n {description}";
+
+        if (SelectedItem is IContainHoney)
+        {
+            HoneyTextMeshObject.SetActive(true);
+            var asHoney = ((IContainHoney)SelectedItem);
+            _honeyCount.text = asHoney.GetHoneyCount().ToString();
+        }
+        else
+        {
+            HoneyTextMeshObject.SetActive(false);
+        }
+
+        if (SelectedItem is IContainPollen)
+        {
+            PollenTextMeshObject.SetActive(true);
+            var asPollen = ((IContainPollen)SelectedItem);
+            _pollenCount.text = asPollen.GetPollenCount().ToString();
+        }
+        else
+        {
+            PollenTextMeshObject.SetActive(false);
+        }
     }
 }

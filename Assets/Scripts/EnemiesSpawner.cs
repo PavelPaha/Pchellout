@@ -1,71 +1,104 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using DefaultNamespace;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+/// <summary>
+/// Это класс волны нападения, который хранит параметры для врага,
+/// которого будет генерировать EnemiesSpawner
+/// </summary>
 public class AttackWave
 {
-    public int BeeCount;
+    //TODO перенести этот класс в Locals
+    public int EnemyCount;
     public float Duration;
+    public int Speed;
+    public float Scale = 1;
+    public int EnemyIndex;
 }
+
+/// <summary>
+/// Генерирует врагов (EnemyItem) рандомным образом
+/// из разных точек, которые берёт из HoneycombObjectЮ
+/// которые летят на Goals рандомно
+/// При этом это происходит "волновым" образом
+/// </summary>
 public class EnemiesSpawner : MonoBehaviour
 {
-
-    public GameObject EnemyItem;
-    public GameObject HoneycombObject; 
-    private Transform[] honeyCombs;
-
-    private static List<GameObject> Bees = new (3);
-
+    public List<GameObject> Goals;
+    public List<GameObject> EnemyItems;
+    public GameObject HoneycombObject;
+    public float BeeSpawnInterval = 5f;
     public List<AttackWave> _attackWaves = new()
     {
-        new AttackWave { BeeCount = 3, Duration = 5 },
-        new AttackWave { BeeCount = 10, Duration = 10 },
-        new AttackWave { BeeCount = 50, Duration = 4 },
+        new AttackWave { EnemyCount = 3, Duration = 5, Speed = 2, Scale = 0.5f, EnemyIndex = 0},
+        new AttackWave { EnemyCount = 10, Duration = 10, Speed = 5, Scale = 0.7f, EnemyIndex = 1},
+        new AttackWave { EnemyCount = 5000, Duration = 10, Speed = 2, Scale = 1f, EnemyIndex = 2}
     };
-    private float timer = 0f;
-
-    // Start is called before the first frame update
-    private int currentWaveIndex = 0;
-    private int beesToSpawn = 0;
-
-    private float waveTimer = 0f;
-    private float beeSpawnTimer = 0f;
-
-    public float BeeSpawnInterval = 0.5f;
+    
+    private Transform[] _honeyCombs;
+    private float _timer;
+    private int _currentWaveIndex;
+    private int _beesToSpawn;
+    private float _waveTimer;
+    private float _beeSpawnTimer;
 
     void Start()
     {
-        honeyCombs = HoneycombObject.GetComponentsInChildren<Transform>();
-        beesToSpawn = _attackWaves[currentWaveIndex].BeeCount;
+        _honeyCombs = HoneycombObject.GetComponentsInChildren<Transform>();
+        _beesToSpawn = _attackWaves[_currentWaveIndex].EnemyCount;
     }
 
     void Update()
     {
-        waveTimer += Time.deltaTime;
-
-        if (waveTimer >= _attackWaves[currentWaveIndex].Duration)
+        IterateWave();
+        if (_beeSpawnTimer >= BeeSpawnInterval && _beesToSpawn > 0)
         {
-            waveTimer = 0f;
-
-            currentWaveIndex++;
-            currentWaveIndex = (currentWaveIndex + 1) % _attackWaves.Count;
-            beesToSpawn = _attackWaves[currentWaveIndex].BeeCount;
-            beeSpawnTimer = BeeSpawnInterval;
+            SpawnEnemy();
+            _timer = 0f;
+            _beesToSpawn--;
+            _beeSpawnTimer = 0f;
         }
-
-        beeSpawnTimer += Time.deltaTime;
-
-        if (beeSpawnTimer >= BeeSpawnInterval && beesToSpawn > 0)
-        {
-            Transform honeycomb = honeyCombs[Random.Range(1, honeyCombs.Length)];
-            Instantiate(EnemyItem, honeycomb.position, Quaternion.identity);
-            EnemyItem.GetComponent<BeeEnemy>().Speed = Random.Range(1, 10);
-            timer = 0f;
-            beesToSpawn--;
-            beeSpawnTimer = 0f;
-        }
-        
-        
     }
+
+    /// <summary>
+    /// Делает так, чтобы _currentWaveIndex указывал на те параметры
+    /// из _attackWaves[_currentWaveIndex],
+    /// которые нужно применить к врагам в данный момент
+    /// </summary>
+    private void IterateWave()
+    {
+        _waveTimer += Time.deltaTime;
+        if (_waveTimer >= _attackWaves[_currentWaveIndex].Duration)
+        {
+            _waveTimer = 0f;
+            _currentWaveIndex++;
+            _currentWaveIndex = (_currentWaveIndex + 1) % _attackWaves.Count;
+            _beesToSpawn = _attackWaves[_currentWaveIndex].EnemyCount;
+            _beeSpawnTimer = BeeSpawnInterval;
+        }
+        _beeSpawnTimer += Time.deltaTime;
+    }
+
+    private void SpawnEnemy()
+    {
+        Transform honeycomb = _honeyCombs[Random.Range(1, _honeyCombs.Length-1)];
+        var speed = _attackWaves[_currentWaveIndex].Speed;
+        var scale = _attackWaves[_currentWaveIndex].Scale;
+        var enemyItem = EnemyItems[_attackWaves[_currentWaveIndex].EnemyIndex];
+        var newEnemy = Instantiate(enemyItem, honeycomb.position, Quaternion.identity);
+
+        newEnemy.GetComponent<BeeEnemy>().Speed = 
+            Random.Range(Math.Max(0, speed - 2), speed + 2);
+        newEnemy.transform.localScale = 
+            new Vector3(scale, scale, scale);
+        
+        //TODO исправить баг в присваивании врагу цели (иногда в BeeSource после присваивания лежит null)
+        newEnemy.GetComponent<BeeEnemy>().BeesSource = GetRandomObject();
+    }
+
+    private GameObject GetRandomObject()
+        => Goals[Random.Range(0, Goals.Count)];
 }

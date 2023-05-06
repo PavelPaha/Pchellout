@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Extractor
   - Flower
+  - Hive
   layers:
   - Default
   - TransparentFX

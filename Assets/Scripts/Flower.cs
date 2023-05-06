@@ -6,7 +6,7 @@ public enum LifeStep
     Adult = 1,
 }
 
-public class Flower : MonoBehaviour
+public class Flower : BasicBee
 {
     [SerializeField] public LifeStep lifeStep;
     [SerializeField] protected float lifePeriod;

@@ -8,6 +8,8 @@ public class Extractor : BasicBee
     private ExtractorState _extractorState;
     private NectarInventory _inventory;
     private GameObject _target;
+    [SerializeField] protected GameObject targetsParent;
+    [SerializeField] protected GameObject spawnObject;
 
 
     // Start is called before the first frame update
@@ -25,6 +27,8 @@ public class Extractor : BasicBee
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
     }
+    
+    protected void MoveToSpawn() => MoveToTarget(spawnObject);
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -90,7 +94,6 @@ public class Extractor : BasicBee
         {
             _extractor.UpdateTarget();
             var target = _extractor._target;
-            Debug.Log("Hahaha");
             if (target == null)
                 return;
             _extractor.MoveToTarget(target);

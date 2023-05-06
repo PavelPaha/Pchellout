@@ -6,10 +6,7 @@ using UnityEngine.Serialization;
 
 public class BasicBee : MonoBehaviour
 {
-    public int CollisionForce = 20;
     public int Health = 100;
-    [SerializeField] protected GameObject targetsParent;
-    [SerializeField] protected GameObject spawnObject;
     [SerializeField] public float Speed = 3;
 
     protected const float Delta = 0.1f;
@@ -28,10 +25,9 @@ public class BasicBee : MonoBehaviour
         UpdateAnimationDirection(rigidbody);
     }
 
-    protected void MoveToSpawn() => MoveToTarget(spawnObject);
-    
     void Start()
     {
+        GetComponent<HealthBarController>().SetMaxHealth(Health);
     }
 
     void Update()

@@ -14,13 +14,18 @@ namespace DefaultNamespace
         
         void Update()
         {
+            // TODO пчела враг, как только разрушит свою цель, ничего не делает.
+            // Нужно сделать так, чтобы враг после этого выбирал другую цель и летел к ней
             transform.rotation = Quaternion.identity;
-            
+            if (BeesSource == null)
+            {
+                throw new NullReferenceException("Enemy не знает, на какую цель ему лететь");
+            }
             _bees = Enumerable
                 .Range(0, BeesSource.transform.childCount)
                 .Select(index => BeesSource.transform.GetChild(index).gameObject)
                 .ToList();
-            
+
             GameObject closestTarget = null;
             float closestDistance = Mathf.Infinity;
         
@@ -46,7 +51,7 @@ namespace DefaultNamespace
         
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            DamageInCollisionWithExtractor(collision);
+            DamageInCollisionWithOtherObject(collision);
         }
         
         public void OnCollisionStay2D(Collision2D collisionInfo)
@@ -55,19 +60,19 @@ namespace DefaultNamespace
         }
         
 
-        private static void DamageInCollisionWithExtractor(Collision2D collision)
+        private static void DamageInCollisionWithOtherObject(Collision2D collision)
         {
-            // throw new Exception(collision.gameObject.tag);
-            // if (collision.gameObject.CompareTag("Extractor")) // проверяем тег объекта, столкнувшегося с нашим
-            // {
-            try
+            switch (collision.gameObject.tag)
             {
-                collision.gameObject.GetComponent<Extractor>().Damage(20);
-            }
-            catch
-            {
-                
-                throw new Exception($"BeeEnemy столкнулся с объектом, у которого такие компоненты (но у него нет компонента Extractor):  {String.Join(", ", collision.gameObject.GetComponents<Component>().Select(a => a.ToString()))}");
+                case "Hive":
+                    collision.gameObject.GetComponent<HouseForBees>().Damage(20);
+                    break;
+                case "Extractor":
+                    collision.gameObject.GetComponent<Extractor>().Damage(20);
+                    break;
+                case "Flower":
+                    collision.gameObject.GetComponent<Flower>().Damage(20);
+                    break;
             }
         }
     }

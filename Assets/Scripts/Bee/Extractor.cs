@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DefaultNamespace;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 public class Extractor : BasicBee
@@ -33,13 +34,14 @@ public class Extractor : BasicBee
     public void OnCollisionEnter2D(Collision2D collision)
     {
         DamageInCollisionWithEnemy(collision);
+        
     }
-
+    
     public void OnCollisionStay2D(Collision2D collisionInfo)
     {
         DamageInCollisionWithEnemy(collisionInfo);
     }
-
+    
     private static void DamageInCollisionWithEnemy(Collision2D collision)
     {
         try
@@ -118,7 +120,7 @@ public class Extractor : BasicBee
             if (_extractor.IsAtSpawnLocation())
             {
                 _extractor._extractorState = new MovingToTargetState(_extractor);
-                Globals.GameResources["pollen"].Amount += _extractor.gameObject
+                Globals.GameResources["honey"].Amount += _extractor.gameObject
                     .GetComponent<NectarInventory>()
                     .DeliverNectar(int.MaxValue);
             }

@@ -9,6 +9,7 @@ TagManager:
   - Extractor
   - Flower
   - Hive
+  - Projectile
   layers:
   - Default
   - TransparentFX

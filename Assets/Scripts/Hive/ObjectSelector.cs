@@ -12,10 +12,8 @@ public class ObjectSelector : MonoBehaviour
     public Image Picture;
 
     public GameObject HoneyTextMeshObject;
-    public GameObject PollenTextMeshObject;
 
     private TextMeshProUGUI _honeyCount;
-    private TextMeshProUGUI _pollenCount;
     private TextMeshProUGUI _textMesh;
     
     private void Start()
@@ -23,11 +21,9 @@ public class ObjectSelector : MonoBehaviour
         SelectedItem = null;
         _textMesh = TextMeshItem.GetComponent<TextMeshProUGUI>();
         _honeyCount = HoneyTextMeshObject.GetComponent<TextMeshProUGUI>();
-        _pollenCount = PollenTextMeshObject.GetComponent<TextMeshProUGUI>();
         // InformationWindow = Menu.transform.GetChild(1).GetComponent<GameObject>();
         InformationWindow.SetActive(false);
         HoneyTextMeshObject.SetActive(false);
-        PollenTextMeshObject.SetActive(false);
     }
 
     private void Update()
@@ -65,7 +61,6 @@ public class ObjectSelector : MonoBehaviour
     {
         InformationWindow.SetActive(false);
         HoneyTextMeshObject.SetActive(false);
-        PollenTextMeshObject.SetActive(false);
     }
     public void ShowMenu()
     {
@@ -84,17 +79,6 @@ public class ObjectSelector : MonoBehaviour
         else
         {
             HoneyTextMeshObject.SetActive(false);
-        }
-
-        if (SelectedItem is IPollenContainer)
-        {
-            PollenTextMeshObject.SetActive(true);
-            var asPollen = ((IPollenContainer)SelectedItem);
-            _pollenCount.text = asPollen.Pollen.ToString();
-        }
-        else
-        {
-            PollenTextMeshObject.SetActive(false);
         }
     }
 }

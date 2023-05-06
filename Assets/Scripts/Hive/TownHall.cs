@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Hive
 {
-    public class TownHall : HiveBuilding, IHoneyContainer, IPollenContainer
+    public class TownHall : HiveBuilding, IHoneyContainer
     {
         public int Honey { get; set; }
         public int Pollen { get; set; }

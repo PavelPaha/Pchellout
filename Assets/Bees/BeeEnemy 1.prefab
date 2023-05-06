@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7344379237400619846}
   - component: {fileID: 7344379237400619845}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7344379238214763168}
   - component: {fileID: 7344379238214763169}
   - component: {fileID: 7344379238214763170}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,9 +201,9 @@ GameObject:
   - component: {fileID: 7344379238393923624}
   - component: {fileID: 7344379238393923639}
   - component: {fileID: 7344379238393923638}
-  - component: {fileID: 7344379238393923637}
-  m_Layer: 0
-  m_Name: BeeEnemy
+  - component: {fileID: 3083048398945998152}
+  m_Layer: 7
+  m_Name: BeeEnemy 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f8fc00f7b5174ea43b0c0f2af6c86fa7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6edbca354c7ff945ad21b11be9d2c87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -301,7 +301,7 @@ Animator:
   m_GameObject: {fileID: 7344379238393923630}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ee2f8f8f662e61448acd7faf3218b2f3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 117706b9831203144b2d59fa338c4298, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -374,7 +374,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7344379238393923637
+--- !u!114 &3083048398945998152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 7344379239192980846}
   - component: {fileID: 7344379239192980847}
   - component: {fileID: 7344379239192980832}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

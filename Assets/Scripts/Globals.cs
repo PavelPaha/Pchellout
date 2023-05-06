@@ -26,4 +26,11 @@ public static class Globals
             { "pollen", 1000 }
         })
     };
+    
+    public static AttackWave[] AttackWaves = 
+    {
+        new() { EnemyCount = 3, Duration = 5, Speed = 2, Scale = 0.5f, EnemyIndex = 0},
+        new() { EnemyCount = 10, Duration = 10, Speed = 5, Scale = 0.7f, EnemyIndex = 1},
+        new() { EnemyCount = 5000, Duration = 10, Speed = 2, Scale = 1f, EnemyIndex = 2}
+    };
 }

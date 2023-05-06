@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 131899162892591047}
   - component: {fileID: 7250601194575042988}
   - component: {fileID: 2451320427867964683}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Extractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,11 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54485ead9e241a84390f82b5d041619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionForce: 20
   Health: 100
+  Speed: 3
   targetsParent: {fileID: 0}
   spawnObject: {fileID: 0}
-  speed: 3
 --- !u!212 &131899162892591047
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -152,7 +151,7 @@ GameObject:
   - component: {fileID: 9012900152810697892}
   - component: {fileID: 9012900152810697893}
   - component: {fileID: 9012900152810697898}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9012900153102260687}
   - component: {fileID: 9012900153102260686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +337,7 @@ GameObject:
   - component: {fileID: 9012900153456606620}
   - component: {fileID: 9012900153456606621}
   - component: {fileID: 9012900153456606818}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

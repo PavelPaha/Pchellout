@@ -12,10 +12,5 @@ namespace Hive
         public override string GetDescription() => "Это описание казармы";
 
         public override Sprite GetImage() => Picture;
-        
-        public override GameObject ShowSpecialInformation()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

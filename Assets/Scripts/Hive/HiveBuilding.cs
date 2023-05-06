@@ -48,6 +48,4 @@ public abstract class HiveBuilding : MonoBehaviour
     public abstract string GetDescription();
 
     public abstract Sprite GetImage();
-
-    public abstract GameObject ShowSpecialInformation();
 }

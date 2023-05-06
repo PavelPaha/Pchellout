@@ -15,7 +15,8 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!Globals.InBounds(transform.position))
+            Destroy(gameObject);
     }
 
     public void OnCollisionEnter2D(Collision2D col)

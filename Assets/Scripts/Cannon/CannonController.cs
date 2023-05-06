@@ -3,11 +3,8 @@ using UnityEngine;
 public class CannonController : MonoBehaviour
 {
     public GameObject ProjectilePrefab;
-    public float ProjectileSpeed = 10f;
-    public float FireCooldown = 0.1f; // Минимальное время между выстрелами
-    private float fireTimer = 0f;
-    
-    
+    private float fireTimer;
+
     void Update()
     {
         fireTimer += Time.deltaTime;
@@ -20,17 +17,34 @@ public class CannonController : MonoBehaviour
         // Отменяем поворот пушки по оси Z
         transform.eulerAngles = new Vector3(0, 0, -transform.eulerAngles.z);
         
-        if (Input.GetMouseButton(0) && fireTimer >= FireCooldown)
-        {
-            Debug.Log("Выстрел");
-            GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
-            Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
-
-            // Направляем снаряд в сторону курсора с заданной скоростью
-            Vector2 shootDirection = (mousePos - transform.position).normalized;
-            projectileRigidbody.AddForce(shootDirection * ProjectileSpeed, ForceMode2D.Impulse);
         
+        if (Input.GetMouseButton(0) 
+            && fireTimer >= Globals.FireCooldown
+            && Globals.InBounds(mousePos))
+        {
+            // Debug.Log("Выстрел");
+            if (Globals.GameResources["honey"].Amount >= Globals.ShotCost)
+            {
+                Fire(mousePos);
+                Globals.GameResources["honey"].Amount -= Globals.ShotCost;
+            }
+            else
+            {
+                //TODO показывать сообщение, что мёда на выстрел недостаточно
+            }
             fireTimer = 0f;
         }
+    }
+
+    private void Fire(Vector3 mousePos)
+    {
+        GameObject projectile =
+            Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
+        Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
+
+        // Направляем снаряд в сторону курсора с заданной скоростью
+        Vector2 shootDirection = (mousePos - transform.position);
+        shootDirection.Normalize();
+        projectileRigidbody.AddForce(shootDirection * Globals.ProjectileSpeed, ForceMode2D.Impulse);
     }
 }

@@ -65,10 +65,10 @@ public class ObjectSelector : MonoBehaviour
     public void ShowMenu()
     {
         InformationWindow.SetActive(true);
-        var name = SelectedItem.GetName();
+        var name = SelectedItem.transform.name;
         var description = SelectedItem.GetDescription();
         Picture.sprite = SelectedItem.GetImage();
-        _textMesh.text = $"{name}\n\n {description}";
+        _textMesh.text = $"{name}\n\n{description}";
 
         if (SelectedItem is IHoneyContainer)
         {

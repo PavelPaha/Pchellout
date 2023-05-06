@@ -7,11 +7,11 @@ public static class Globals
     
     public static readonly int ProjectileDamage = 20;
 
-    public static readonly float FireCooldown =  0.5f;
+    public static readonly float FireCooldown =  0.2f;
 
     public static readonly float ProjectileSpeed = 2f;
 
-    public static readonly int ShotCost = 1000;
+    public static readonly int ShotCost = 400;
     
     
     public static readonly Dictionary<string, GameResource> GameResources = new()
@@ -38,9 +38,9 @@ public static class Globals
     
     public static AttackWave[] AttackWaves = 
     {
-        new() { EnemyCount = 0, Duration = 5, Speed = 2, Scale = 0.5f, EnemyIndex = 0},
-        new() { EnemyCount = 0, Duration = 10, Speed = 5, Scale = 0.7f, EnemyIndex = 1},
-        new() { EnemyCount = 0, Duration = 10, Speed = 2, Scale = 1f, EnemyIndex = 2}
+        new() { EnemyCount = 10, Duration = 15, Speed = 2, Scale = 0.5f, EnemyIndex = 0},
+        new() { EnemyCount = 20, Duration = 20, Speed = 5, Scale = 0.6f, EnemyIndex = 1},
+        new() { EnemyCount = 30, Duration = 20, Speed = 7, Scale = 0.8f, EnemyIndex = 2}
     };
     
     public static bool InBounds(Vector3 position)

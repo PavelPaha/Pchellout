@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,9 +8,12 @@ public class Building
     public readonly string Name;
     public readonly int MaxHp;
     
+    private BuildingPlacement _placement;
+    private List<Material> _materials;
+    
     public int Hp { get; set; }
 
-    public int DataIndex => Enumerable
+    public int BuildingIndex => Enumerable
         .Range(0, Globals.Buildings.Length)
         .First(i => Globals.Buildings[i].Name == Name);
 

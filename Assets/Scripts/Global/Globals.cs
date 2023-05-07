@@ -19,28 +19,43 @@ public static class Globals
         { "honey", new GameResource("honey", 0) }
     };
 
-    public static readonly BuildingData[] BuildingData =
+    public static readonly BuildingData[] Buildings =
     {
-        new("Barrack", new Dictionary<string, int>
+        new("Барак", 100, new Dictionary<string, int>
         {
-            { "honey", 2000 }
-        },
-            "Это казарма"),
-        new("Honey Storage", new Dictionary<string, int>
+            { "honey", 2000 },
+        }, string.Empty),
+        new("Медохранилище", 100, new Dictionary<string, int>
         {
-            { "honey", 2000 }
-        }, "Это хранилище мёда"),
-        new("TownHall", new Dictionary<string, int>
+            { "honey", 1500 },
+        }, string.Empty),
+        new("Ратуша", 100, new Dictionary<string, int>
         {
-            { "honey", 5000 }
-        }, "Это ратуша")
+            { "honey", 2000 },
+        }, string.Empty),
+        new("Колеус", 100, new Dictionary<string, int>
+        {
+            { "honey", 1000 },
+        }, string.Empty),
+        new("Ромашка", 100, new Dictionary<string, int>
+        {
+            { "honey", 1500 },
+        }, string.Empty),
+        new("Подсолнух", 100, new Dictionary<string, int>
+        {
+            { "honey", 2000 },
+        }, string.Empty),
+        new("Куст", 100, new Dictionary<string, int>
+        {
+            { "honey", 500 },
+        }, string.Empty)
     };
-    
-    public static AttackWave[] AttackWaves = 
+
+    public static readonly AttackWave[] AttackWaves =
     {
-        new() { EnemyCount = 0, Duration = 15, Speed = 2, Scale = 0.5f, EnemyIndex = 0},
-        new() { EnemyCount = 0, Duration = 20, Speed = 5, Scale = 0.6f, EnemyIndex = 1},
-        new() { EnemyCount = 0, Duration = 20, Speed = 7, Scale = 0.8f, EnemyIndex = 2}
+        new() { EnemyCount = 3, Duration = 5, Speed = 2, Scale = 0.5f, EnemyIndex = 0 },
+        new() { EnemyCount = 10, Duration = 10, Speed = 5, Scale = 0.7f, EnemyIndex = 1 },
+        new() { EnemyCount = 5000, Duration = 10, Speed = 2, Scale = 1f, EnemyIndex = 2 }
     };
     
     public static bool InBounds(Vector3 position)

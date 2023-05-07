@@ -20,7 +20,7 @@ TagManager:
   - Extractors
   - Enemies
   - Flowers
-  - 
+  - Background
   - 
   - 
   - 
@@ -44,12 +44,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Flowers
-    uniqueID: 1529405995
-    locked: 0
   - name: Background
     uniqueID: 2993876353
     locked: 0
+  - name: Flowers
+    uniqueID: 1529405995
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1027990603
     locked: 0

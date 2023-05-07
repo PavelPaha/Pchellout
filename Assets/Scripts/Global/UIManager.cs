@@ -22,8 +22,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void _AddBuildingButtonListener(Button b, int i)
-    {
-        b.onClick.AddListener(() => _buildingPlacer.SelectPlacedBuilding(i));
-    }
+    private void _AddBuildingButtonListener(Button buttonComponent, int i) =>
+        buttonComponent.onClick.AddListener(() =>
+        {
+            if (_buildingPlacer.IsBuildingSelected)
+                _buildingPlacer.CancelPlacedBuilding();
+            _buildingPlacer.SelectPlacedBuilding(i);
+        });
 }

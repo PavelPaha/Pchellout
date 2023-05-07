@@ -10,53 +10,63 @@ public enum BuildingPlacement
 
 public class BuildingPlacer : MonoBehaviour
 {
-    private Building _placedBuilding;
-    private Vector2 _lastPlacementPosition;
+    public bool IsBuildingSelected => _placedBuilding != null;
 
-    void Start()
-    {
-        // for now, we'll automatically pick our first
-        // building type as the type we want to build
-        _PreparePlacedBuilding(0);
-    }
+    private Building _placedBuilding;
+    private float _buildingToCameraDistance;
 
     void Update()
     {
         if (_placedBuilding == null)
             return;
+        UpdateBuildingPosition();
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            _CancelPlacedBuilding();
+            CancelPlacedBuilding();
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
-            _PlaceBuilding();
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-            _PlaceBuilding();
+            PlaceBuilding();
     }
 
-    void _PreparePlacedBuilding(int buildingIndex)
+
+    public void PreparePlacedBuilding(int buildingIndex)
     {
         var building = new Building(Globals.Buildings[buildingIndex]);
-        // link the data into the manager
         _placedBuilding = building;
-        _lastPlacementPosition = Vector2.zero;
+        FreezeBuilding(true);
+        UpdateBuildingPosition();
     }
 
-    void _PlaceBuilding()
+    public void PlaceBuilding()
     {
-        _placedBuilding.Place();
-        // keep on building the same building type
-        _PreparePlacedBuilding(_placedBuilding.BuildingIndex);
+        FreezeBuilding(false);
+        PreparePlacedBuilding(_placedBuilding.BuildingIndex);
     }
 
-    void _CancelPlacedBuilding()
+    public void CancelPlacedBuilding()
     {
-        // destroy the "phantom" building
         Destroy(_placedBuilding.BuildingObject);
         _placedBuilding = null;
     }
 
-    public void SelectPlacedBuilding(int buildingIndex) => _PreparePlacedBuilding(buildingIndex);
+    public void SelectPlacedBuilding(int buildingIndex) => PreparePlacedBuilding(buildingIndex);
+
+    private void UpdateBuildingPosition()
+    {
+        var curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+        var curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+        _placedBuilding.SetPosition(curPosition);
+    }
+
+    private void FreezeBuilding(bool toFreeze)
+    {
+        foreach (var component in _placedBuilding.BuildingObject.GetComponents<Component>())
+        {
+            var behaviour = component as Behaviour;
+            if (behaviour != null)
+                behaviour.enabled = !toFreeze;
+        }
+    }
 }

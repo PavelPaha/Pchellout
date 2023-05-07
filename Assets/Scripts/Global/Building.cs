@@ -22,18 +22,9 @@ public class Building
         MaxHp = data.Hp;
         Hp = MaxHp;
         _placement = BuildingPlacement.Valid;
-        var instantiate = Object.Instantiate(Resources.Load<GameObject>($"Flowers/{data.Name}"));
-        BuildingObject = instantiate;
+        var buildingObject = Object.Instantiate(Resources.Load<GameObject>($"Flowers/{data.Name}"));
+        BuildingObject = buildingObject;
     }
 
     public void SetPosition(Vector2 position) => BuildingObject.transform.position = position;
-
-    public void Place()
-    {
-        // set placement state
-        _placement = BuildingPlacement.Fixed;
-        // remove "is trigger" flag from box collider to allow
-        // for collisions with units
-        BuildingObject.GetComponent<BoxCollider2D>().isTrigger = false;
-    }
 }

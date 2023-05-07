@@ -9,17 +9,33 @@ public static class Globals
 
     public static readonly BuildingData[] Buildings =
     {
-        new("ColeusFlower", 100, new Dictionary<string, int>
+        new("Барак", 100, new Dictionary<string, int>
         {
             { "honey", 2000 },
         }),
-        new("DaisyFlower", 100, new Dictionary<string, int>
+        new("Медохранилище", 100, new Dictionary<string, int>
         {
             { "honey", 1500 },
         }),
-        new("SunflowerFlower", 100, new Dictionary<string, int>
+        new("Ратуша", 100, new Dictionary<string, int>
         {
             { "honey", 2000 },
+        }),
+        new("Колеус", 100, new Dictionary<string, int>
+        {
+            { "honey", 1000 },
+        }),
+        new("Ромашка", 100, new Dictionary<string, int>
+        {
+            { "honey", 1500 },
+        }),
+        new("Подсолнух", 100, new Dictionary<string, int>
+        {
+            { "honey", 2000 },
+        }),
+        new("Куст", 100, new Dictionary<string, int>
+        {
+            { "honey", 500 },
         })
     };
 

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1938407975679543809}
   - component: {fileID: 4749850639104271961}
   m_Layer: 8
-  m_Name: ColeusFlower
+  m_Name: "\u041A\u043E\u043B\u0435\u0443\u0441"
   m_TagString: Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

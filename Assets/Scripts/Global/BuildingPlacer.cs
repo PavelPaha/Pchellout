@@ -68,5 +68,8 @@ public class BuildingPlacer : MonoBehaviour
             if (behaviour != null)
                 behaviour.enabled = !toFreeze;
         }
+
+        if (_placedBuilding.BuildingObject.TryGetComponent<Animator>(out var animator))
+            animator.enabled = true;
     }
 }

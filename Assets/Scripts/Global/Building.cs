@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class Building
 {
@@ -22,7 +23,7 @@ public class Building
         MaxHp = data.Hp;
         Hp = MaxHp;
         _placement = BuildingPlacement.Valid;
-        var buildingObject = Object.Instantiate(Resources.Load<GameObject>($"Flowers/{data.Name}"));
+        var buildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
         BuildingObject = buildingObject;
     }
 

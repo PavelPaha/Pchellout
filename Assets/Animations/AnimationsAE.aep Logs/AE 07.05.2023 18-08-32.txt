@@ -1,0 +1,8 @@
+  07.05.2023 18:08:32: Starting composition “BeeIdle”.
+
+  Output To: C:\Users\MagicBook\Desktop\Sequences\BeeIdle\BeeIdle_[#####].png    07.05.2023 18:08:34: Finished composition “BeeIdle”.
+
+
+  Total Time Elapsed: 2 Seconds
+Log closed on 07.05.2023 at 18:08:34
+

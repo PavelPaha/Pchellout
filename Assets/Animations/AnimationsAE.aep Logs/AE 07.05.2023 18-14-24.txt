@@ -1,0 +1,8 @@
+  07.05.2023 18:14:24: Starting composition “BeeIdle”.
+
+  Output To: C:\Users\MagicBook\Desktop\Sequences\BeeIdle\BeeIdle_[#####].png  After Effects error: Can't overwite file “C:\Users\MagicBook\Desktop\Sequences\BeeIdle\BeeIdle_00000.png”. (3  ::  3)  07.05.2023 18:14:24: Finished composition “BeeIdle”.
+
+
+  Total Time Elapsed: 0 Seconds
+Log closed on 07.05.2023 at 18:14:24
+

@@ -1,0 +1,8 @@
+  07.05.2023 17:55:54: Starting composition “BeeIdle”.
+
+  Output To: C:\Users\MagicBook\Documents\GitHub\Pchellout\Assets\Animations\AnimationsAE_AME\Animations\Sequences\BeeIdle\BeeIdle_[#####].png    07.05.2023 17:55:55: Finished composition “BeeIdle”.
+
+
+  Total Time Elapsed: 1 Seconds
+Log closed on 07.05.2023 at 17:55:55
+

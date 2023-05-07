@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 
 public class CannonController : MonoBehaviour
 {
     public GameObject ProjectilePrefab;
     private float fireTimer;
+    private Animator _animator;
+    private static readonly int IsFire = Animator.StringToHash("is_fire");
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -16,8 +24,15 @@ public class CannonController : MonoBehaviour
         transform.LookAt(mousePos, Vector3.forward);
         // Отменяем поворот пушки по оси Z
         transform.eulerAngles = new Vector3(0, 0, -transform.eulerAngles.z);
-        
-        
+        if (Input.GetMouseButton(0))
+        {
+            _animator.SetBool(IsFire, true);
+            
+        }
+        else
+        {
+            _animator.SetBool(IsFire, false);
+        }
         if (Input.GetMouseButton(0) 
             && fireTimer >= Globals.FireCooldown
             && Globals.InBounds(mousePos))
@@ -46,5 +61,6 @@ public class CannonController : MonoBehaviour
         Vector2 shootDirection = (mousePos - transform.position);
         shootDirection.Normalize();
         projectileRigidbody.AddForce(shootDirection * Globals.ProjectileSpeed, ForceMode2D.Impulse);
+
     }
 }

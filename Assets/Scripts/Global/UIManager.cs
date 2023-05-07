@@ -1,25 +1,18 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    //private BuildingPlacer _buildingPlacer;
-
     public Transform buildingMenu;
     public GameObject buildingButtonPrefab;
+    private BuildingPlacer _buildingPlacer;
 
     private void Awake()
     {
-        //_buildingPlacer = GetComponent<BuildingPlacer>();
-
-        // create buttons for each building type
+        _buildingPlacer = GetComponent<BuildingPlacer>();
         for (var i = 0; i < Globals.Buildings.Length; i++)
         {
-            // var button = Instantiate(
-            //     buildingButtonPrefab,
-            //     buildingMenu);
             var button = Instantiate(buildingButtonPrefab, buildingMenu);
             var text = Globals.Buildings[i].Name;
             button.name = text;
@@ -31,6 +24,6 @@ public class UIManager : MonoBehaviour
 
     private void _AddBuildingButtonListener(Button b, int i)
     {
-        //b.onClick.AddListener(() => _buildingPlacer.SelectPlacedBuilding(i));
+        b.onClick.AddListener(() => _buildingPlacer.SelectPlacedBuilding(i));
     }
 }

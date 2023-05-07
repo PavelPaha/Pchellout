@@ -9,15 +9,15 @@ public static class Globals
 
     public static readonly BuildingData[] Buildings =
     {
-        new("Barrack", 100, new Dictionary<string, int>
+        new("ColeusFlower", 100, new Dictionary<string, int>
         {
             { "honey", 2000 },
         }),
-        new("Pollen Storage", 100, new Dictionary<string, int>
+        new("DaisyFlower", 100, new Dictionary<string, int>
         {
             { "honey", 1500 },
         }),
-        new("Honey Storage", 100, new Dictionary<string, int>
+        new("SunflowerFlower", 100, new Dictionary<string, int>
         {
             { "honey", 2000 },
         })

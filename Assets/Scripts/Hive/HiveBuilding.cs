@@ -1,45 +1,50 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class HiveBuilding : MonoBehaviour
 {
-    private GameObject SelectedImage;
-    private GameObject UnselectedImage;
+    private GameObject _selectedImage;
+    private GameObject _unselectedImage;
 
-    private GameObject Information;
-    public bool Selected;
+    private GameObject _information;
+    public bool selected;
 
+    public static Action<GameObject> OnSelected;
+    public static Action OnUnSelected;
+    
     private void Start()
     {
-        SelectedImage = transform.GetChild(0).gameObject;
-        UnselectedImage = transform.GetChild(1).gameObject;
+        _selectedImage = transform.GetChild(0).gameObject;
+        _unselectedImage = transform.GetChild(1).gameObject;
         Unselect();
     }
 
     public void Select()
     {
-        SelectedImage.gameObject.SetActive(true);
-        UnselectedImage.gameObject.SetActive(false);
-        Selected = true;
+        _selectedImage.gameObject.SetActive(true);
+        _unselectedImage.gameObject.SetActive(false);
+        selected = true;
     }
 
     public void Unselect()
     {
-        SelectedImage.gameObject.SetActive(false);
-        UnselectedImage.gameObject.SetActive(true);
-        Selected = false;
+        _selectedImage.gameObject.SetActive(false);
+        _unselectedImage.gameObject.SetActive(true);
+        selected = false;
     }
 
     private void OnMouseDown()
     {
-        if (!Selected)
+        if (!selected)
         {
-            Select();
-            Selected = true;
+            OnSelected.Invoke(gameObject);
+            selected = true;
         }
         else
         {
-            Unselect();
-            Selected = false;
+            OnUnSelected?.Invoke();
+            selected = false;
         }
     }
 

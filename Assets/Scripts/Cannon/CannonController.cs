@@ -33,6 +33,7 @@ public class CannonController : MonoBehaviour
         {
             _animator.SetBool(IsFire, false);
         }
+        
         if (Input.GetMouseButton(0) 
             && fireTimer >= Globals.FireCooldown
             && Globals.InBounds(mousePos))

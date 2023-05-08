@@ -7,12 +7,13 @@ public static class Globals
     
     public static readonly int ProjectileDamage = 20;
 
-    public static readonly float FireCooldown =  0.2f;
+    public static readonly float FireCooldown =  0.0f;
 
     public static readonly float ProjectileSpeed = 2f;
 
     public static readonly int ShotCost = 0;
-    
+
+    public static readonly int MaxWobbleAngle = 15;
     
     public static readonly Dictionary<string, GameResource> GameResources = new()
     {

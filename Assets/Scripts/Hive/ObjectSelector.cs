@@ -1,6 +1,7 @@
 using System.Linq;
 using Hive;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -24,37 +25,25 @@ public class ObjectSelector : MonoBehaviour
         // InformationWindow = Menu.transform.GetChild(1).GetComponent<GameObject>();
         InformationWindow.SetActive(false);
         HoneyTextMeshObject.SetActive(false);
+        HiveBuilding.OnSelected += Show;
+        HiveBuilding.OnUnSelected += Hide;
     }
 
-    private void Update()
+    public void Show(GameObject obj)
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            var current = transform.GetChild(i).transform.GetComponent<HiveBuilding>();
-            if (current.Selected)
-            {
-                if (SelectedItem == null)
-                {
-                    current.Select();
-                    SelectedItem = current;
-                }
-                else if (SelectedItem.name != current.name)
-                {
-                    SelectedItem.Unselect();
-                    SelectedItem = current;
-                }
-            }
-        }
+        obj.GetComponent<HiveBuilding>().Select();
+        Debug.Log($"ObjectSelector: Мне попал в руки {obj.name}");
+        SelectedItem?.Unselect();
+        SelectedItem = obj.GetComponent<HiveBuilding>();
+        ShowMenu();
+    }
 
-        if (!Enumerable.Range(0, transform.childCount)
-                .Select(x => transform.GetChild(x))
-                .Any(x => x.GetComponent<HiveBuilding>().Selected))
-        {
-            SelectedItem = null;
-            HideMenu();
-        }
-        else if (SelectedItem != null)
-            ShowMenu();
+    public void Hide()
+    {
+        Debug.Log($"Говорит ObjectSelector: отмена выбора элемента");
+        SelectedItem?.Unselect();
+        SelectedItem = null;
+        HideMenu();
     }
 
     public void HideMenu()

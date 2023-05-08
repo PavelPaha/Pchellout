@@ -10,7 +10,6 @@ namespace Global
 
         public void Update()
         {
-            Debug.Log(Globals.GameResources["honey"].Amount.ToString());
             Honey.text = Globals.GameResources["honey"].Amount.ToString();
         }
     }

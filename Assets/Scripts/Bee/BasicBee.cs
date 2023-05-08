@@ -11,6 +11,8 @@ public class BasicBee : MonoBehaviour
 
     protected const float Delta = 0.1f;
 
+    private float frame = 0f;
+
     protected void UpdateAnimationDirection(Rigidbody2D rigidbody) =>
         GetComponent<SpriteRenderer>().flipX = rigidbody.velocity.x < 0.01f;
 
@@ -19,8 +21,17 @@ public class BasicBee : MonoBehaviour
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         Vector2 targetPosition = target.transform.position;
         Vector2 currentPosition = rigidbody.position;
-        Vector2 direction = (targetPosition - currentPosition).normalized;
-        Vector2 moveForce = direction * Speed - rigidbody.velocity;
+        Vector2 directionToTarget = (targetPosition - currentPosition).normalized;
+
+        // Вычисляем случайное отклонение от направления к цели
+        frame = frame < 100 ? frame + 0.01f : 0;
+        float wobbleAngle = UnityEngine.Random.Range(-Globals.MaxWobbleAngle, Globals.MaxWobbleAngle);
+        var wobbleRotation = Quaternion.Euler(0f, 0f, (float)Math.Sin(frame) * Globals.MaxWobbleAngle / 3 + wobbleAngle);
+
+        // Получаем новое направление на основе отклонения
+        Vector2 wobbledDirection = wobbleRotation * directionToTarget;
+        
+        Vector2 moveForce = wobbledDirection * Speed - rigidbody.velocity;
         rigidbody.AddForce(moveForce, ForceMode2D.Impulse);
         UpdateAnimationDirection(rigidbody);
     }
@@ -33,6 +44,10 @@ public class BasicBee : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.identity;
+        if (!Globals.InBounds(transform.position))
+        {
+            DestroyBee();
+        }
     }
 
     public void Damage(int damage)

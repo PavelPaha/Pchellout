@@ -18,8 +18,10 @@ public class EnemiesSpawner : MonoBehaviour
     public List<GameObject> EnemyItems;
     public GameObject HoneycombObject;
     public float BeeSpawnInterval = 5f;
-    
-    
+
+    public GameObject ParentForEnemies;
+
+
     private Transform[] _honeyCombs;
     private float _timer;
     private int _currentWaveIndex;
@@ -72,6 +74,7 @@ public class EnemiesSpawner : MonoBehaviour
         var enemyItem = EnemyItems[Globals.AttackWaves[_currentWaveIndex].EnemyIndex];
         var newEnemy = Instantiate(enemyItem, honeycomb.position, Quaternion.identity);
 
+        newEnemy.transform.SetParent(ParentForEnemies.transform);
         newEnemy.GetComponent<BeeEnemy>().Speed = 
             Random.Range(Math.Max(0, speed - 2), speed + 2);
         newEnemy.transform.localScale = 

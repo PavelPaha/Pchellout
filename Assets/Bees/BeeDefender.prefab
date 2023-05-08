@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7344379237400619846}
   - component: {fileID: 7344379237400619845}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7344379237400619847}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.002, z: -0.109999776}
+  m_LocalPosition: {x: 0, y: 0.002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed6c1387bcb4ff64b994e3b8edddcd66, type: 3}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7344379238214763168}
   - component: {fileID: 7344379238214763169}
   - component: {fileID: 7344379238214763170}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: HealthBar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7344379238214763172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.01700546}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.87999994, y: 0.87999994, z: 0.87999994}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -198,11 +198,10 @@ GameObject:
   - component: {fileID: 7344379238393923627}
   - component: {fileID: 7344379238393923628}
   - component: {fileID: 7344379238393923629}
-  - component: {fileID: 7344379238393923624}
   - component: {fileID: 7344379238393923639}
   - component: {fileID: 7344379238393923638}
-  - component: {fileID: 3083048398945998152}
-  m_Layer: 7
+  - component: {fileID: 6834889963333863361}
+  m_Layer: 9
   m_Name: BeeDefender
   m_TagString: Defender
   m_Icon: {fileID: 0}
@@ -217,8 +216,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7344379238393923630}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.63, y: 0.89, z: 0.07040127}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 9.63, y: 0.89, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7344379238214763171}
@@ -301,7 +300,7 @@ Animator:
   m_GameObject: {fileID: 7344379238393923630}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: abb04b853c978a84084ec9d6b6cf597b, type: 2}
+  m_Controller: {fileID: 9100000, guid: a7b1f8484e1a78745a5242ee389575ca, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -312,21 +311,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7344379238393923624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7344379238393923630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362e64a5283f4c088a1b0656bff5cdfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 100
-  Speed: 3
-  BeesSource: {fileID: 0}
 --- !u!61 &7344379238393923639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -374,7 +358,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3083048398945998152
+--- !u!114 &6834889963333863361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,11 +367,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7344379238393923630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5803c18832526484492bd1d81b24e957, type: 3}
+  m_Script: {fileID: 11500000, guid: 52caac461ee24934a8275b99ccab429c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
   Speed: 3
+  BeesSource: {fileID: 0}
 --- !u!1 &7344379239192980834
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +385,7 @@ GameObject:
   - component: {fileID: 7344379239192980846}
   - component: {fileID: 7344379239192980847}
   - component: {fileID: 7344379239192980832}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +400,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7344379239192980834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.11}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -434,7 +419,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7344379239192980834}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -467,7 +452,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed6c1387bcb4ff64b994e3b8edddcd66, type: 3}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
@@ -500,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9716981, g: 0.33459416, b: 0.33459416, a: 1}
+  m_Color: {r: 0.93725497, g: 1, b: 0.3529412, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

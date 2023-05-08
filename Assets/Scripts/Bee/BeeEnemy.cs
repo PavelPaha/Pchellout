@@ -12,6 +12,7 @@ namespace DefaultNamespace
         public GameObject BeesSource;
         private List<GameObject> _bees;
         
+        
         void Update()
         {
             // TODO пчела враг, как только разрушит свою цель, ничего не делает.
@@ -60,18 +61,17 @@ namespace DefaultNamespace
         }
         
 
-        private static void DamageInCollisionWithOtherObject(Collision2D collision)
+        private void DamageInCollisionWithOtherObject(Collision2D collision)
         {
             switch (collision.gameObject.tag)
             {
                 case "Hive":
-                    collision.gameObject.GetComponent<HouseForBees>().Damage(20);
-                    break;
                 case "Extractor":
-                    collision.gameObject.GetComponent<Extractor>().Damage(20);
-                    break;
                 case "Flower":
-                    collision.gameObject.GetComponent<Flower>().Damage(20);
+                case "Enemy":
+                case "Defender":
+                    BeesSource = collision.transform.parent.gameObject;
+                    collision.gameObject.GetComponent<BeeDefender>().Damage(20);
                     break;
             }
         }

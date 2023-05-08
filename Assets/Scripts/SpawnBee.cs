@@ -1,27 +1,19 @@
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpawnBee : MonoBehaviour
 {
-    public GameObject Button;
+    public GameObject ParentForDefenders;
     public GameObject Bee;
     public GameObject Hive;
-    private GameObject hiveInstance;
-
-    void Start()
-    {
-        hiveInstance = Instantiate(Hive);
-    }
-
-    void Update()
-    {
-        
-    }
+    public GameObject Goal;
 
     public void OnMouseDown()
     {
-        Debug.Log("Пиждор");
-        Vector3 hivePosition = hiveInstance.transform.position;
-        Instantiate(Bee, hivePosition, Quaternion.identity);
+        if (Hive == null) return;
+        Vector3 hivePosition = Hive.transform.position;
+        var bee = Instantiate(Bee, hivePosition, Quaternion.identity);
+        bee.GetComponent<BeeDefender>().BeesSource = Goal;
+        bee.transform.SetParent(ParentForDefenders.transform);
     }
 }

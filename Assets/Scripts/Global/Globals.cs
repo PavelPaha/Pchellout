@@ -7,7 +7,7 @@ public static class Globals
     
     public static readonly int ProjectileDamage = 20;
 
-    public static readonly float FireCooldown =  0.0f;
+    public static readonly float FireCooldown =  0.3f;
 
     public static readonly float ProjectileSpeed = 2f;
 

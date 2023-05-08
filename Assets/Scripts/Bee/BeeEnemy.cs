@@ -70,9 +70,6 @@ namespace DefaultNamespace
                 case "Flower":
                 case "Enemy":
                 case "Defender":
-                    collision.gameObject.GetComponent<Flower>().Damage(20);
-                    break;
-                case "Defender":
                     BeesSource = collision.transform.parent.gameObject;
                     collision.gameObject.GetComponent<BeeDefender>().Damage(20);
                     break;

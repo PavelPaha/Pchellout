@@ -66,9 +66,14 @@ namespace DefaultNamespace
             switch (collision.gameObject.tag)
             {
                 case "Hive":
+                    collision.gameObject.GetComponent<HouseForBees>().Damage(20);
+                    break;
                 case "Extractor":
+                    collision.gameObject.GetComponent<Extractor>().Damage(20);
+                    break;
                 case "Flower":
-                case "Enemy":
+                    collision.gameObject.GetComponent<Flower>().Damage(20);
+                    break;
                 case "Defender":
                     BeesSource = collision.transform.parent.gameObject;
                     collision.gameObject.GetComponent<BeeDefender>().Damage(20);

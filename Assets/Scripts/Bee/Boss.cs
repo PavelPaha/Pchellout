@@ -9,8 +9,6 @@ namespace DefaultNamespace
     {
         public GameObject Child;
         float time = 0;
-        float spawnInterval = 5;
-        private int childsCount = 10;
         public float minDelay = 1f;
         public float maxDelay = 5f;
         
@@ -47,10 +45,10 @@ namespace DefaultNamespace
         private void RefreshTime()
         {
             time += Time.deltaTime;
-            if (time >= spawnInterval)
+            if (time >= Globals.BossChildrenSpawnInterval)
             {
                 time = 0;
-                SpawnChilds(childsCount);
+                SpawnChilds(Globals.BossChildrenCount);
             }
         }
 

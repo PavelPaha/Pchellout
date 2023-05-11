@@ -18,6 +18,10 @@ public static class Globals
     public static readonly int MaxWobbleAngle = 15;
 
     public static GameOutcome GameOutcome = GameOutcome.Default;
+
+    public static float BossChildrenSpawnInterval = 10f;
+
+    public static int BossChildrenCount = 5;
     
     public static readonly Dictionary<string, GameResource> GameResources = new()
     {

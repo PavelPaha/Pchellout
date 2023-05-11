@@ -13,7 +13,7 @@ namespace DefaultNamespace
         private List<GameObject> _bees;
         
         
-        void Update()
+        public virtual void Update()
         {
             // TODO пчела враг, как только разрушит свою цель, ничего не делает.
             // Нужно сделать так, чтобы враг после этого выбирал другую цель и летел к ней

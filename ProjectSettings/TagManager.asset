@@ -10,6 +10,8 @@ TagManager:
   - Flower
   - Hive
   - Defender
+  - Projectile
+  - Boss
   layers:
   - Default
   - TransparentFX

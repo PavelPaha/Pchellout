@@ -21,10 +21,16 @@ public class Projectile : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Enemy")
+        switch (col.gameObject.tag)
         {
-            col.gameObject.GetComponent<BeeEnemy>().Damage(Globals.ProjectileDamage);
-            Destroy(gameObject);
+            case "Enemy":
+                col.gameObject.GetComponent<BeeEnemy>().Damage(Globals.ProjectileDamage);
+                Destroy(gameObject);
+                break;
+            case "Boss":
+                col.gameObject.GetComponent<Boss>().Damage(Globals.ProjectileDamage);
+                Destroy(gameObject);
+                break;
         }
     }
 }

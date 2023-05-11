@@ -45,14 +45,14 @@ public class Extractor : BasicBee
     
     private static void DamageInCollisionWithEnemy(Collision2D collision)
     {
-        try
+        switch (collision.gameObject.tag)
         {
-            collision.gameObject.GetComponent<BeeEnemy>().Damage(5);
-        }
-        catch
-        {
-            throw new Exception(
-                $"Extractor столкнулся с объектом, у которого такие компоненты (но у него нет компонента BeeEnemy):  {String.Join(", ", collision.gameObject.GetComponents<Component>().Select(a => a.ToString()))}");
+            case "Enemy":
+                collision.gameObject.GetComponent<BeeEnemy>().Damage(20);
+                break;
+            case "Boss":
+                collision.gameObject.GetComponent<Boss>().Damage(20);
+                break;
         }
     }
 

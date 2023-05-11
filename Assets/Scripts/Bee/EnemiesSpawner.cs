@@ -28,7 +28,7 @@ public class EnemiesSpawner : MonoBehaviour
     private int _beesToSpawn;
     private float _waveTimer;
     private float _beeSpawnTimer;
-
+    private bool isEnd = false;
     void Start()
     {
         _honeyCombs = HoneycombObject.GetComponentsInChildren<Transform>();
@@ -37,6 +37,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     void Update()
     {
+        if (isEnd) return;
         IterateWave();
         if (_beeSpawnTimer >= BeeSpawnInterval && _beesToSpawn > 0)
         {
@@ -59,7 +60,11 @@ public class EnemiesSpawner : MonoBehaviour
         {
             _waveTimer = 0f;
             _currentWaveIndex++;
-            _currentWaveIndex = (_currentWaveIndex + 1) % Globals.AttackWaves.Length;
+            if (_currentWaveIndex >= Globals.AttackWaves.Length)
+            {
+                isEnd = true;
+                return;
+            }
             _beesToSpawn = Globals.AttackWaves[_currentWaveIndex].EnemyCount;
             _beeSpawnTimer = BeeSpawnInterval;
         }

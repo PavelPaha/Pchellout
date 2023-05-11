@@ -64,6 +64,9 @@ namespace DefaultNamespace
                 case "Enemy":
                     collision.gameObject.GetComponent<BeeEnemy>().Damage(20);
                     break;
+                case "Boss":
+                    collision.gameObject.GetComponent<Boss>().Damage(20);
+                    break;
             }
         }
     }

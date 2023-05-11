@@ -4,6 +4,8 @@ using UnityEngine;
 public static class Globals
 {
     public static bool CameraIsInHive = false;
+
+    public static bool Pause = false;
     
     public static readonly int ProjectileDamage = 20;
 

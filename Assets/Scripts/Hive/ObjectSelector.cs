@@ -19,6 +19,7 @@ public class ObjectSelector : MonoBehaviour
     
     private void Start()
     {
+        SceneChanger.OnChangeScene += HideSelectedBuilding;
         SelectedItem = null;
         _textMesh = TextMeshItem.GetComponent<TextMeshProUGUI>();
         _honeyCount = HoneyTextMeshObject.GetComponent<TextMeshProUGUI>();
@@ -38,6 +39,14 @@ public class ObjectSelector : MonoBehaviour
         ShowMenu();
     }
 
+    public void HideSelectedBuilding(string location)
+    {
+        if (location == "world")
+        {
+            Hide();
+        }
+    }
+    
     public void Hide()
     {
         Debug.Log($"Говорит ObjectSelector: отмена выбора элемента");

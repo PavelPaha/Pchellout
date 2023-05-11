@@ -5577,6 +5577,7 @@ GameObject:
   - component: {fileID: 2041337791}
   - component: {fileID: 2041337790}
   - component: {fileID: 2041337789}
+  - component: {fileID: 2041337795}
   m_Layer: 6
   m_Name: Hive
   m_TagString: Hive
@@ -5708,6 +5709,18 @@ Transform:
   m_Father: {fileID: 953933758}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2041337795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041337788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f7c500f9c0465cb21ac8f7bf5117a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2064856730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7757822143529804495, guid: 8201cc682a9c22944abd19c71f0d7df7, type: 3}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Global;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -56,7 +57,11 @@ public class BasicBee : MonoBehaviour
         if (Health <= 0)
         {
             Health = 0;
-            DestroyBee();
+            Globals.GameOutcome = GameOutcome.Loss;
+            if (gameObject.GetComponent<HouseForBees>() != null)
+                gameObject.GetComponent<HouseForBees>().Loss();
+            else
+                DestroyBee();
         }
     }
 

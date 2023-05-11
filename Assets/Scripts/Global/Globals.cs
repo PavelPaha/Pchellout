@@ -14,6 +14,8 @@ public static class Globals
     public static readonly int ShotCost = 0;
 
     public static readonly int MaxWobbleAngle = 15;
+
+    public static GameOutcome GameOutcome = GameOutcome.Default;
     
     public static readonly Dictionary<string, GameResource> GameResources = new()
     {
@@ -76,4 +78,12 @@ public static class Globals
                && position.x < 12 
                && position.y < 4.5f;
     }
+    
+}
+
+public enum GameOutcome
+{
+    Loss,
+    Default,
+    Menu
 }

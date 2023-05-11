@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HiveTest.unity
     guid: 04b45c80ab7b5214e9cc9da99c2059f1
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: b8ab9a1e3b8d60f4aa196799a0a76414
   m_configObjects: {}

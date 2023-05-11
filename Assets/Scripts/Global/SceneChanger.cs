@@ -1,22 +1,23 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+    public static Action<string> OnChangeScene;
     
     private void OnMouseDown()
     {
         if (Globals.CameraIsInHive)
         {
             Camera.main.transform.Translate(new Vector3(-45, 0, 0));
+            OnChangeScene("world");
         }
         else
         {
             Camera.main.transform.Translate(new Vector3(45, 0, 0));
+            OnChangeScene("hive");
         }
 
         Globals.CameraIsInHive = !Globals.CameraIsInHive;

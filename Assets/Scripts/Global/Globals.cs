@@ -20,7 +20,7 @@ public static class Globals
         { "honey", new GameResource("honey", 0) }
     };
 
-    public static readonly BuildingData[] Buildings =
+    public static readonly BuildingData[] BuildingsInHive =
     {
         new("Барак", 100, new Dictionary<string, int>
         {
@@ -33,7 +33,11 @@ public static class Globals
         new("Ратуша", 100, new Dictionary<string, int>
         {
             { "honey", 2000 },
-        }, string.Empty),
+        }, string.Empty)
+    };
+
+    public static readonly BuildingData[] BuildigsInWorld =
+    {
         new("Колеус", 100, new Dictionary<string, int>
         {
             { "honey", 1000 },
@@ -50,6 +54,12 @@ public static class Globals
         {
             { "honey", 500 },
         }, string.Empty)
+    };
+
+    public static readonly Dictionary<string, BuildingData[]> Buildings = new()
+    {
+        { "hive", BuildingsInHive },
+        { "world", BuildigsInWorld }
     };
 
     public static readonly AttackWave[] AttackWaves =

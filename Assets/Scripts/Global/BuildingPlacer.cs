@@ -31,9 +31,9 @@ public class BuildingPlacer : MonoBehaviour
     }
 
 
-    public void PreparePlacedBuilding(int buildingIndex)
+    public void PreparePlacedBuilding(string location, int buildingIndex)
     {
-        var building = new Building(Globals.Buildings[buildingIndex]);
+        var building = new Building(Globals.Buildings[location][buildingIndex]);
         _placedBuilding = building;
         FreezeBuilding(true);
         UpdateBuildingPosition();
@@ -42,7 +42,7 @@ public class BuildingPlacer : MonoBehaviour
     public void PlaceBuilding()
     {
         FreezeBuilding(false);
-        PreparePlacedBuilding(_placedBuilding.BuildingIndex);
+        PreparePlacedBuilding(Globals.CameraIsInHive ? "hive" : "world", _placedBuilding.BuildingIndex);
     }
 
     public void CancelPlacedBuilding()
@@ -51,7 +51,8 @@ public class BuildingPlacer : MonoBehaviour
         _placedBuilding = null;
     }
 
-    public void SelectPlacedBuilding(int buildingIndex) => PreparePlacedBuilding(buildingIndex);
+    public void SelectPlacedBuilding(int buildingIndex) 
+        => PreparePlacedBuilding(Globals.CameraIsInHive ? "hive" : "world", buildingIndex);
 
     private void UpdateBuildingPosition()
     {

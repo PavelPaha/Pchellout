@@ -10,12 +10,12 @@ public class Building
 
     private BuildingPlacement _placement;
 
-    public int Hp { get; set; }
+    public int Hp { get; }
     public bool IsFixed => _placement == BuildingPlacement.Fixed;
 
     public int BuildingIndex => Enumerable
-        .Range(0, Globals.Buildings.Length)
-        .First(i => Globals.Buildings[i].Name == Name);
+        .Range(0, Globals.Buildings[Globals.CameraIsInHive ? "hive" : "world"].Length)
+        .First(i => Globals.Buildings[Globals.CameraIsInHive ? "hive" : "world"][i].Name == Name);
 
     public Building(BuildingData data)
     {
@@ -23,7 +23,10 @@ public class Building
         MaxHp = data.Hp;
         Hp = MaxHp;
         _placement = BuildingPlacement.Valid;
-        var buildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
+
+        var parent = GameObject.Find(Globals.CameraIsInHive ? "HiveBuildings" : "Flowers");
+        var buildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"), 
+            parent.transform);
         BuildingObject = buildingObject;
     }
 

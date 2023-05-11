@@ -12,6 +12,7 @@ public class Extractor : BasicBee
     [SerializeField] protected GameObject targetsParent;
     [SerializeField] protected GameObject spawnObject;
 
+    public static Action OnResourcesUpdated;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +124,7 @@ public class Extractor : BasicBee
                 Globals.GameResources["honey"].Amount += _extractor.gameObject
                     .GetComponent<NectarInventory>()
                     .DeliverNectar(int.MaxValue);
+                OnResourcesUpdated();
             }
         }
 

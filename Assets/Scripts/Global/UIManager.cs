@@ -15,11 +15,11 @@ public class UIManager : MonoBehaviour
     {
         _createdButtons = new List<GameObject>();
         _buildingPlacer = GetComponent<BuildingPlacer>();
-        SceneChanger.OnChangeScene += ShowHiveBuildingButtons;
-        ShowHiveBuildingButtons("world");
+        SceneChanger.OnChangeScene += ShowBuildingButtons;
+        ShowBuildingButtons("world");
     }
 
-    public void ShowHiveBuildingButtons(string location)
+    public void ShowBuildingButtons(string location)
     {
         foreach (var button in _createdButtons)
         {

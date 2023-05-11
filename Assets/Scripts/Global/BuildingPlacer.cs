@@ -1,5 +1,11 @@
+using System;
+using System.Diagnostics;
+using Global;
+using Mono.Cecil.Cil;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Debug = UnityEngine.Debug;
 
 public enum BuildingPlacement
 {
@@ -10,15 +16,20 @@ public enum BuildingPlacement
 
 public class BuildingPlacer : MonoBehaviour
 {
+    public static Action OnBuildingPlaced;
     public bool IsBuildingSelected => _placedBuilding != null;
 
     private Building _placedBuilding;
     private float _buildingToCameraDistance;
+    
 
+    
     void Update()
     {
         if (_placedBuilding == null)
             return;
+        
+        UpdateMesh();
         UpdateBuildingPosition();
         if (Input.GetKeyUp(KeyCode.Escape))
         {
@@ -26,8 +37,15 @@ public class BuildingPlacer : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0)
+            && !EventSystem.current.IsPointerOverGameObject()
+            && Globals.GameResources["honey"].Amount >= _placedBuilding.Cost)
+        {
+            Globals.GameResources["honey"].Amount -= _placedBuilding.Cost;
+            var material = _placedBuilding.BuildingObject.GetComponent<Renderer>().material;
+            material.color = new Color(1f, 1f, 1f, 1f);
             PlaceBuilding();
+        }
     }
 
 
@@ -41,6 +59,7 @@ public class BuildingPlacer : MonoBehaviour
 
     public void PlaceBuilding()
     {
+        OnBuildingPlaced();
         FreezeBuilding(false);
         PreparePlacedBuilding(Globals.CameraIsInHive ? "hive" : "world", _placedBuilding.BuildingIndex);
     }
@@ -69,8 +88,22 @@ public class BuildingPlacer : MonoBehaviour
             if (behaviour != null)
                 behaviour.enabled = !toFreeze;
         }
-
+        
         if (_placedBuilding.BuildingObject.TryGetComponent<Animator>(out var animator))
             animator.enabled = true;
+    }
+    
+    public void UpdateMesh()
+    {
+        var material = _placedBuilding.BuildingObject.GetComponent<Renderer>().material;
+        if (_placedBuilding.Cost > Globals.GameResources["honey"].Amount)
+        {
+            material.color = new Color(1, 1, 1, 0.3f);
+        }
+        else
+        {
+            material.color = new Color(1f, 1f, 1f, 1f);
+        }
+        
     }
 }

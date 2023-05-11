@@ -40,19 +40,19 @@ public static class Globals
     {
         new("Колеус", 100, new Dictionary<string, int>
         {
-            { "honey", 1000 },
+            { "honey", 10000 },
         }, string.Empty),
         new("Ромашка", 100, new Dictionary<string, int>
         {
-            { "honey", 1500 },
+            { "honey", 15000 },
         }, string.Empty),
         new("Подсолнух", 100, new Dictionary<string, int>
         {
-            { "honey", 2000 },
+            { "honey", 20000 },
         }, string.Empty),
         new("Куст", 100, new Dictionary<string, int>
         {
-            { "honey", 500 },
+            { "honey", 5000 },
         }, string.Empty)
     };
 

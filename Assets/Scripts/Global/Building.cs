@@ -1,4 +1,6 @@
 using System.Linq;
+using Global;
+using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -7,6 +9,7 @@ public class Building
     public readonly GameObject BuildingObject;
     public readonly string Name;
     public readonly int MaxHp;
+    public readonly int Cost;
 
     private BuildingPlacement _placement;
 
@@ -22,13 +25,16 @@ public class Building
         Name = data.Name;
         MaxHp = data.Hp;
         Hp = MaxHp;
+        Cost = data.Cost["honey"];
         _placement = BuildingPlacement.Valid;
 
         var parent = GameObject.Find(Globals.CameraIsInHive ? "HiveBuildings" : "Flowers");
         var buildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"), 
             parent.transform);
+        
         BuildingObject = buildingObject;
     }
 
+    
     public void SetPosition(Vector2 position) => BuildingObject.transform.position = position;
 }

@@ -7,6 +7,7 @@ public class BuildingData
     public readonly int Hp;
     public readonly Dictionary<string, int> Cost;
     public readonly string Description;
+    
 
     public BuildingData(string name, int hp, Dictionary<string, int> cost, string description)
     {

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1938407975679543838}
   - component: {fileID: 1938407975679543809}
   - component: {fileID: 4749850639104271961}
+  - component: {fileID: -4430155242346577421}
   m_Layer: 8
   m_Name: ColeusFlower
   m_TagString: Flower
@@ -205,6 +206,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bar: {fileID: 1099599812128956140}
   Fill: 1
+--- !u!114 &-4430155242346577421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938407975679543811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bffab8ceb04dec43937bd6553cbbdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4102884707693138563
 GameObject:
   m_ObjectHideFlags: 0

@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 5446423613914113767}
   - component: {fileID: 7140313344017463199}
   - component: {fileID: -7444930098929787154}
+  - component: {fileID: 4699553649532817540}
   m_Layer: 8
   m_Name: SucculentFlower
   m_TagString: Flower
@@ -347,6 +348,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bffab8ceb04dec43937bd6553cbbdc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4699553649532817540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5446423613914113769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f769e800e4295b47ae63cacfc7311ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBoostCost: 20000
 --- !u!1 &7169784831156677385
 GameObject:
   m_ObjectHideFlags: 0

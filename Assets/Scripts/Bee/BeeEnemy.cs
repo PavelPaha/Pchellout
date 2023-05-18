@@ -18,11 +18,20 @@ namespace DefaultNamespace
         public void Start()
         {
             _organizer = GameObject.Find("Game").GetComponent<Organizer>();
-            _sources.Enqueue(_organizer.Flowers);
-            _sources.Enqueue(_organizer.Extractors);
-            _sources.Enqueue(_organizer.Hive);
+            AddSources();
             BeesSource = _sources.Dequeue();
         }
+
+        private void AddSources()
+        {
+            if (_organizer.Flowers.transform.childCount > 0)
+                _sources.Enqueue(_organizer.Flowers);
+            if (_organizer.Extractors.transform.childCount > 0)
+                _sources.Enqueue(_organizer.Extractors);
+            if (_organizer.Hive.transform.childCount > 0)
+                _sources.Enqueue(_organizer.Hive);
+        }
+
         public virtual void Update()
         {
             // TODO пчела враг, как только разрушит свою цель, ничего не делает.
@@ -30,15 +39,13 @@ namespace DefaultNamespace
             transform.rotation = Quaternion.identity;
             if (BeesSource == null || BeesSource.transform.childCount == 0)
             {
-                if (_sources.Count > 0)
+                if (_sources.Count == 0)
                 {
-                    BeesSource = _sources.Dequeue();
+                    AddSources();
                 }
-                else
-                {
-                    throw new NullReferenceException("Enemy не знает, на какую цель ему лететь");
-                }
+                BeesSource = _sources.Dequeue();
             }
+            
             _bees = Enumerable
                 .Range(0, BeesSource.transform.childCount)
                 .Select(index => BeesSource.transform.GetChild(index).gameObject)

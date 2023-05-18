@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using UnityEngine;
+
+/// <summary>
 /// Это класс волны нападения, который хранит параметры для врага,
 /// которого будет генерировать EnemiesSpawner
 /// </summary>
@@ -8,5 +10,6 @@ public class AttackWave
     public int EnemyCount;
     public int Speed;
     public float Scale = 1;
-    public int EnemyIndex;
+    public float BeeSpawnInterval = 1f;
+    public string SourceName;
 }

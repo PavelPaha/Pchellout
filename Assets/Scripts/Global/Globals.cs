@@ -72,10 +72,10 @@ public static class Globals
 
     public static readonly AttackWave[] AttackWaves =
     {
-        new() { EnemyCount = 20, Speed = 5, Scale = 1f, EnemyIndex = 0 },
-        new() { EnemyCount = 10, Speed = 5, Scale = 0.7f, EnemyIndex = 1 },
-        new() { EnemyCount = 30, Speed = 5, Scale = 1f, EnemyIndex = 2 },
-        new() { EnemyCount = 1, Speed = 5, Scale = 1, EnemyIndex = 3}
+        new() { EnemyCount = 20, Speed = 5, Scale = 1f, SourceName = "1"},
+        new() { EnemyCount = 10, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 0.4f, SourceName = "2" },
+        new() { EnemyCount = 30, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.2f, SourceName = "3" },
+        new() { EnemyCount = 1, Speed = 5, Scale = 1, SourceName = "4"}
     };
     
     public static bool InBounds(Vector3 position)

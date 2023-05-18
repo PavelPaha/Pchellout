@@ -15,9 +15,8 @@ using Random = UnityEngine.Random;
 public class EnemiesSpawner : MonoBehaviour
 {
     public List<GameObject> Goals;
-    public List<GameObject> EnemyItems;
     public GameObject HoneycombObject;
-    private float BeeSpawnInterval = 2f;
+    private float BeeSpawnInterval = 0.8f;
 
     public GameObject ParentForEnemies;
 
@@ -44,6 +43,7 @@ public class EnemiesSpawner : MonoBehaviour
             }
             _beeSpawnTimer = 0;
             _beesToSpawn = Globals.AttackWaves[_currentWaveIndex].EnemyCount;
+            BeeSpawnInterval = Globals.AttackWaves[_currentWaveIndex].BeeSpawnInterval;
         }
         _beeSpawnTimer += Time.deltaTime;
         // Debug.Log($"BeeSpawnTimer = {_beeSpawnTimer} {BeeSpawnInterval} {_beeSpawnTimer >= BeeSpawnInterval}");
@@ -72,10 +72,12 @@ public class EnemiesSpawner : MonoBehaviour
         Transform honeycomb = _honeyCombs[Random.Range(1, _honeyCombs.Length-1)];
         var speed = Globals.AttackWaves[_currentWaveIndex].Speed;
         var scale = Globals.AttackWaves[_currentWaveIndex].Scale;
-        var enemyItem = EnemyItems[Globals.AttackWaves[_currentWaveIndex].EnemyIndex];
-        var newEnemy = Instantiate(enemyItem, honeycomb.position, Quaternion.identity);
+        //TODO: работает тольео если SourceName - это одно слово. Если CamelCase или несколько слов то выплёвывает ошибку
+        var enemyItem = Resources.Load<GameObject>($"Enemies/{Globals.AttackWaves[_currentWaveIndex].SourceName}");
+        var newEnemy = UnityEngine.Object.Instantiate(enemyItem, ParentForEnemies.transform, true);
 
-        newEnemy.transform.SetParent(ParentForEnemies.transform);
+        newEnemy.transform.position = HoneycombObject.transform
+            .GetChild(Random.Range(0, HoneycombObject.transform.childCount)).transform.position; 
         newEnemy.GetComponent<BeeEnemy>().Speed = 
             Random.Range(Math.Max(0, speed - 2), speed + 2);
         newEnemy.transform.localScale = 

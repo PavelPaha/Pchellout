@@ -99,7 +99,8 @@ namespace DefaultNamespace
         
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            SpawnChilds(1);
+            if (Random.Range(1,5) < 2)
+                SpawnChilds(1);
             Vector2 direction = GetComponent<Boss>().BeesSource.transform.position - transform.position;
             Vector2 force = direction.normalized*5;
             rb.AddForce(-force);

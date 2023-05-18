@@ -12,6 +12,8 @@ namespace DefaultNamespace
         
         void Update()
         {
+            if (!Globals.InBounds(transform.position))
+                DestroyBee();
             // TODO пчела, как только разрушит свою цель, ничего не делает.
             // Нужно сделать так, чтобы враг после этого выбирал другую цель и летел к ней
             transform.rotation = Quaternion.identity;

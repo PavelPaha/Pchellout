@@ -17,7 +17,7 @@ public class EnemiesSpawner : MonoBehaviour
     public List<GameObject> Goals;
     public List<GameObject> EnemyItems;
     public GameObject HoneycombObject;
-    public float BeeSpawnInterval = 5f;
+    private float BeeSpawnInterval = 2f;
 
     public GameObject ParentForEnemies;
 
@@ -26,9 +26,7 @@ public class EnemiesSpawner : MonoBehaviour
     private float _timer;
     private int _currentWaveIndex;
     private int _beesToSpawn;
-    private float _waveTimer;
     private float _beeSpawnTimer;
-    private bool isEnd = false;
     void Start()
     {
         _honeyCombs = HoneycombObject.GetComponentsInChildren<Transform>();
@@ -37,14 +35,25 @@ public class EnemiesSpawner : MonoBehaviour
 
     void Update()
     {
-        if (isEnd) return;
-        IterateWave();
+        if (_beesToSpawn == 0)
+        {
+            _currentWaveIndex++;
+            if (_currentWaveIndex >= Globals.AttackWaves.Length)
+            {
+                return;
+            }
+            _beeSpawnTimer = 0;
+            _beesToSpawn = Globals.AttackWaves[_currentWaveIndex].EnemyCount;
+        }
+        _beeSpawnTimer += Time.deltaTime;
+        // Debug.Log($"BeeSpawnTimer = {_beeSpawnTimer} {BeeSpawnInterval} {_beeSpawnTimer >= BeeSpawnInterval}");
         if (_beeSpawnTimer >= BeeSpawnInterval && _beesToSpawn > 0)
         {
             SpawnEnemy();
             _timer = 0f;
             _beesToSpawn--;
             _beeSpawnTimer = 0f;
+            Debug.Log($"{_currentWaveIndex} {_beesToSpawn}");
         }
     }
 
@@ -55,20 +64,7 @@ public class EnemiesSpawner : MonoBehaviour
     /// </summary>
     private void IterateWave()
     {
-        _waveTimer += Time.deltaTime;
-        if (_waveTimer >= Globals.AttackWaves[_currentWaveIndex].Duration)
-        {
-            _waveTimer = 0f;
-            _currentWaveIndex++;
-            if (_currentWaveIndex >= Globals.AttackWaves.Length)
-            {
-                isEnd = true;
-                return;
-            }
-            _beesToSpawn = Globals.AttackWaves[_currentWaveIndex].EnemyCount;
-            _beeSpawnTimer = BeeSpawnInterval;
-        }
-        _beeSpawnTimer += Time.deltaTime;
+        
     }
 
     private void SpawnEnemy()

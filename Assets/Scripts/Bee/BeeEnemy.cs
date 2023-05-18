@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Global;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -11,16 +12,32 @@ namespace DefaultNamespace
     {
         public GameObject BeesSource;
         private List<GameObject> _bees;
-        
-        
+        private Queue<GameObject> _sources = new();
+        private Organizer _organizer;
+
+        public void Start()
+        {
+            _organizer = GameObject.Find("Game").GetComponent<Organizer>();
+            _sources.Enqueue(_organizer.Flowers);
+            _sources.Enqueue(_organizer.Extractors);
+            _sources.Enqueue(_organizer.Hive);
+            BeesSource = _sources.Dequeue();
+        }
         public virtual void Update()
         {
             // TODO пчела враг, как только разрушит свою цель, ничего не делает.
             // Нужно сделать так, чтобы враг после этого выбирал другую цель и летел к ней
             transform.rotation = Quaternion.identity;
-            if (BeesSource == null)
+            if (BeesSource == null || BeesSource.transform.childCount == 0)
             {
-                throw new NullReferenceException("Enemy не знает, на какую цель ему лететь");
+                if (_sources.Count > 0)
+                {
+                    BeesSource = _sources.Dequeue();
+                }
+                else
+                {
+                    throw new NullReferenceException("Enemy не знает, на какую цель ему лететь");
+                }
             }
             _bees = Enumerable
                 .Range(0, BeesSource.transform.childCount)

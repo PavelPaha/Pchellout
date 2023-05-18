@@ -24,6 +24,10 @@ public class Extractor : BasicBee
     // Update is called once per frame
     void Update()
     {
+        if (!Globals.InBounds(transform.position))
+        {
+            DestroyBee();
+        }
         transform.rotation = Quaternion.identity;
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();

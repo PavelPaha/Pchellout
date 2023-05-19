@@ -53,7 +53,7 @@ public class EnemiesSpawner : MonoBehaviour
             _timer = 0f;
             _beesToSpawn--;
             _beeSpawnTimer = 0f;
-            Debug.Log($"{_currentWaveIndex} {_beesToSpawn}");
+            // Debug.Log($"{_currentWaveIndex} {_beesToSpawn}");
         }
     }
 

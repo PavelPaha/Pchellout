@@ -9,8 +9,8 @@ public class Extractor : BasicBee
     private ExtractorState _extractorState;
     private NectarInventory _inventory;
     private GameObject _target;
-    [SerializeField] protected GameObject targetsParent;
-    [SerializeField] protected GameObject spawnObject;
+    [SerializeField] public GameObject targetsParent;
+    [SerializeField] public GameObject spawnObject;
 
     public static Action OnResourcesUpdated;
 
@@ -101,8 +101,12 @@ public class Extractor : BasicBee
         {
             _extractor.UpdateTarget();
             var target = _extractor._target;
-            if (target == null)
+            if (target == null || target.transform.childCount == 0)
+            {
+                _extractor.MoveToSpawn();
+                //TODO: если цветов нет, то скорее всего экстрактор должен прилететь в улье и в него залететь (пропасть). Ну или нет:)
                 return;
+            }
             _extractor.MoveToTarget(target);
             if (_extractor.IsAtTargetLocation(target))
                 _extractor._extractorState = new ExtractingNectarState(_extractor);
@@ -125,9 +129,11 @@ public class Extractor : BasicBee
             if (_extractor.IsAtSpawnLocation())
             {
                 _extractor._extractorState = new MovingToTargetState(_extractor);
-                Globals.GameResources["honey"].Amount += _extractor.gameObject
+                Globals.AddHoney(
+                    _extractor.gameObject
                     .GetComponent<NectarInventory>()
-                    .DeliverNectar(int.MaxValue);
+                    .DeliverNectar(int.MaxValue)
+                    );
                 OnResourcesUpdated();
             }
         }

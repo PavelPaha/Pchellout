@@ -29,12 +29,13 @@ public class Building
         _placement = BuildingPlacement.Valid;
 
         var parent = GameObject.Find(Globals.CameraIsInHive ? "HiveBuildings" : "Flowers");
-        var buildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"), 
-            parent.transform);
-        
-        BuildingObject = buildingObject;
+        if (data.Name != "Bomb")
+            BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"),
+                parent.transform);
+        else
+            BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
     }
 
-    
+
     public void SetPosition(Vector2 position) => BuildingObject.transform.position = position;
 }

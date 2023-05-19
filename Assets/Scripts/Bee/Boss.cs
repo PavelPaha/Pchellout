@@ -81,7 +81,7 @@ namespace DefaultNamespace
 
             if (!Globals.InBounds(gameObject.transform.position))
             {
-                rb.AddForce(direction.normalized * Time.deltaTime * 500);
+                rb.AddForce(direction.normalized * Time.deltaTime * 10000);
             }
         }
 

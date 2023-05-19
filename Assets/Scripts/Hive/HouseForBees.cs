@@ -9,6 +9,7 @@ public class HouseForBees: BasicBee
     public GameObject Menu;
     public void Loss()
     {
+        Globals.GameOutcome = GameOutcome.Loss;
         SceneManager.LoadScene("Menu");
     }
 

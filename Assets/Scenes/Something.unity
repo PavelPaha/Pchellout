@@ -11282,7 +11282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c6ec1be80a83047b1a96d70759517c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1000
+  Health: 10000
   Speed: 0
   Menu: {fileID: 500021658}
 --- !u!114 &2041337790

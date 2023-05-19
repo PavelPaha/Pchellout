@@ -1,23 +1,19 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    public int timeToExplode;
     public GameObject explosion;
-    private float _timeSinceInitialization;
-    private float _initializationTime;
+
+    private TimerBarController _timerBarController;
 
     void Start()
     {
-        _initializationTime = Time.timeSinceLevelLoad;
+        _timerBarController = gameObject.GetComponent<TimerBarController>();
     }
 
     void Update()
     {
-        _timeSinceInitialization = Time.timeSinceLevelLoad - _initializationTime;
-        if (_timeSinceInitialization > timeToExplode)
+        if (_timerBarController.TimeSinceInitialization > _timerBarController.timeToExplode)
         {
             var currentTransform = transform;
             Instantiate(explosion, currentTransform.position, currentTransform.rotation, currentTransform.parent);

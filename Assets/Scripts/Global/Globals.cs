@@ -41,7 +41,7 @@ public static class Globals
     public static int ProjectileUpgradePrice = 1000;
     public static int ProjectileDamage = 20;
 
-    public static readonly float ProjectileSpeed = 2f;
+    public static readonly float ProjectileSpeed = 8f;
 
     public static readonly Dictionary<string, GameResource> GameResources = new()
     {

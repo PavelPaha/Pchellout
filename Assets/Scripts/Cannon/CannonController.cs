@@ -57,13 +57,12 @@ public class CannonController : MonoBehaviour
         GameObject projectile =
             Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
         var trail = projectile.GetComponent<TrailRenderer>();
-        trail.time = 2 * Globals.ProjectileDamage / Globals.MaxProjectileDamage;
+        trail.time = (float)Globals.ProjectileDamage / Globals.MaxProjectileDamage / 10;
         Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 
         // Направляем снаряд в сторону курсора с заданной скоростью
         Vector2 shootDirection = (mousePos - transform.position);
         shootDirection.Normalize();
-        projectileRigidbody.AddForce(shootDirection * Globals.ProjectileSpeed, ForceMode2D.Impulse);
-
+        projectileRigidbody.AddForce(shootDirection * Globals.ProjectileSpeed * Globals.ProjectileDamage / Globals.MaxProjectileDamage, ForceMode2D.Impulse);
     }
 }

@@ -7,15 +7,14 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float _timer;
 
     // Update is called once per frame
     void Update()
     {
-        if (!Globals.InBounds(transform.position))
+        _timer += Time.deltaTime;
+        
+        if (_timer >= 3)
             Destroy(gameObject);
     }
 

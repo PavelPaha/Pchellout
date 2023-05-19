@@ -1,4 +1,5 @@
 using System;
+using Global;
 using UnityEngine;
 
 public class CannonController : MonoBehaviour
@@ -27,7 +28,6 @@ public class CannonController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             _animator.SetBool(IsFire, true);
-            
         }
         else
         {
@@ -56,6 +56,8 @@ public class CannonController : MonoBehaviour
     {
         GameObject projectile =
             Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
+        var trail = projectile.GetComponent<TrailRenderer>();
+        trail.time = 2 * Globals.ProjectileDamage / Globals.MaxProjectileDamage;
         Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 
         // Направляем снаряд в сторону курсора с заданной скоростью

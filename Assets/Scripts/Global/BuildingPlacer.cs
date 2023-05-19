@@ -61,7 +61,7 @@ public class BuildingPlacer : MonoBehaviour
     {
         OnBuildingPlaced();
         FreezeBuilding(false);
-        PreparePlacedBuilding(Globals.CameraIsInHive ? "hive" : "world", _placedBuilding.BuildingIndex);
+        PreparePlacedBuilding("world", _placedBuilding.BuildingIndex);
     }
 
     public void CancelPlacedBuilding()
@@ -71,7 +71,7 @@ public class BuildingPlacer : MonoBehaviour
     }
 
     public void SelectPlacedBuilding(int buildingIndex) 
-        => PreparePlacedBuilding(Globals.CameraIsInHive ? "hive" : "world", buildingIndex);
+        => PreparePlacedBuilding("world", buildingIndex);
 
     private void UpdateBuildingPosition()
     {

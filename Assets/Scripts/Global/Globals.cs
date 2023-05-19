@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,13 +7,9 @@ public static class Globals
     public static bool CameraIsInHive = false;
 
     public static bool Pause = false;
-    
-    public static readonly int ProjectileDamage = 20;
 
     public static readonly float FireCooldown =  0.3f;
-
-    public static readonly float ProjectileSpeed = 2f;
-
+    
     public static readonly int ShotCost = 0;
 
     public static readonly int MaxWobbleAngle = 15;
@@ -22,10 +19,33 @@ public static class Globals
     public static float BossChildrenSpawnInterval = 10f;
 
     public static int BossChildrenCount = 5;
+
+    public static int MaxHiveHealth = 1000;
     
+    public static int MaxHoneyStorageCapacity = 10_000_000;
+    public static int HoneyStorageUpgradePrice = 1_000;
+    public static int CurrentStorageCapacity = 100_000;
+
+    public static int MaxDefendersUpgrade = 5;
+    public static int CurrentDefenderUpgradeLevel = 0;
+    public static int DefendersUpgradePrice = 1000;
+
+    public static int BombCapacity = 5;
+    public static int BombPrice = 1000;
+    public static int CurrentBombCount = 0;
+    
+    public static int FixHivePrice = 25000;
+    public static float FixHiveCoeff = 0.05f;
+
+    public static int MaxProjectileDamage = 100;
+    public static int ProjectileUpgradePrice = 1000;
+    public static int ProjectileDamage = 20;
+
+    public static readonly float ProjectileSpeed = 2f;
+
     public static readonly Dictionary<string, GameResource> GameResources = new()
     {
-        { "honey", new GameResource("honey", 0) }
+        { "honey", new GameResource("honey", 10000) }
     };
 
     public static readonly BuildingData[] BuildingsInHive =
@@ -85,7 +105,13 @@ public static class Globals
                && position.x < 12 
                && position.y < 4.5f;
     }
-    
+
+    public static void AddHoney(int value)
+    {
+        GameResources["honey"].Amount = Math.Min(
+            GameResources["honey"].Amount + value,
+            CurrentStorageCapacity);
+    }
 }
 
 public enum GameOutcome

@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class HouseForBees: BasicBee
 {
+    public GameObject Menu;
     public void Loss()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void OnMouseDown()
+    {
+        Menu.SetActive(!Menu.activeSelf);
     }
 }

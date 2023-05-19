@@ -125,9 +125,11 @@ public class Extractor : BasicBee
             if (_extractor.IsAtSpawnLocation())
             {
                 _extractor._extractorState = new MovingToTargetState(_extractor);
-                Globals.GameResources["honey"].Amount += _extractor.gameObject
+                Globals.AddHoney(
+                    _extractor.gameObject
                     .GetComponent<NectarInventory>()
-                    .DeliverNectar(int.MaxValue);
+                    .DeliverNectar(int.MaxValue)
+                    );
                 OnResourcesUpdated();
             }
         }

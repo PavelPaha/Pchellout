@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,12 +10,13 @@ public class SceneChanger : MonoBehaviour
     {
         if (Globals.CameraIsInHive)
         {
-            Camera.main.transform.Translate(new Vector3(-45, 0, 0));
+            // Camera.main.transform.Translate(new Vector3(-45, 0, 0));
             OnChangeScene("world");
         }
         else
         {
-            Camera.main.transform.Translate(new Vector3(45, 0, 0));
+            
+            // Camera.main.transform.Translate(new Vector3(45, 0, 0));
             OnChangeScene("hive");
         }
 

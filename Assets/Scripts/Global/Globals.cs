@@ -87,7 +87,7 @@ public static class Globals
     public static readonly Dictionary<string, BuildingData[]> Buildings = new()
     {
         { "hive", BuildingsInHive },
-        { "world", BuildigsInWorld }
+        { "world", BuildingsInHive }
     };
 
     public static readonly AttackWave[] AttackWaves =

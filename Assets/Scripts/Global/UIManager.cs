@@ -33,6 +33,8 @@ public class UIManager : MonoBehaviour
             var text = Globals.Buildings[location][i].Name;
             button.name = text;
             button.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = text;
+            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
+                Globals.Buildings[location][i].Cost["honey"].ToString();
             
             _createdButtons.Add(button);
             var buttonComponent = button.GetComponent<Button>();

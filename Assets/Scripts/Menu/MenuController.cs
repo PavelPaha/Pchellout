@@ -36,7 +36,7 @@ public class MenuController : MonoBehaviour
                 Globals.GameOutcome = GameOutcome.Menu;
                 ShowLossWindow();
                 break;
-            case GameOutcome.Default:
+            case GameOutcome.Win:
                 Globals.GameOutcome = GameOutcome.Menu;
                 //TODO если игра закончилась успешно
                 break;
@@ -47,6 +47,7 @@ public class MenuController : MonoBehaviour
     private void ShowLossWindow()
     {
         LossCanvas.enabled = true;
+        Debug.Log("Хуйло");
         LossScore.text = Globals.GameResources["honey"].Amount.ToString();
     }
     

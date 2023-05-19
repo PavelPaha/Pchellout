@@ -14,7 +14,7 @@ public static class Globals
 
     public static readonly int MaxWobbleAngle = 15;
 
-    public static GameOutcome GameOutcome = GameOutcome.Default;
+    public static GameOutcome GameOutcome = GameOutcome.Win;
 
     public static float BossChildrenSpawnInterval = 10f;
 
@@ -29,6 +29,7 @@ public static class Globals
     public static int MaxDefendersUpgrade = 5;
     public static int CurrentDefenderUpgradeLevel = 0;
     public static int DefendersUpgradePrice = 1000;
+    public static int DefenderCost = 500;
 
     public static int BombCapacity = 5;
     public static int BombPrice = 1000;
@@ -82,16 +83,16 @@ public static class Globals
         {
             { "honey", 5000 }
         }, string.Empty),
-        new("Bomb", 100, new Dictionary<string, int>
+        new("Бомба", 100, new Dictionary<string, int>
             {
-                { "honey", 5000 }
+                { "honey", 100 }
             },
             string.Empty)
     };
 
     public static readonly Dictionary<string, BuildingData[]> Buildings = new()
     {
-        { "hive", BuildingsInHive },
+        { "hive", BuildigsInWorld },
         { "world", BuildigsInWorld }
     };
 
@@ -122,6 +123,6 @@ public static class Globals
 public enum GameOutcome
 {
     Loss,
-    Default,
+    Win,
     Menu
 }

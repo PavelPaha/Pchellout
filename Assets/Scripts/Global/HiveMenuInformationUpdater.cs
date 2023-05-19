@@ -61,6 +61,7 @@ namespace Global
                 {
                     Globals.CurrentBombCount = Math.Min(Globals.BombCapacity, Globals.CurrentBombCount + 1);
                     BombBar.fillAmount = (float)Globals.CurrentBombCount / Globals.BombCapacity;
+                    OnUpgradeHoney?.Invoke();
                 }
             });
             

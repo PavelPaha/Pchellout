@@ -11,11 +11,16 @@ public class SpawnBee : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (Hive == null) return;
-        Vector3 hivePosition = Hive.transform.position;
-        Debug.Log("ABOBA");
-        var bee = Instantiate(Bee, hivePosition, Quaternion.identity);
-        bee.GetComponent<BeeDefender>().BeesSource = Goal;
-        bee.transform.SetParent(ParentForDefenders.transform);
+        if (Globals.GameResources["honey"].Amount - Globals.DefenderCost >= 0)
+        {
+            if (Hive == null) return;
+            Vector3 hivePosition = Hive.transform.position;
+            Debug.Log("ABOBA");
+            var bee = Instantiate(Bee, hivePosition, Quaternion.identity);
+            bee.GetComponent<BeeDefender>().BeesSource = Goal;
+            bee.transform.SetParent(ParentForDefenders.transform);
+            Globals.GameResources["honey"].Amount -= Globals.DefenderCost;
+        }
+        
     }
 }

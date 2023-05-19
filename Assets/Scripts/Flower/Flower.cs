@@ -8,40 +8,38 @@ public enum LifeStep
 
 public class Flower : BasicBee
 {
-    [SerializeField] public LifeStep lifeStep;
-    [SerializeField] protected float lifePeriod;
+    public LifeStep lifeStep;
+    public float lifePeriod;
 
-    protected float timeSinceInitialization;
-    protected float initializationTime;
-    protected FlowerState flowerState;
-    protected NectarInventory inventory;
-    protected Animator animator;
+    private float _timeSinceInitialization;
+    private float _initializationTime;
+    private FlowerState _flowerState;
+    private NectarInventory _inventory;
+    private Animator _animator;
 
-    // Start is called before the first frame update
     void Start()
     {
         lifeStep = LifeStep.Child;
-        initializationTime = Time.timeSinceLevelLoad;
-        flowerState = new IdleState(this);
-        inventory = GetComponent<NectarInventory>();
-        animator = GetComponent<Animator>();
+        _initializationTime = Time.timeSinceLevelLoad;
+        _flowerState = new IdleState(this);
+        _inventory = GetComponent<NectarInventory>();
+        _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        timeSinceInitialization = Time.timeSinceLevelLoad - initializationTime;
+        _timeSinceInitialization = Time.timeSinceLevelLoad - _initializationTime;
         UpdateLifePeriod();
-        flowerState.ProduceNectar();
+        _flowerState.ProduceNectar();
     }
 
     protected void UpdateLifePeriod()
     {
-        if (timeSinceInitialization < lifePeriod)
+        if (_timeSinceInitialization < lifePeriod)
             return;
         lifeStep = LifeStep.Adult;
-        flowerState = new ProducingState(this);
-        animator.SetTrigger("IsAdult");
+        _flowerState = new ProducingState(this);
+        _animator.SetTrigger("IsAdult");
     }
 
     public abstract class FlowerState
@@ -62,7 +60,7 @@ public class Flower : BasicBee
 
         public override void ProduceNectar()
         {
-            _flower.inventory.ProduceNectar();
+            _flower._inventory.ProduceNectar();
         }
     }
 

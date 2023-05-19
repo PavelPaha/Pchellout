@@ -229,6 +229,8 @@ GameObject:
   - component: {fileID: 4434272957061321822}
   - component: {fileID: 4434272957061321821}
   - component: {fileID: 5479004549208016390}
+  - component: {fileID: -734220183516278627}
+  - component: {fileID: 6786081422105984639}
   m_Layer: 8
   m_Name: SunflowerFlower
   m_TagString: Flower
@@ -290,8 +292,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1529405995
+  m_SortingLayer: -1
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: cbf95251ff8dd14408fca260f4f2658c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -418,6 +420,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bar: {fileID: 8093474829731533084}
   Fill: 1
+--- !u!114 &-734220183516278627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434272957061321819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bffab8ceb04dec43937bd6553cbbdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6786081422105984639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434272957061321819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f769e800e4295b47ae63cacfc7311ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBoostCost: 20000
 --- !u!1 &6856505803219222666
 GameObject:
   m_ObjectHideFlags: 0

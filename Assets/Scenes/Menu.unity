@@ -663,6 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 797209055}
   - component: {fileID: 797209056}
+  - component: {fileID: 797209057}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -702,6 +703,19 @@ MonoBehaviour:
   BeginButton: {fileID: 1976531974}
   ExitButton: {fileID: 390966577}
   LossScore: {fileID: 468396544}
+--- !u!114 &797209057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797209053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6c935e04715824486013c2b13c6180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 1079223911}
 --- !u!1 &806208749
 GameObject:
   m_ObjectHideFlags: 0

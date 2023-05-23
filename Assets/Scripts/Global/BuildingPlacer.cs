@@ -17,6 +17,7 @@ public enum BuildingPlacement
 public class BuildingPlacer : MonoBehaviour
 {
     public static Action OnBuildingPlaced;
+    public static Action OnShake;
     public bool IsBuildingSelected => _placedBuilding != null;
 
     private Building _placedBuilding;
@@ -59,10 +60,11 @@ public class BuildingPlacer : MonoBehaviour
 
     public void PlaceBuilding()
     {
-        OnBuildingPlaced();
-        if (_placedBuilding.Name != "Bomb")
+        OnBuildingPlaced?.Invoke();
+        if (_placedBuilding.Name != "Бомба")
         {
-            var parent = GameObject.Find(Globals.CameraIsInHive ? "HiveBuildings" : "Flowers");
+            OnShake?.Invoke();
+            var parent = GameObject.Find("Flowers");
             _placedBuilding.BuildingObject.transform.SetParent(parent.transform);
         }
         FreezeBuilding(false);
@@ -109,6 +111,5 @@ public class BuildingPlacer : MonoBehaviour
         {
             material.color = new Color(1f, 1f, 1f, 1f);
         }
-        
     }
 }

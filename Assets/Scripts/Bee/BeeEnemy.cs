@@ -10,6 +10,8 @@ namespace DefaultNamespace
 {
     public class BeeEnemy: BasicBee
     {
+        public static Action OnHiveDamage;
+        
         public GameObject BeesSource;
         private List<GameObject> _bees;
         private Queue<GameObject> _sources = new();
@@ -90,6 +92,7 @@ namespace DefaultNamespace
             switch (collision.gameObject.tag)
             {
                 case "Hive":
+                    OnHiveDamage?.Invoke();
                     collision.gameObject.GetComponent<HouseForBees>().Damage(20);
                     break;
                 case "Extractor":

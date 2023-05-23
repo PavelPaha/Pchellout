@@ -1385,8 +1385,8 @@ MonoBehaviour:
   m_text: "\u041F\u0440\u043E\u0438\u0433\u0440\u044B\u0448.\n\u0412\u0430\u0448
     \u0441\u0447\u0451\u0442:"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a4cd293abd94ea4c9b64406c92f58f2, type: 2}
+  m_sharedMaterial: {fileID: -8311656053336145190, guid: 4a4cd293abd94ea4c9b64406c92f58f2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

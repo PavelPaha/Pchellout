@@ -12,6 +12,7 @@ TagManager:
   - Defender
   - Projectile
   - Boss
+  - Bomb
   layers:
   - Default
   - TransparentFX

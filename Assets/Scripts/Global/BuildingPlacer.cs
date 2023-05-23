@@ -60,6 +60,11 @@ public class BuildingPlacer : MonoBehaviour
     public void PlaceBuilding()
     {
         OnBuildingPlaced();
+        if (_placedBuilding.Name != "Bomb")
+        {
+            var parent = GameObject.Find(Globals.CameraIsInHive ? "HiveBuildings" : "Flowers");
+            _placedBuilding.BuildingObject.transform.SetParent(parent.transform);
+        }
         FreezeBuilding(false);
         PreparePlacedBuilding("world", _placedBuilding.BuildingIndex);
     }

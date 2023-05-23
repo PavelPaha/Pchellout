@@ -30,8 +30,7 @@ public class Building
 
         var parent = GameObject.Find(Globals.CameraIsInHive ? "HiveBuildings" : "Flowers");
         if (data.Name != "Bomb")
-            BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"),
-                parent.transform);
+            BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
         else
             BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
     }

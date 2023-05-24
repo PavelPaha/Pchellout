@@ -20,6 +20,7 @@ namespace Global
             HiveMenuInformationUpdater.OnUpgradeHoney += UpdateResources;
             ExtractorsSpawner.OnBuy += UpdateResources;
             SpawnBee.OnBuy += UpdateResources;
+            BuildingPlacer.OnBuy += UpdateResources;
             UpdateResources();
         }
         

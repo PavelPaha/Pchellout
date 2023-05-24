@@ -18,19 +18,18 @@ public class BuildingPlacer : MonoBehaviour
 {
     public static Action OnBuildingPlaced;
     public static Action OnShake;
+    public static Action OnBuy;
     public bool IsBuildingSelected => _placedBuilding != null;
 
     private Building _placedBuilding;
     private float _buildingToCameraDistance;
-    
 
-    
+
     void Update()
     {
         if (_placedBuilding == null)
             return;
-        
-        UpdateMesh();
+
         UpdateBuildingPosition();
         if (Input.GetKeyUp(KeyCode.Escape))
         {
@@ -38,15 +37,33 @@ public class BuildingPlacer : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0)
-            && !EventSystem.current.IsPointerOverGameObject()
+        if ((InBounds() || _placedBuilding.Name == "Бомба")
             && Globals.GameResources["honey"].Amount >= _placedBuilding.Cost)
         {
-            Globals.GameResources["honey"].Amount -= _placedBuilding.Cost;
-            var material = _placedBuilding.BuildingObject.GetComponent<Renderer>().material;
-            material.color = new Color(1f, 1f, 1f, 1f);
-            PlaceBuilding();
+            ChangeOpacity(1);
+            if (Input.GetMouseButtonDown(0)
+                && !EventSystem.current.IsPointerOverGameObject())
+            {
+                Globals.GameResources["honey"].Amount -= _placedBuilding.Cost;
+                OnBuy?.Invoke();
+                PlaceBuilding();
+            }
         }
+        else
+        {
+            ChangeOpacity(0.2f);
+        }
+    }
+
+    private void ChangeOpacity(float value)
+    {
+        var currentColor = _placedBuilding.BuildingObject.GetComponent<SpriteRenderer>().color;
+        _placedBuilding.BuildingObject.GetComponent<SpriteRenderer>().color = new Color(
+            currentColor.r,
+            currentColor.g,
+            currentColor.b,
+            value
+        );
     }
 
 
@@ -67,6 +84,7 @@ public class BuildingPlacer : MonoBehaviour
             var parent = GameObject.Find("Flowers");
             _placedBuilding.BuildingObject.transform.SetParent(parent.transform);
         }
+
         FreezeBuilding(false);
         PreparePlacedBuilding("world", _placedBuilding.BuildingIndex);
     }
@@ -77,7 +95,7 @@ public class BuildingPlacer : MonoBehaviour
         _placedBuilding = null;
     }
 
-    public void SelectPlacedBuilding(int buildingIndex) 
+    public void SelectPlacedBuilding(int buildingIndex)
         => PreparePlacedBuilding("world", buildingIndex);
 
     private void UpdateBuildingPosition()
@@ -95,21 +113,16 @@ public class BuildingPlacer : MonoBehaviour
             if (behaviour != null)
                 behaviour.enabled = !toFreeze;
         }
-        
+
         if (_placedBuilding.BuildingObject.TryGetComponent<Animator>(out var animator))
             animator.enabled = true;
     }
-    
-    public void UpdateMesh()
+
+    private bool InBounds()
     {
-        var material = _placedBuilding.BuildingObject.GetComponent<Renderer>().material;
-        if (_placedBuilding.Cost > Globals.GameResources["honey"].Amount)
-        {
-            material.color = new Color(1, 1, 1, 0.3f);
-        }
-        else
-        {
-            material.color = new Color(1f, 1f, 1f, 1f);
-        }
+        var x = Input.mousePosition.x;
+        var y = Input.mousePosition.y;
+        // Debug.Log($"{x} {y}");
+        return x is >= 300 and <= 890 && y is >= 120 and <= 230;
     }
 }

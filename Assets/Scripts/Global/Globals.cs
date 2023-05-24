@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Globals
 {
     public static bool CameraIsInHive = false;
+
+    public static int ExtractorPrice = 2000;
 
     public static bool Pause = false;
 
@@ -117,6 +120,19 @@ public static class Globals
         GameResources["honey"].Amount = Math.Min(
             GameResources["honey"].Amount + value,
             CurrentStorageCapacity);
+    }
+
+    public static void UpdateBuyPossibility(Button button, int price)
+    {
+        var currentColor = button.GetComponent<Image>().color;
+        var possible = price <= Globals.GameResources["honey"].Amount;
+        button.GetComponent<Image>().color =
+            new Color(
+                currentColor.r, 
+                currentColor.g, 
+                currentColor.b, 
+                possible ? 1 : 0.2f);
+        button.GetComponent<Button>().enabled = possible;
     }
 }
 

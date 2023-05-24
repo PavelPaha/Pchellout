@@ -18,6 +18,8 @@ namespace Global
             Extractor.OnResourcesUpdated += UpdateResources;
             BuildingPlacer.OnBuildingPlaced += UpdateResources;
             HiveMenuInformationUpdater.OnUpgradeHoney += UpdateResources;
+            ExtractorsSpawner.OnBuy += UpdateResources;
+            SpawnBee.OnBuy += UpdateResources;
             UpdateResources();
         }
         

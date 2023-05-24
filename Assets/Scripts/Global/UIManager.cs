@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Global;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -56,28 +57,9 @@ public class UIManager : MonoBehaviour
     {
         foreach (var button in _createdButtons)
         {
+            if (button == null) continue;
             var price = int.Parse(button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
-            var currentColor = button.GetComponent<Image>().color;
-            if (price <= Globals.GameResources["honey"].Amount)
-            {
-                button.GetComponent<Image>().color =
-                    new Color(
-                        currentColor.r, 
-                        currentColor.g, 
-                        currentColor.b, 
-                        1);
-                button.GetComponent<Button>().enabled = true;
-            }
-            else
-            {
-                button.GetComponent<Image>().color =
-                    new Color(
-                        currentColor.r, 
-                        currentColor.g, 
-                        currentColor.b, 
-                        0.2f);
-                button.GetComponent<Button>().enabled = false;
-            }
+            Globals.UpdateBuyPossibility(button.GetComponent<Button>(), price);
         }
     }
 }

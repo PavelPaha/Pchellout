@@ -14,15 +14,16 @@ public class Extractor : BasicBee
     public GameObject spawnObject;
 
     public static Action OnResourcesUpdated;
-    
-    void Awake()
+
+    public void Awake()
     {
+        spawnObject = GameObject.Find("Hive");
         _inventory = GetComponent<NectarInventory>();
         _extractorState = new MovingToTargetState(this);
         targetsParent = GameObject.Find("Flowers");
     }
-    
-    void Update()
+
+    private void Update()
     {
         if (!Globals.InBounds(transform.position))
         {
@@ -33,8 +34,8 @@ public class Extractor : BasicBee
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
     }
-    
-    protected void MoveToSpawn() => MoveToTarget(spawnObject);
+
+    private void MoveToSpawn() => MoveToTarget(spawnObject);
 
     public void OnCollisionEnter2D(Collision2D collision)
     {

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Global
@@ -28,9 +30,11 @@ namespace Global
         public Button BuyBomb;
         public Button FixHiveButton;
         public Button UpgradeProjectileButton;
-
+        
+        
         public void Start()
         {
+            ResourcesUpdater.OnUpdated += UpdatePressPossibility;
             InitializeTextFields();
             InitializeBars();
 
@@ -114,6 +118,15 @@ namespace Global
 
             Debug.Log("Недостаточно мёда для покупки");
             return false;
+        }
+
+        private void UpdatePressPossibility()
+        {
+            Globals.UpdateBuyPossibility(UpgradeHoneyStorageButton, int.Parse(HoneyStorageUpgradePrice.text));
+            Globals.UpdateBuyPossibility(UpgradeDefendersButton, int.Parse(DefendersUpgradePrice.text));
+            Globals.UpdateBuyPossibility(BuyBomb, int.Parse(BombPrice.text));
+            Globals.UpdateBuyPossibility(FixHiveButton, int.Parse(FixHivePrice.text));
+            Globals.UpdateBuyPossibility(UpgradeProjectileButton, int.Parse(ProjectileUpgradePrice.text));
         }
     }
 }

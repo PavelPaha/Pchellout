@@ -24,7 +24,7 @@ public static class Globals
 
     public static int MaxHoneyStorageCapacity = 10_000_000;
     public static int HoneyStorageUpgradePrice = 1_000;
-    public static int CurrentStorageCapacity = 100_000;
+    public static int CurrentStorageCapacity = 1_000_000;
 
     public static int MaxDefendersUpgrade = 5;
     public static int CurrentDefenderUpgradeLevel = 0;
@@ -46,7 +46,7 @@ public static class Globals
 
     public static readonly Dictionary<string, GameResource> GameResources = new()
     {
-        { "honey", new GameResource("honey", 10000000) }
+        { "honey", new GameResource("honey", 100) }
     };
 
     public static readonly BuildingData[] BuildingsInHive =

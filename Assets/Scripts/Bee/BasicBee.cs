@@ -7,6 +7,11 @@ using UnityEngine.Serialization;
 
 public class BasicBee : MonoBehaviour
 {
+    public float scaleDuration = 1.0f;
+    public float maxScale = 1.0f;
+
+    private Vector3 _originalScale;
+    
     public int Health = 100;
     [SerializeField] public float Speed = 3;
 
@@ -23,13 +28,9 @@ public class BasicBee : MonoBehaviour
         Vector2 targetPosition = target.transform.position;
         Vector2 currentPosition = rigidbody.position;
         Vector2 directionToTarget = (targetPosition - currentPosition).normalized;
-
-        // Вычисляем случайное отклонение от направления к цели
         frame = frame < 100 ? frame + 0.01f : 0;
         float wobbleAngle = UnityEngine.Random.Range(-Globals.MaxWobbleAngle, Globals.MaxWobbleAngle);
         var wobbleRotation = Quaternion.Euler(0f, 0f, (float)Math.Sin(frame) * Globals.MaxWobbleAngle / 3 + wobbleAngle);
-
-        // Получаем новое направление на основе отклонения
         Vector2 wobbledDirection = wobbleRotation * directionToTarget;
         
         Vector2 moveForce = wobbledDirection * Speed - rigidbody.velocity;
@@ -39,9 +40,27 @@ public class BasicBee : MonoBehaviour
 
     void Start()
     {
+        _originalScale = transform.localScale; 
         GetComponent<HealthBarController>().SetMaxHealth(Health);
+        StartCoroutine(ScaleUp());
     }
 
+    IEnumerator ScaleUp()
+    {
+        transform.localScale = Vector3.zero;
+        float timeElapsed = 0.0f;
+        while (timeElapsed < scaleDuration)
+        {
+            float scaleFactor = timeElapsed / scaleDuration * maxScale;
+            Vector3 newScale = _originalScale * scaleFactor;
+            transform.localScale = newScale;
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = _originalScale;
+    }
+
+    // проходим цикл аним
     void Update()
     {
         transform.rotation = Quaternion.identity;

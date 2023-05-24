@@ -15,7 +15,7 @@ public class Extractor : BasicBee
 
     public static Action OnResourcesUpdated;
     
-    void Start()
+    void Awake()
     {
         _inventory = GetComponent<NectarInventory>();
         _extractorState = new MovingToTargetState(this);
@@ -107,6 +107,7 @@ public class Extractor : BasicBee
                 //TODO: если цветов нет, то скорее всего экстрактор должен прилететь в улье и в него залететь (пропасть). Ну или нет:)
                 return;
             }
+
             _extractor.MoveToTarget(target);
             if (_extractor.IsAtTargetLocation(target))
                 _extractor._extractorState = new ExtractingNectarState(_extractor);

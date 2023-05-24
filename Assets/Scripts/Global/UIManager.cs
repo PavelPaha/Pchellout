@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Global;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
  
     private void Awake()
     {
+        ResourcesUpdater.OnUpdated += ShowAvailableButtons;
         _createdButtons = new List<GameObject>();
         _buildingPlacer = GetComponent<BuildingPlacer>();
         SceneChanger.OnChangeScene += ShowBuildingButtons;
@@ -35,7 +37,7 @@ public class UIManager : MonoBehaviour
             button.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = text;
             button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
                 Globals.Buildings[location][i].Cost["honey"].ToString();
-            
+        
             _createdButtons.Add(button);
             var buttonComponent = button.GetComponent<Button>();
             _AddBuildingButtonListener(buttonComponent, i);
@@ -49,4 +51,33 @@ public class UIManager : MonoBehaviour
                 _buildingPlacer.CancelPlacedBuilding();
             _buildingPlacer.SelectPlacedBuilding(i);
         });
+
+    public void ShowAvailableButtons()
+    {
+        foreach (var button in _createdButtons)
+        {
+            var price = int.Parse(button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+            var currentColor = button.GetComponent<Image>().color;
+            if (price <= Globals.GameResources["honey"].Amount)
+            {
+                button.GetComponent<Image>().color =
+                    new Color(
+                        currentColor.r, 
+                        currentColor.g, 
+                        currentColor.b, 
+                        1);
+                button.GetComponent<Button>().enabled = true;
+            }
+            else
+            {
+                button.GetComponent<Image>().color =
+                    new Color(
+                        currentColor.r, 
+                        currentColor.g, 
+                        currentColor.b, 
+                        0.2f);
+                button.GetComponent<Button>().enabled = false;
+            }
+        }
+    }
 }

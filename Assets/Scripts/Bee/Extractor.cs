@@ -3,25 +3,25 @@ using System.Linq;
 using DefaultNamespace;
 using UnityEditor.U2D.Sprites;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class Extractor : BasicBee
 {
     private ExtractorState _extractorState;
     private NectarInventory _inventory;
     private GameObject _target;
-    [SerializeField] public GameObject targetsParent;
-    [SerializeField] public GameObject spawnObject;
+    public GameObject targetsParent;
+    public GameObject spawnObject;
 
     public static Action OnResourcesUpdated;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         _inventory = GetComponent<NectarInventory>();
         _extractorState = new MovingToTargetState(this);
+        targetsParent = GameObject.Find("Flowers");
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (!Globals.InBounds(transform.position))

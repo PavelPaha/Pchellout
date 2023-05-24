@@ -46,7 +46,7 @@ public static class Globals
 
     public static readonly Dictionary<string, GameResource> GameResources = new()
     {
-        { "honey", new GameResource("honey", 10000) }
+        { "honey", new GameResource("honey", 10000000) }
     };
 
     public static readonly BuildingData[] BuildingsInHive =

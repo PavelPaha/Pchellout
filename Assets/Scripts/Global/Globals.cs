@@ -104,7 +104,10 @@ public static class Globals
         new() { EnemyCount = 20, Speed = 5, Scale = 1f, SourceName = "1" },
         new() { EnemyCount = 10, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 0.4f, SourceName = "2" },
         new() { EnemyCount = 30, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.2f, SourceName = "3" },
-        new() { EnemyCount = 1, Speed = 5, Scale = 1, SourceName = "4" }
+        new() { EnemyCount = 1, Speed = 5, Scale = 1, SourceName = "4" },
+        new() { EnemyCount = 10, Speed = 10, Scale = 1, BeeSpawnInterval = 15f, SourceName = "4" },
+        new() { EnemyCount = 10, Speed = 10, Scale = 1, BeeSpawnInterval = 10f, SourceName = "4" },
+        new() { EnemyCount = 10, Speed = 10, Scale = 1, BeeSpawnInterval = 5f, SourceName = "4" }
     };
 
     public static bool InBounds(Vector3 position)

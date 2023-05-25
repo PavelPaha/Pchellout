@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3763721756568378376}
   - component: {fileID: 5244490024031327116}
   - component: {fileID: 127303832635281541}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 358216496435244654}
   - component: {fileID: 7364499565085243277}
   - component: {fileID: 3203711411065996083}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 4894870520657131078}
   - component: {fileID: 6092293098715608798}
   - component: {fileID: 3696017655694400208}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Gray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 8849605336666057498}
   - component: {fileID: 7379027040261288886}
   - component: {fileID: 2883937125696248552}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 6493012080391050151}
   - component: {fileID: 6245821198134643109}
   - component: {fileID: -5728426359202505224}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: "\u0411\u043E\u043C\u0431\u0430"
   m_TagString: Untagged
   m_Icon: {fileID: 0}

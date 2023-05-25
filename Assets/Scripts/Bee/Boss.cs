@@ -16,7 +16,7 @@ namespace DefaultNamespace
         private Vector3 originalPosition;
         private Rigidbody2D rb;
 
-        public void Start()
+        public void Awake()
         {
             GetComponent<HealthBarController>().SetMaxHealth(Health);
             originalPosition = transform.position;

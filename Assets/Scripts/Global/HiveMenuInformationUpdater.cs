@@ -15,19 +15,16 @@ namespace Global
 
         public TextMeshProUGUI HoneyStorageUpgradePrice;
         public TextMeshProUGUI DefendersUpgradePrice;
-        public TextMeshProUGUI BombPrice;
         public TextMeshProUGUI FixHivePrice;
         public TextMeshProUGUI ProjectileUpgradePrice;
 
         public Image HoneyStorageBar;
         public Image DefendersBar;
-        public Image BombBar;
         public Image ProjectileBar;
 
 
         public Button UpgradeHoneyStorageButton;
         public Button UpgradeDefendersButton;
-        public Button BuyBomb;
         public Button FixHiveButton;
         public Button UpgradeProjectileButton;
         
@@ -58,16 +55,7 @@ namespace Global
                     HoneyStorageBar.fillAmount = (float)Globals.CurrentStorageCapacity / Globals.MaxHoneyStorageCapacity;
                 }
             });
-
-            BuyBomb.onClick.AddListener(() =>
-            {
-                if (TryBuy(Globals.BombPrice))
-                {
-                    Globals.CurrentBombCount = Math.Min(Globals.BombCapacity, Globals.CurrentBombCount + 1);
-                    BombBar.fillAmount = (float)Globals.CurrentBombCount / Globals.BombCapacity;
-                    OnUpgradeHoney?.Invoke();
-                }
-            });
+            
             
             FixHiveButton.onClick.AddListener(() =>
             {
@@ -94,7 +82,6 @@ namespace Global
         {
             HoneyStorageUpgradePrice.text = Globals.HoneyStorageUpgradePrice.ToString();
             DefendersUpgradePrice.text = Globals.DefendersUpgradePrice.ToString();
-            BombPrice.text = Globals.BombPrice.ToString();
             FixHivePrice.text = Globals.FixHivePrice.ToString();
             ProjectileUpgradePrice.text = Globals.ProjectileUpgradePrice.ToString();
         }
@@ -103,7 +90,6 @@ namespace Global
         {
             DefendersBar.fillAmount = (float)Globals.CurrentDefenderUpgradeLevel / Globals.MaxDefendersUpgrade;
             HoneyStorageBar.fillAmount = (float)Globals.CurrentStorageCapacity / Globals.MaxHoneyStorageCapacity;
-            BombBar.fillAmount = (float)Globals.CurrentBombCount / Globals.BombCapacity;
             ProjectileBar.fillAmount = (float)Globals.ProjectileDamage / Globals.MaxProjectileDamage;
         }
 
@@ -124,7 +110,6 @@ namespace Global
         {
             Globals.UpdateBuyPossibility(UpgradeHoneyStorageButton, int.Parse(HoneyStorageUpgradePrice.text));
             Globals.UpdateBuyPossibility(UpgradeDefendersButton, int.Parse(DefendersUpgradePrice.text));
-            Globals.UpdateBuyPossibility(BuyBomb, int.Parse(BombPrice.text));
             Globals.UpdateBuyPossibility(FixHiveButton, int.Parse(FixHivePrice.text));
             Globals.UpdateBuyPossibility(UpgradeProjectileButton, int.Parse(ProjectileUpgradePrice.text));
         }

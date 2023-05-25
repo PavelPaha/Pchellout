@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
 using DefaultNamespace;
-using UnityEditor.U2D.Sprites;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class Extractor : BasicBee
 {
@@ -19,7 +18,7 @@ public class Extractor : BasicBee
     {
         spawnObject = GameObject.Find("Hive");
         _inventory = GetComponent<NectarInventory>();
-        _extractorState = new MovingToTargetState(this);
+        _extractorState = new MovingToSpawn(this);
         targetsParent = GameObject.Find("Flowers");
     }
 
@@ -29,6 +28,7 @@ public class Extractor : BasicBee
         {
             DestroyObject();
         }
+
         transform.rotation = Quaternion.identity;
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
@@ -40,14 +40,13 @@ public class Extractor : BasicBee
     public void OnCollisionEnter2D(Collision2D collision)
     {
         DamageInCollisionWithEnemy(collision);
-        
     }
-    
+
     public void OnCollisionStay2D(Collision2D collisionInfo)
     {
         DamageInCollisionWithEnemy(collisionInfo);
     }
-    
+
     private static void DamageInCollisionWithEnemy(Collision2D collision)
     {
         switch (collision.gameObject.tag)
@@ -63,19 +62,13 @@ public class Extractor : BasicBee
 
     private void UpdateTarget()
     {
-        try
-        {
-            _target = Enumerable
-                .Range(0, targetsParent.transform.childCount)
-                .Select(index => targetsParent.transform.GetChild(index).gameObject)
-                .Where(target => target.GetComponent<Flower>().lifeStep != LifeStep.Child)
-                .OrderByDescending(target => target.GetComponent<NectarInventory>().NectarCount)
-                .FirstOrDefault();
-        }
-        catch (Exception e)
-        {
-            throw new NotSupportedException("Extractor не может извлечь компонент из цели во время поиска цели", e);
-        }
+        var potentialTargets = Enumerable
+            .Range(0, targetsParent.transform.childCount)
+            .Select(index => targetsParent.transform.GetChild(index).gameObject)
+            .Where(target => target.GetComponent<Flower>().lifeStep != LifeStep.Child)
+            .ToList();
+        var randomIndex = Random.Range(0, potentialTargets.Count - 1);
+        _target = potentialTargets.Count > 0 ? potentialTargets[randomIndex] : null;
     }
 
     private bool IsAtTargetLocation(GameObject target) =>
@@ -85,9 +78,9 @@ public class Extractor : BasicBee
 
     private abstract class ExtractorState
     {
-        protected Extractor _extractor;
+        protected readonly Extractor Extractor;
 
-        protected ExtractorState(Extractor extractor) => _extractor = extractor;
+        protected ExtractorState(Extractor extractor) => Extractor = extractor;
 
         public abstract void MoveToTarget();
         public abstract void MoveToSpawn();
@@ -100,18 +93,17 @@ public class Extractor : BasicBee
 
         public override void MoveToTarget()
         {
-            _extractor.UpdateTarget();
-            var target = _extractor._target;
-            if (target == null || target.transform.childCount == 0)
+            var target = Extractor._target;
+            if (target is null)
             {
-                _extractor.MoveToSpawn();
+                Extractor.MoveToSpawn();
                 //TODO: если цветов нет, то скорее всего экстрактор должен прилететь в улье и в него залететь (пропасть). Ну или нет:)
                 return;
             }
 
-            _extractor.MoveToTarget(target);
-            if (_extractor.IsAtTargetLocation(target))
-                _extractor._extractorState = new ExtractingNectarState(_extractor);
+            Extractor.MoveToTarget(target);
+            if (Extractor.IsAtTargetLocation(target))
+                Extractor._extractorState = new ExtractingNectarState(Extractor);
         }
 
         public override void MoveToSpawn() { }
@@ -127,15 +119,15 @@ public class Extractor : BasicBee
 
         public override void MoveToSpawn()
         {
-            _extractor.MoveToSpawn();
-            if (_extractor.IsAtSpawnLocation())
+            Extractor.MoveToSpawn();
+            if (Extractor.IsAtSpawnLocation())
             {
-                _extractor._extractorState = new MovingToTargetState(_extractor);
-                Globals.AddHoney(
-                    _extractor.gameObject
+                Extractor.UpdateTarget();
+                Extractor._extractorState = new MovingToTargetState(Extractor);
+                Globals.AddHoney(Extractor.gameObject
                     .GetComponent<NectarInventory>()
                     .DeliverNectar(int.MaxValue)
-                    );
+                );
                 OnResourcesUpdated();
             }
         }
@@ -153,10 +145,10 @@ public class Extractor : BasicBee
 
         public override void ExtractNectar()
         {
-            _extractor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            _extractor._inventory.ExtractNectar(_extractor._target);
-            if (_extractor._inventory.IsFull || _extractor._target.GetComponent<NectarInventory>().NectarCount < 10)
-                _extractor._extractorState = new MovingToSpawn(_extractor);
+            Extractor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Extractor._inventory.ExtractNectar(Extractor._target);
+            if (Extractor._inventory.IsFull || Extractor._target.GetComponent<NectarInventory>().NectarCount < 10)
+                Extractor._extractorState = new MovingToSpawn(Extractor);
         }
     }
 }

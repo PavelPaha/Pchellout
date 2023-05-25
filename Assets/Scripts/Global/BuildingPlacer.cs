@@ -1,18 +1,6 @@
 using System;
-using System.Diagnostics;
-using Global;
-using Mono.Cecil.Cil;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Debug = UnityEngine.Debug;
-
-public enum BuildingPlacement
-{
-    Valid,
-    Invalid,
-    Fixed
-};
 
 public class BuildingPlacer : MonoBehaviour
 {

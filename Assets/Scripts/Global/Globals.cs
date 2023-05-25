@@ -54,15 +54,15 @@ public static class Globals
 
     public static readonly BuildingData[] BuildingsInHive =
     {
-        new("Барак", 100, new Dictionary<string, int>
+        new("Барак", new Dictionary<string, int>
         {
             { "honey", 2000 },
         }, string.Empty),
-        new("Медохранилище", 100, new Dictionary<string, int>
+        new("Медохранилище", new Dictionary<string, int>
         {
             { "honey", 1500 },
         }, string.Empty),
-        new("Ратуша", 100, new Dictionary<string, int>
+        new("Ратуша", new Dictionary<string, int>
         {
             { "honey", 2000 },
         }, string.Empty)
@@ -70,23 +70,23 @@ public static class Globals
 
     public static readonly BuildingData[] BuildigsInWorld =
     {
-        new("Колеус", 100, new Dictionary<string, int>
+        new("Колеус", new Dictionary<string, int>
         {
             { "honey", 10000 },
         }, string.Empty),
-        new("Ромашка", 100, new Dictionary<string, int>
+        new("Ромашка", new Dictionary<string, int>
         {
             { "honey", 15000 },
         }, string.Empty),
-        new("Подсолнух", 100, new Dictionary<string, int>
+        new("Подсолнух", new Dictionary<string, int>
         {
             { "honey", 20000 },
         }, string.Empty),
-        new("Куст", 100, new Dictionary<string, int>
+        new("Куст", new Dictionary<string, int>
         {
             { "honey", 5000 }
         }, string.Empty),
-        new("Бомба", 100, new Dictionary<string, int>
+        new("Бомба", new Dictionary<string, int>
             {
                 { "honey", 100 }
             },
@@ -128,9 +128,9 @@ public static class Globals
         var possible = price <= Globals.GameResources["honey"].Amount;
         button.GetComponent<Image>().color =
             new Color(
-                currentColor.r, 
-                currentColor.g, 
-                currentColor.b, 
+                currentColor.r,
+                currentColor.g,
+                currentColor.b,
                 possible ? 1 : 0.2f);
         button.GetComponent<Button>().enabled = possible;
     }

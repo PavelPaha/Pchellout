@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Global;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour

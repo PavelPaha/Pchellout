@@ -23,7 +23,7 @@ public static class Globals
 
     public static int BossChildrenCount = 5;
 
-    public static int MaxHiveHealth = 1000;
+    public static int MaxHiveHealth = 10000;
 
     public static int MaxHoneyStorageCapacity = 10_000_000;
     public static int HoneyStorageUpgradePrice = 1_000;

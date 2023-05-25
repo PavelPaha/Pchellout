@@ -1,46 +1,21 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class HealthBarController: MonoBehaviour
+[RequireComponent(typeof(BasicBee))]
+public class HealthBarController : MonoBehaviour
 {
     public Image _bar;
-    public float Fill;
-    private int _maxHealth = 100;
-    private BasicBee _basicBee; 
+    private BasicBee _basicBee;
+    private float _maxHealth;
 
-    private void Start()
+    void Awake()
     {
-        Fill = 1f;
         _basicBee = GetComponent<BasicBee>();
+        _maxHealth = _basicBee.Health;
     }
 
     void Update()
     {
-        try
-        {
-            ChangeHealth(_basicBee.Health);
-        }
-        catch
-        {
-            throw new Exception("HealthBarController не может получить доступ к здоровью объекта, чтобы обновить HealthBar");
-        }
-    }
-
-    public void SetMaxHealth(int maxHealth)
-    {
-        _maxHealth = maxHealth;
-    }
-    public void ChangeHealth(float actual)
-    {
-        Fill = actual / _maxHealth;
-        _bar.fillAmount = Fill;
-    }
-
-    public void AddLife(float percent)
-    {
-        Fill = Math.Min(1, Fill + percent);
-        _bar.fillAmount = Fill;
+        _bar.fillAmount = _basicBee.Health / _maxHealth;
     }
 }

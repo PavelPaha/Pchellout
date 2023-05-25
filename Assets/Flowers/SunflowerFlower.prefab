@@ -208,7 +208,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.678
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -318,7 +318,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f207bd357b828f43983edb99a40c98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  scaleDuration: 1
+  maxScale: 1
+  Health: 500
   Speed: 3
   lifeStep: 0
   lifePeriod: 5
@@ -419,7 +421,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 8093474829731533084}
-  Fill: 1
 --- !u!114 &-734220183516278627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f769e800e4295b47ae63cacfc7311ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBoostCost: 20000
+  healthBoostCost: 500
 --- !u!1 &6856505803219222666
 GameObject:
   m_ObjectHideFlags: 0

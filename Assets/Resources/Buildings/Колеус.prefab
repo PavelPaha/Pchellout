@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 1938407975679543838}
   - component: {fileID: 1938407975679543809}
   - component: {fileID: 4749850639104271961}
+  - component: {fileID: -4430155242346577421}
+  - component: {fileID: 1219232053957636393}
   m_Layer: 8
   m_Name: "\u041A\u043E\u043B\u0435\u0443\u0441"
   m_TagString: Flower
@@ -33,7 +35,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.45, y: -4.83, z: 0}
   m_LocalScale: {x: 0.13394067, y: 0.13394067, z: 0.13394067}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1669385347068738734}
   m_Father: {fileID: 0}
@@ -103,7 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f207bd357b828f43983edb99a40c98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  scaleDuration: 1
+  maxScale: 1
+  Health: 500
   Speed: 3
   lifeStep: 0
   lifePeriod: 4
@@ -204,7 +208,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 1099599812128956140}
-  Fill: 1
+--- !u!114 &-4430155242346577421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938407975679543811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bffab8ceb04dec43937bd6553cbbdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1219232053957636393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938407975679543811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f769e800e4295b47ae63cacfc7311ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBoostCost: 500
 --- !u!1 &4102884707693138563
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +305,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed6c1387bcb4ff64b994e3b8edddcd66, type: 3}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
@@ -368,7 +396,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed6c1387bcb4ff64b994e3b8edddcd66, type: 3}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
@@ -478,7 +506,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!114 &7341307560352183050
 MonoBehaviour:

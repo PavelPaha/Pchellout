@@ -420,7 +420,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f207bd357b828f43983edb99a40c98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  scaleDuration: 1
+  maxScale: 1
+  Health: 500
   Speed: 3
   lifeStep: 0
   lifePeriod: 3
@@ -521,7 +523,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 6337094291842772127}
-  Fill: 1
 --- !u!114 &-3602569183798422234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,4 +547,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f769e800e4295b47ae63cacfc7311ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBoostCost: 20000
+  healthBoostCost: 500

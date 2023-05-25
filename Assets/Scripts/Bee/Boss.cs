@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,7 +17,6 @@ namespace DefaultNamespace
 
         public void Awake()
         {
-            GetComponent<HealthBarController>().SetMaxHealth(Health);
             originalPosition = transform.position;
             GetComponent<Boss>().BeesSource = GameObject.Find("Hive");
             rb = GetComponent<Rigidbody2D>();

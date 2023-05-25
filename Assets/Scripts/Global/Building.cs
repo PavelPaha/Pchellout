@@ -16,10 +16,7 @@ public class Building
     {
         Name = data.Name;
         Cost = data.Cost["honey"];
-        var flowersParent = GameObject.Find("Flowers");
         BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
-        if (data.Name != "Бомба")
-            BuildingObject.transform.SetParent(flowersParent.transform);
     }
 
 

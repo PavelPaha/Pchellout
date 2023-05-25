@@ -7,8 +7,8 @@ public class CameraShaker : MonoBehaviour
     public GameObject DamageTint;
 
     private SpriteRenderer spriteRenderer;
-    private float _shakeDuration = 0.2f;
-    private float _shakeAmount = 0.3f;
+    private float _shakeDuration =0.1f;
+    private float _shakeAmount = 0.05f;
     private float _decreaseFactor = 1.0f;
 
     private Vector3 _originalPosition;

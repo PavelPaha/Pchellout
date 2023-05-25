@@ -29,7 +29,7 @@ public class BuildingPlacer : MonoBehaviour
     {
         if (_placedBuilding == null)
             return;
-
+        
         UpdateBuildingPosition();
         if (Input.GetKeyUp(KeyCode.Escape))
         {

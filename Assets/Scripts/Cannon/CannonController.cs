@@ -1,6 +1,7 @@
 using System;
 using Global;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CannonController : MonoBehaviour
 {
@@ -25,7 +26,8 @@ public class CannonController : MonoBehaviour
         transform.LookAt(mousePos, Vector3.forward);
         // Отменяем поворот пушки по оси Z
         transform.eulerAngles = new Vector3(0, 0, -transform.eulerAngles.z);
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && 
+            !EventSystem.current.IsPointerOverGameObject())
         {
             _animator.SetBool(IsFire, true);
         }
@@ -36,7 +38,8 @@ public class CannonController : MonoBehaviour
         
         if (Input.GetMouseButton(0) 
             && fireTimer >= Globals.FireCooldown
-            && Globals.InBounds(mousePos))
+            && Globals.InBounds(mousePos)
+            && !EventSystem.current.IsPointerOverGameObject())
         {
             // Debug.Log("Выстрел");
             if (Globals.GameResources["honey"].Amount >= Globals.ShotCost)

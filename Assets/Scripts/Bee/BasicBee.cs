@@ -66,7 +66,7 @@ public class BasicBee : MonoBehaviour
         transform.rotation = Quaternion.identity;
         if (!Globals.InBounds(transform.position))
         {
-            DestroyBee();
+            DestroyObject();
         }
     }
 
@@ -80,11 +80,11 @@ public class BasicBee : MonoBehaviour
             if (gameObject.GetComponent<HouseForBees>() != null)
                 gameObject.GetComponent<HouseForBees>().Loss();
             else
-                DestroyBee();
+                DestroyObject();
         }
     }
 
-    public void DestroyBee()
+    protected virtual void DestroyObject()
     {
         Destroy(gameObject);
     }

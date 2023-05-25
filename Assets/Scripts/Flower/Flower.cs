@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum LifeStep
@@ -32,7 +33,8 @@ public class Flower : BasicBee
         UpdateLifePeriod();
         _flowerState.ProduceNectar();
     }
-
+    
+    
     protected void UpdateLifePeriod()
     {
         if (_timeSinceInitialization < lifePeriod)

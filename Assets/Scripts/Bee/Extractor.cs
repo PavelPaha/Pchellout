@@ -27,7 +27,7 @@ public class Extractor : BasicBee
     {
         if (!Globals.InBounds(transform.position))
         {
-            DestroyBee();
+            DestroyObject();
         }
         transform.rotation = Quaternion.identity;
         _extractorState.MoveToTarget();

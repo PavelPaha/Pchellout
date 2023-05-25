@@ -105,10 +105,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f207bd357b828f43983edb99a40c98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleDuration: 1
+  maxScale: 1
   Health: 100
   Speed: 3
   lifeStep: 0
   lifePeriod: 4
+  animationComponent: {fileID: 7400000, guid: fab3c1122b04d5f48906c1b2286497c0, type: 2}
 --- !u!114 &1938407975679543836
 MonoBehaviour:
   m_ObjectHideFlags: 0

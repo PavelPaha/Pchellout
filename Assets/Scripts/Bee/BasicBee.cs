@@ -1,22 +1,17 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Global;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BasicBee : MonoBehaviour
 {
     public float scaleDuration = 1.0f;
     public float maxScale = 1.0f;
-
-    private Vector3 _originalScale;
-    
     public int Health = 100;
-    [SerializeField] public float Speed = 3;
+    public float Speed = 3;
 
     protected const float Delta = 0.1f;
 
+    private Vector3 _originalScale;
     private float frame = 0f;
 
     protected void UpdateAnimationDirection(Rigidbody2D rigidbody) =>
@@ -30,9 +25,10 @@ public class BasicBee : MonoBehaviour
         Vector2 directionToTarget = (targetPosition - currentPosition).normalized;
         frame = frame < 100 ? frame + 0.01f : 0;
         float wobbleAngle = UnityEngine.Random.Range(-Globals.MaxWobbleAngle, Globals.MaxWobbleAngle);
-        var wobbleRotation = Quaternion.Euler(0f, 0f, (float)Math.Sin(frame) * Globals.MaxWobbleAngle / 3 + wobbleAngle);
+        var wobbleRotation =
+            Quaternion.Euler(0f, 0f, (float)Math.Sin(frame) * Globals.MaxWobbleAngle / 3 + wobbleAngle);
         Vector2 wobbledDirection = wobbleRotation * directionToTarget;
-        
+
         Vector2 moveForce = wobbledDirection * Speed - rigidbody.velocity;
         rigidbody.AddForce(moveForce, ForceMode2D.Impulse);
         UpdateAnimationDirection(rigidbody);
@@ -40,8 +36,7 @@ public class BasicBee : MonoBehaviour
 
     void Start()
     {
-        _originalScale = transform.localScale; 
-        GetComponent<HealthBarController>().SetMaxHealth(Health);
+        _originalScale = transform.localScale;
         StartCoroutine(ScaleUp());
     }
 
@@ -57,6 +52,7 @@ public class BasicBee : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+
         transform.localScale = _originalScale;
     }
 
@@ -93,11 +89,12 @@ public class BasicBee : MonoBehaviour
     {
         PushAway(collision);
     }
+
     public void OnCollisionStay2D(Collision2D collisionInfo)
     {
         PushAway(collisionInfo);
     }
-    
+
 
     private void PushAway(Collision2D collision)
     {
@@ -105,6 +102,4 @@ public class BasicBee : MonoBehaviour
         // Vector3 normal = collision.contacts[0].normal;
         // rb.AddForce(normal * CollisionForce, ForceMode2D.Impulse);
     }
-
-
 }

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed6c1387bcb4ff64b994e3b8edddcd66, type: 3}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
@@ -130,7 +130,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2253676996675864604}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -163,7 +163,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed6c1387bcb4ff64b994e3b8edddcd66, type: 3}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.678
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -229,6 +229,8 @@ GameObject:
   - component: {fileID: 4434272957061321822}
   - component: {fileID: 4434272957061321821}
   - component: {fileID: 5479004549208016390}
+  - component: {fileID: -734220183516278627}
+  - component: {fileID: 6786081422105984639}
   m_Layer: 8
   m_Name: "\u041F\u043E\u0434\u0441\u043E\u043B\u043D\u0443\u0445"
   m_TagString: Flower
@@ -246,7 +248,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.3409996, y: -4.6559997, z: 0}
   m_LocalScale: {x: 0.19017105, y: 0.19017105, z: 0.19017105}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4302274295544050004}
   m_Father: {fileID: 0}
@@ -316,7 +318,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f207bd357b828f43983edb99a40c98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  scaleDuration: 1
+  maxScale: 1
+  Health: 500
   Speed: 3
   lifeStep: 0
   lifePeriod: 5
@@ -417,7 +421,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 8093474829731533084}
-  Fill: 1
+--- !u!114 &-734220183516278627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434272957061321819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bffab8ceb04dec43937bd6553cbbdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6786081422105984639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434272957061321819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f769e800e4295b47ae63cacfc7311ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBoostCost: 500
 --- !u!1 &6856505803219222666
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +506,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!114 &4278327038992766248
 MonoBehaviour:

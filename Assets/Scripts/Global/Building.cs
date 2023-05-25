@@ -16,11 +16,10 @@ public class Building
     {
         Name = data.Name;
         Cost = data.Cost["honey"];
-        var parent = GameObject.Find(Globals.CameraIsInHive ? "HiveBuildings" : "Flowers");
-        if (data.Name != "Bomb")
-            BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
-        else
-            BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
+        var flowersParent = GameObject.Find("Flowers");
+        BuildingObject = Object.Instantiate(Resources.Load<GameObject>($"Buildings/{data.Name}"));
+        if (data.Name != "Бомба")
+            BuildingObject.transform.SetParent(flowersParent.transform);
     }
 
 

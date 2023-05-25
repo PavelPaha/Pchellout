@@ -59,7 +59,7 @@ public class Extractor : BasicBee
                 break;
         }
     }
-
+    
     private void UpdateTarget()
     {
         var potentialTargets = Enumerable
@@ -67,7 +67,7 @@ public class Extractor : BasicBee
             .Select(index => targetsParent.transform.GetChild(index).gameObject)
             .Where(target => target.GetComponent<Flower>().lifeStep != LifeStep.Child)
             .ToList();
-        var randomIndex = Random.Range(0, potentialTargets.Count - 1);
+        var randomIndex = Random.Range(0, potentialTargets.Count);
         _target = potentialTargets.Count > 0 ? potentialTargets[randomIndex] : null;
     }
 
@@ -97,7 +97,6 @@ public class Extractor : BasicBee
             if (target is null)
             {
                 Extractor.MoveToSpawn();
-                //TODO: если цветов нет, то скорее всего экстрактор должен прилететь в улье и в него залететь (пропасть). Ну или нет:)
                 return;
             }
 

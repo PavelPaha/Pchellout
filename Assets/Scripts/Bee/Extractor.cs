@@ -33,6 +33,12 @@ public class Extractor : BasicBee
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
+        
+        if (!Globals.InBounds_LowCondition(gameObject.transform.position))
+        {
+            Vector2 direction = spawnObject.transform.position - transform.position;
+            GetComponent<Rigidbody2D>().AddForce(direction.normalized * Time.deltaTime * 1000);
+        }
     }
 
     private void MoveToSpawn() => MoveToTarget(spawnObject);

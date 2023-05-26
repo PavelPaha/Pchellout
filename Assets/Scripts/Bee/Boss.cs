@@ -34,7 +34,6 @@ namespace DefaultNamespace
             gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().flipX = direction.x < 0.01f;
             gameObject.transform.GetChild(2).GetComponent<SpriteRenderer>().flipX = direction.x < 0.01f;
             
-            
             transform.rotation = Quaternion.identity;
             if (BeesSource == null)
             {
@@ -57,34 +56,14 @@ namespace DefaultNamespace
 
         private void Move()
         {
-            Vector2 direction = GetComponent<Boss>().BeesSource.transform.position - transform.position;
+            Vector2 direction = BeesSource.transform.position - transform.position;
             Vector2 force = direction.normalized * Time.deltaTime * 100;
-            float distance = direction.magnitude;
-            
-            rb.AddForce(force, ForceMode2D.Impulse);
-            if (distance > 4f)
+            force = direction.normalized * 1000 * Time.deltaTime;
+            rb.AddForce(force);
+
+            if (!Globals.InBounds_LowCondition(gameObject.transform.position))
             {
-                force = direction.normalized * 80 * Time.deltaTime;
-
-                rb.AddForce(force);
-                if (delayTimer <= 0f)
-                {
-                    // Задержка времени после остановки
-                    delayTimer = Random.Range(minDelay, maxDelay);
-
-                    // Сбросить направление движения
-                    direction = originalPosition - transform.position;
-                    rb.velocity = Vector2.zero;
-                }
-                else
-                    delayTimer -= Time.deltaTime;
-            }
-            else
-                rb.AddForce(-direction.normalized * 1.5f, ForceMode2D.Impulse);
-
-            if (!Globals.InBounds(gameObject.transform.position))
-            {
-                rb.AddForce(direction.normalized * Time.deltaTime * 10000);
+                rb.AddForce(direction.normalized * Time.deltaTime * 80000);
             }
         }
 
@@ -106,7 +85,7 @@ namespace DefaultNamespace
         public void OnCollisionEnter2D(Collision2D collision)
         {
             if (Random.Range(1,5) < 2)
-                SpawnChilds(1);
+                SpawnChilds(2);
             Vector2 direction = GetComponent<Boss>().BeesSource.transform.position - transform.position;
             Vector2 force = direction.normalized*5;
             rb.AddForce(-force);

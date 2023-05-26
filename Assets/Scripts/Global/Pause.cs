@@ -43,7 +43,6 @@ namespace Global
         public void Update()
         {
             timer += Time.deltaTime;
-            Debug.Log($"{timer} {Globals.Pause}");
             if (Input.GetKey(KeyCode.Escape))
             {
                 if (timer >= delayTime)

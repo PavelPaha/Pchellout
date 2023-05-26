@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Global;
 using UnityEngine;
+using UnityEngine.Windows;
+using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
@@ -9,7 +12,13 @@ namespace DefaultNamespace
     {
         public GameObject BeesSource;
         private List<GameObject> _bees;
-        
+        private GameObject _goal;
+
+        public void Awake()
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
+
         void Update()
         {
             if (!Globals.InBounds(transform.position))
@@ -21,36 +30,26 @@ namespace DefaultNamespace
             {
                 throw new NullReferenceException("Enemy не знает, на какую цель ему лететь");
             }
-            _bees = Enumerable
-                .Range(0, BeesSource.transform.childCount)
-                .Select(index => BeesSource.transform.GetChild(index).gameObject)
-                .ToList();
-
-            GameObject closestTarget = null;
-            float closestDistance = Mathf.Infinity;
-        
-            foreach (GameObject target in _bees)
+            
+            if (_goal == null || _goal.name == "Hive")
             {
-                float distance = Vector3.Distance(transform.position, target.transform.position);
-                if (distance < closestDistance)
-                {
-                    closestTarget = target;
-                    closestDistance = distance;
-                }
-            }
+                _bees = Enumerable
+                    .Range(0, BeesSource.transform.childCount)
+                    .Select(index => BeesSource.transform.GetChild(index).gameObject)
+                    .ToList();
 
-            if (closestTarget == null)
-            {
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                return;
+                if (_bees.Count > 0)
+                    _goal = _bees[Random.Range(0, _bees.Count)];
+                else
+                    _goal = GameObject.Find("Hive");
             }
-        
-            MoveToTarget(closestTarget);
+            MoveToTarget(_goal);
         }
         
         
         public void OnCollisionEnter2D(Collision2D collision)
         {
+            
             DamageInCollisionWithOtherObject(collision);
         }
         
@@ -59,15 +58,17 @@ namespace DefaultNamespace
             //DamageInCollisionWithExtractor(collisionInfo);
         }
 
-        private static void DamageInCollisionWithOtherObject(Collision2D collision)
+        private void DamageInCollisionWithOtherObject(Collision2D collision)
         {
             switch (collision.gameObject.tag)
             {
                 case "Enemy":
-                    collision.gameObject.GetComponent<BeeEnemy>().Damage(20);
+                    collision.gameObject.GetComponent<BeeEnemy>().Damage(Globals.DefenderDamage);
+                    _audioSource.Play();
                     break;
                 case "Boss":
-                    collision.gameObject.GetComponent<Boss>().Damage(20);
+                    collision.gameObject.GetComponent<Boss>().Damage(Globals.DefenderDamage);
+                    _audioSource.Play();
                     break;
             }
         }

@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class BasicBee : MonoBehaviour
 {
@@ -13,6 +16,8 @@ public class BasicBee : MonoBehaviour
 
     private Vector3 _originalScale;
     private float frame = 0f;
+
+    protected AudioSource _audioSource;
 
     protected void UpdateAnimationDirection(Rigidbody2D rigidbody) =>
         GetComponent<SpriteRenderer>().flipX = rigidbody.velocity.x < 0.01f;
@@ -36,6 +41,9 @@ public class BasicBee : MonoBehaviour
 
     void Start()
     {
+        _audioSource = GetComponents<AudioSource>()[0];
+        _audioSource.pitch = Random.Range(-2.0f, 2.0f);
+        _audioSource.volume = Random.Range(0.0f, 0.5f);
         _originalScale = transform.localScale;
         StartCoroutine(ScaleUp());
     }

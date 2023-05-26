@@ -22,13 +22,14 @@ public class SpawnBee : MonoBehaviour
     public void OnMouseDown()
     {
         if (Hive == null) return;
-        if (Globals.GameResources["honey"].Amount - Globals.DefenderCost >= 0)
+        if (Globals.GameResources["honey"].Amount - Globals.DefenderPrice >= 0)
         {
             Vector3 hivePosition = Hive.transform.position;
             var bee = Instantiate(Bee, hivePosition, Quaternion.identity);
+            bee.transform.localScale = new Vector3(Globals.DefenderScale, Globals.DefenderScale, Globals.DefenderScale);
             bee.GetComponent<BeeDefender>().BeesSource = Goal;
             bee.transform.SetParent(ParentForDefenders.transform);
-            Globals.GameResources["honey"].Amount -= Globals.DefenderCost;
+            Globals.GameResources["honey"].Amount -= Globals.DefenderPrice;
             OnBuy?.Invoke();
         }
         

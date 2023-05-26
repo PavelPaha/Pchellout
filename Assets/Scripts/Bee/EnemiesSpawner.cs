@@ -16,7 +16,7 @@ public class EnemiesSpawner : MonoBehaviour
 {
     public List<GameObject> Goals;
     public GameObject HoneycombObject;
-    private float BeeSpawnInterval = 0.8f;
+    private float BeeSpawnInterval = 2f;
 
     public GameObject ParentForEnemies;
 
@@ -55,16 +55,6 @@ public class EnemiesSpawner : MonoBehaviour
             _beeSpawnTimer = 0f;
             // Debug.Log($"{_currentWaveIndex} {_beesToSpawn}");
         }
-    }
-
-    /// <summary>
-    /// Делает так, чтобы _currentWaveIndex указывал на те параметры
-    /// из _attackWaves[_currentWaveIndex],
-    /// которые нужно применить к врагам в данный момент
-    /// </summary>
-    private void IterateWave()
-    {
-        
     }
 
     private void SpawnEnemy()

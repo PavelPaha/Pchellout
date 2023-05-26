@@ -17,8 +17,9 @@ namespace DefaultNamespace
         private Queue<GameObject> _sources = new();
         private Organizer _organizer;
 
-        public void Start()
+        public void Awake()
         {
+            _audioSource = GetComponent<AudioSource>();
             _organizer = GameObject.Find("Game").GetComponent<Organizer>();
             AddSources();
             BeesSource = _sources.Dequeue();
@@ -94,9 +95,11 @@ namespace DefaultNamespace
                 case "Hive":
                     OnHiveDamage?.Invoke();
                     collision.gameObject.GetComponent<HouseForBees>().Damage(20);
+                    _audioSource.Play();
                     break;
                 case "Extractor":
                     collision.gameObject.GetComponent<Extractor>().Damage(20);
+                    _audioSource.Play();
                     break;
                 case "Flower":
                     var flower = collision.gameObject.GetComponent<Flower>();
@@ -105,6 +108,7 @@ namespace DefaultNamespace
                 case "Defender":
                     BeesSource = collision.transform.parent.gameObject;
                     collision.gameObject.GetComponent<BeeDefender>().Damage(20);
+                    _audioSource.Play();
                     break;
             }
         }

@@ -15,16 +15,21 @@ namespace DefaultNamespace
         private Vector3 originalPosition;
         private Rigidbody2D rb;
 
+
+        public AudioClip BackgroundBossSound;
+
         public void Awake()
         {
             originalPosition = transform.position;
             GetComponent<Boss>().BeesSource = GameObject.Find("Hive");
             rb = GetComponent<Rigidbody2D>();
+            var audioController = GameObject.Find("Audio");
+            audioController.GetComponent<AudioSource>().clip = BackgroundBossSound;
+            audioController.GetComponent<AudioSource>().Play();
         }
 
         public override void Update()
         {
-
             Vector2 direction = GetComponent<Boss>().BeesSource.transform.position - transform.position;
             gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().flipX = direction.x < 0.01f;
             gameObject.transform.GetChild(2).GetComponent<SpriteRenderer>().flipX = direction.x < 0.01f;
@@ -90,6 +95,9 @@ namespace DefaultNamespace
             {
                 Vector3 spawnPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0);
                 var enemy = Instantiate(Child, transform.position + spawnPosition/4, Quaternion.identity);
+                enemy.transform.SetParent(GameObject.Find("Enemies").transform);
+                enemy.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                enemy.GetComponent<BasicBee>().Health = 300;
                 enemy.GetComponent<Rigidbody2D>().AddForce(spawnPosition);
                 enemy.GetComponent<BeeEnemy>().BeesSource = GameObject.Find("Hive");
             }

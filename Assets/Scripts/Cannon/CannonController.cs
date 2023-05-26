@@ -9,9 +9,11 @@ public class CannonController : MonoBehaviour
     private float fireTimer;
     private Animator _animator;
     private static readonly int IsFire = Animator.StringToHash("is_fire");
+    private AudioSource _audioSource;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
     }
 
@@ -57,6 +59,7 @@ public class CannonController : MonoBehaviour
 
     private void Fire(Vector3 mousePos)
     {
+        _audioSource.Play();
         GameObject projectile =
             Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
         var trail = projectile.GetComponent<TrailRenderer>();

@@ -42,6 +42,8 @@ namespace Global
                     Globals.CurrentDefenderUpgradeLevel = Math.Max(Globals.CurrentDefenderUpgradeLevel,
                         Globals.CurrentDefenderUpgradeLevel+1);
                     DefendersBar.fillAmount = (float)Globals.CurrentDefenderUpgradeLevel / Globals.MaxDefendersUpgrade;
+                    Globals.DefenderDamage += 20;
+                    Globals.DefenderScale += 0.1f;
                 }
             });
 

@@ -10,6 +10,7 @@ public class HouseForBees: BasicBee
     public void Loss()
     {
         Globals.GameOutcome = GameOutcome.Loss;
+        Health = Globals.MaxHiveHealth;
         SceneManager.LoadScene("Menu");
     }
 

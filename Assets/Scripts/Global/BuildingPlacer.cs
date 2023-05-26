@@ -15,17 +15,14 @@ public class BuildingPlacer : MonoBehaviour
     
     void Update()
     {
-        Debug.Log($"Globals.SelectBuildingMode = {Globals.SelectBuildingMode}");
         if (_placedBuilding == null)
         {
-            Globals.SelectBuildingMode = false;
             return;
         }
         UpdateBuildingPosition();
         if (Input.GetMouseButtonDown(1))
         {
             CancelPlacedBuilding();
-            Globals.SelectBuildingMode = false;
             return;
         }
         Globals.SelectBuildingMode = true;
@@ -84,12 +81,12 @@ public class BuildingPlacer : MonoBehaviour
 
         FreezeBuilding(false);
         PreparePlacedBuilding("world", _placedBuilding.BuildingIndex);
-        Globals.SelectBuildingMode = false;
     }
 
     public void CancelPlacedBuilding()
     {
         Destroy(_placedBuilding.BuildingObject);
+        Globals.SelectBuildingMode = false;
         _placedBuilding = null;
     }
 

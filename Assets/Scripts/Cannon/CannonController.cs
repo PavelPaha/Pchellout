@@ -33,7 +33,8 @@ public class CannonController : MonoBehaviour
         // Отменяем поворот пушки по оси Z
         transform.eulerAngles = new Vector3(0, 0, -transform.eulerAngles.z);
         if (Input.GetMouseButton(0) && 
-            !EventSystem.current.IsPointerOverGameObject())
+            !EventSystem.current.IsPointerOverGameObject()
+            && !Globals.SelectBuildingMode)
         {
             _animator.SetBool(IsFire, true);
         }

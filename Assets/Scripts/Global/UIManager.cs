@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
     private void _AddBuildingButtonListener(Button buttonComponent, int i) =>
         buttonComponent.onClick.AddListener(() =>
         {
+            Globals.SelectBuildingMode = true;
             if (_buildingPlacer.IsBuildingSelected)
                 _buildingPlacer.CancelPlacedBuilding();
             _buildingPlacer.SelectPlacedBuilding(i);

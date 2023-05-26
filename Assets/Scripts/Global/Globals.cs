@@ -11,6 +11,8 @@ public static class Globals
 
     public static bool Pause = false;
 
+    public static bool SelectBuildingMode = false;
+
     public static readonly float FireCooldown = 0.3f;
 
     public static readonly int ShotCost = 0;

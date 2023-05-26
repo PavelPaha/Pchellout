@@ -11,35 +11,44 @@ public class BuildingPlacer : MonoBehaviour
     public bool IsBuildingSelected => _placedBuilding != null;
     private Building _placedBuilding;
     private float _buildingToCameraDistance;
-
+    
     
     void Update()
     {
+        Debug.Log($"Globals.SelectBuildingMode = {Globals.SelectBuildingMode}");
         if (_placedBuilding == null)
-            return;
-
-        UpdateBuildingPosition();
-        if (Input.GetKeyUp(KeyCode.Escape))
         {
-            CancelPlacedBuilding();
+            Globals.SelectBuildingMode = false;
             return;
         }
-
+        UpdateBuildingPosition();
+        if (Input.GetMouseButtonDown(1))
+        {
+            CancelPlacedBuilding();
+            Globals.SelectBuildingMode = false;
+            return;
+        }
+        Globals.SelectBuildingMode = true;
         if ((InBounds() || _placedBuilding.Name == "Бомба") &&
             Globals.GameResources["honey"].Amount >= _placedBuilding.Cost)
         {
             ChangeOpacity(1);
             if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                Globals.GameResources["honey"].Amount -= _placedBuilding.Cost;
-                OnBuy?.Invoke();
-                PlaceBuilding();
+                OnMouseDown();
             }
         }
         else
         {
             ChangeOpacity(0.2f);
         }
+    }
+
+    public void OnMouseDown()
+    {
+        Globals.GameResources["honey"].Amount -= _placedBuilding.Cost;
+        OnBuy?.Invoke();
+        PlaceBuilding();
     }
 
     private void ChangeOpacity(float value)
@@ -75,6 +84,7 @@ public class BuildingPlacer : MonoBehaviour
 
         FreezeBuilding(false);
         PreparePlacedBuilding("world", _placedBuilding.BuildingIndex);
+        Globals.SelectBuildingMode = false;
     }
 
     public void CancelPlacedBuilding()

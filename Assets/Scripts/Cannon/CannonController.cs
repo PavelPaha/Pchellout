@@ -1,5 +1,6 @@
 using System;
 using Global;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,9 +11,12 @@ public class CannonController : MonoBehaviour
     private Animator _animator;
     private static readonly int IsFire = Animator.StringToHash("is_fire");
     private AudioSource _audioSource;
+    public static Action OnBuy;
+    
 
     private void Start()
     {
+        BuildingPlacer.OnBuy += () => { };
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
     }
@@ -41,13 +45,16 @@ public class CannonController : MonoBehaviour
         if (Input.GetMouseButton(0) 
             && fireTimer >= Globals.FireCooldown
             && Globals.InBounds(mousePos)
-            && !EventSystem.current.IsPointerOverGameObject())
+            && !EventSystem.current.IsPointerOverGameObject()
+            && !Globals.SelectBuildingMode)
         {
+            
             // Debug.Log("Выстрел");
             if (Globals.GameResources["honey"].Amount >= Globals.ShotCost)
             {
                 Fire(mousePos);
                 Globals.GameResources["honey"].Amount -= Globals.ShotCost;
+                OnBuy?.Invoke();
             }
             else
             {
@@ -56,6 +63,7 @@ public class CannonController : MonoBehaviour
             fireTimer = 0f;
         }
     }
+    
 
     private void Fire(Vector3 mousePos)
     {

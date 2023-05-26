@@ -19,6 +19,7 @@ namespace Global
             ExtractorsSpawner.OnBuy += UpdateResources;
             SpawnBee.OnBuy += UpdateResources;
             BuildingPlacer.OnBuy += UpdateResources;
+            CannonController.OnBuy += UpdateResources;
             UpdateResources();
         }
         

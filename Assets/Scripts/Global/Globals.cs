@@ -9,6 +9,8 @@ public static class Globals
 
     public static int ExtractorPrice = 1500;
 
+    public static bool SelectBuildingMode = false;
+    
     public static bool Pause = false;
 
     public static readonly float FireCooldown = 0.3f;
@@ -26,17 +28,17 @@ public static class Globals
     public static int MaxHiveHealth = 30_000;
 
     public static int MaxHoneyStorageCapacity = 10_000_000;
-    public static int HoneyStorageUpgradePrice = 1_000;
+    public static int HoneyStorageUpgradePrice = 30_000;
     public static int CurrentStorageCapacity = 1_000_000;
 
     public static int MaxDefendersUpgrade = 5;
     public static int CurrentDefenderUpgradeLevel = 0;
-    public static int DefendersUpgradePrice = 20000;
+    public static int DefendersUpgradePrice = 50000;
     public static int DefenderPrice = 1500;
     public static int DefenderDamage = 23;
-    public static float DefenderScale = 1f;
+    public static float DefenderScale = 0.8f;
 
-    public static int FixHivePrice = 25000;
+    public static int FixHivePrice = 80_000;
     public static float FixHiveCoeff = 0.05f;
 
     public static int MaxProjectileDamage = 100;
@@ -86,8 +88,8 @@ public static class Globals
     public static readonly AttackWave[] AttackWaves =
     {
         new() { EnemyCount = 50, Speed = 5, Scale = 1f, SourceName = "1" },
-        new() { EnemyCount = 40, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 1f, SourceName = "2" },
-        new() { EnemyCount = 80, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.7f, SourceName = "3" },
+        new() { EnemyCount = 20, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 0.5f, SourceName = "2" },
+        new() { EnemyCount = 180, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.3f, SourceName = "3" },
         new() { EnemyCount = 1, Speed = 5, Scale = 1, SourceName = "4" }
     };
 

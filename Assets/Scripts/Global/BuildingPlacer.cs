@@ -12,7 +12,7 @@ public class BuildingPlacer : MonoBehaviour
     private Building _placedBuilding;
     private float _buildingToCameraDistance;
 
-
+    
     void Update()
     {
         if (_placedBuilding == null)
@@ -69,6 +69,7 @@ public class BuildingPlacer : MonoBehaviour
         {
             OnShake?.Invoke();
             var parent = GameObject.Find("Flowers");
+            GetComponent<AudioSource>().Play();
             _placedBuilding.BuildingObject.transform.SetParent(parent.transform);
         }
 

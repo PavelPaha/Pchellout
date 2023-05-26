@@ -7,13 +7,13 @@ public static class Globals
 {
     public static bool CameraIsInHive = false;
 
-    public static int ExtractorPrice = 1000;
+    public static int ExtractorPrice = 1500;
 
     public static bool Pause = false;
 
     public static readonly float FireCooldown = 0.3f;
 
-    public static readonly int ShotCost = 0;
+    public static readonly int ShotCost = 100;
 
     public static readonly int MaxWobbleAngle = 15;
 
@@ -21,7 +21,7 @@ public static class Globals
 
     public static float BossChildrenSpawnInterval = 10f;
 
-    public static int BossChildrenCount = 7;
+    public static int BossChildrenCount = 13;
 
     public static int MaxHiveHealth = 30_000;
 
@@ -31,44 +31,44 @@ public static class Globals
 
     public static int MaxDefendersUpgrade = 5;
     public static int CurrentDefenderUpgradeLevel = 0;
-    public static int DefendersUpgradePrice = 1000;
-    public static int DefenderPrice = 800;
-    public static int DefenderDamage = 20;
+    public static int DefendersUpgradePrice = 20000;
+    public static int DefenderPrice = 1500;
+    public static int DefenderDamage = 23;
     public static float DefenderScale = 1f;
 
     public static int FixHivePrice = 25000;
     public static float FixHiveCoeff = 0.05f;
 
     public static int MaxProjectileDamage = 100;
-    public static int ProjectileUpgradePrice = 1000;
-    public static int ProjectileDamage = 20;
+    public static int ProjectileUpgradePrice = 5000;
+    public static int ProjectileDamage = 30;
 
-    public static int BeeEnemyDamage = 20;
+    public static int BeeEnemyDamage = 21;
 
     public static readonly float ProjectileSpeed = 8f;
 
     public static readonly Dictionary<string, GameResource> GameResources = new()
     {
-        { "honey", new GameResource("honey", 15000) }
+        { "honey", new GameResource("honey", 172225) }
     };
 
     public static readonly BuildingData[] BuildigsInWorld =
     {
         new("Колеус", new Dictionary<string, int>
         {
-            { "honey", 20000 },
+            { "honey", 8000 },
         }, string.Empty),
         new("Ромашка", new Dictionary<string, int>
         {
-            { "honey", 25000 },
+            { "honey", 8000 },
         }, string.Empty),
         new("Подсолнух", new Dictionary<string, int>
         {
-            { "honey", 30000 },
+            { "honey", 8000 },
         }, string.Empty),
         new("Куст", new Dictionary<string, int>
         {
-            { "honey", 7000 }
+            { "honey", 5000 }
         }, string.Empty),
         new("Бомба", new Dictionary<string, int>
             {
@@ -85,11 +85,9 @@ public static class Globals
 
     public static readonly AttackWave[] AttackWaves =
     {
-        new() { EnemyCount = 20, Speed = 5, Scale = 1f, SourceName = "1" },
-        new() { EnemyCount = 10, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 1f, SourceName = "2" },
-        new() { EnemyCount = 30, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.7f, SourceName = "3" },
-        new() { EnemyCount = 100, Speed = 5, Scale = 1.2f, BeeSpawnInterval = 0.5f, SourceName = "2" },
-        new() { EnemyCount = 300, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.7f, SourceName = "3" },
+        new() { EnemyCount = 50, Speed = 5, Scale = 1f, SourceName = "1" },
+        new() { EnemyCount = 40, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 1f, SourceName = "2" },
+        new() { EnemyCount = 80, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.7f, SourceName = "3" },
         new() { EnemyCount = 1, Speed = 5, Scale = 1, SourceName = "4" }
     };
 

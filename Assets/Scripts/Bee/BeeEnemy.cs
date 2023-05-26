@@ -94,20 +94,20 @@ namespace DefaultNamespace
             {
                 case "Hive":
                     OnHiveDamage?.Invoke();
-                    collision.gameObject.GetComponent<HouseForBees>().Damage(20);
+                    collision.gameObject.GetComponent<HouseForBees>().Damage(Globals.BeeEnemyDamage);
                     _audioSource.Play();
                     break;
                 case "Extractor":
-                    collision.gameObject.GetComponent<Extractor>().Damage(20);
+                    collision.gameObject.GetComponent<Extractor>().Damage(Globals.BeeEnemyDamage);
                     _audioSource.Play();
                     break;
                 case "Flower":
                     var flower = collision.gameObject.GetComponent<Flower>();
-                    flower.Damage(20);
+                    flower.Damage(Globals.BeeEnemyDamage);
                     break;
                 case "Defender":
                     BeesSource = collision.transform.parent.gameObject;
-                    collision.gameObject.GetComponent<BeeDefender>().Damage(20);
+                    collision.gameObject.GetComponent<BeeDefender>().Damage(Globals.BeeEnemyDamage);
                     _audioSource.Play();
                     break;
             }

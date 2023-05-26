@@ -21,7 +21,7 @@ public static class Globals
 
     public static float BossChildrenSpawnInterval = 10f;
 
-    public static int BossChildrenCount = 5;
+    public static int BossChildrenCount = 7;
 
     public static int MaxHiveHealth = 30_000;
 
@@ -42,6 +42,8 @@ public static class Globals
     public static int MaxProjectileDamage = 100;
     public static int ProjectileUpgradePrice = 1000;
     public static int ProjectileDamage = 20;
+
+    public static int BeeEnemyDamage = 20;
 
     public static readonly float ProjectileSpeed = 8f;
 

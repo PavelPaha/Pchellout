@@ -10,7 +10,7 @@ public static class Globals
     public static int ExtractorPrice = 2000;
 
     public static bool SelectBuildingMode = false;
-    
+
     public static bool Pause = false;
 
     public static readonly float FireCooldown = 0.3f;
@@ -19,7 +19,7 @@ public static class Globals
 
     public static readonly int MaxWobbleAngle = 15;
 
-    public static GameOutcome GameOutcome = GameOutcome.Win;
+    public static GameOutcome GameOutcome = GameOutcome.Menu;
 
     public static float BossChildrenSpawnInterval = 10f;
 
@@ -87,10 +87,10 @@ public static class Globals
 
     public static readonly AttackWave[] AttackWaves =
     {
-        // new() { EnemyCount = 50, Speed = 5, Scale = 1f, SourceName = "1" },
-        // new() { EnemyCount = 20, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 0.5f, SourceName = "2" },
-        // new() { EnemyCount = 180, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.3f, SourceName = "3" },
-        // new() { EnemyCount = 1, Speed = 5, Scale = 1, SourceName = "4" }
+        new() { EnemyCount = 50, Speed = 5, Scale = 1f, SourceName = "1" },
+        new() { EnemyCount = 20, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 0.5f, SourceName = "2" },
+        new() { EnemyCount = 180, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.3f, SourceName = "3" },
+        new() { EnemyCount = 1, Speed = 5, Scale = 1, SourceName = "4" }
     };
 
     public static bool InBounds(Vector3 position)

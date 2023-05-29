@@ -6,12 +6,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
     public Canvas MenuCanvas;
-    public Canvas LossCanvas;
+    public Canvas GameOutcomeCanvas;
+    public TextMeshProUGUI Description;
     
     public Button BeginButton;
     public Button ExitButton;
@@ -21,10 +23,11 @@ public class MenuController : MonoBehaviour
     
     void Start()
     {
+
         BeginButton.onClick.AddListener(BeginGame);
         ExitButton.onClick.AddListener(ExitGame);
 
-        LossCanvas.enabled = false;
+        GameOutcomeCanvas.enabled = false;
         MenuCanvas.enabled = true;
     }
 
@@ -34,11 +37,13 @@ public class MenuController : MonoBehaviour
         {
             case GameOutcome.Loss:
                 Globals.GameOutcome = GameOutcome.Menu;
+                BeginButton.gameObject.SetActive(false);
                 ShowLossWindow();
                 break;
             case GameOutcome.Win:
                 Globals.GameOutcome = GameOutcome.Menu;
-                //TODO если игра закончилась успешно
+                BeginButton.gameObject.SetActive(false);
+                ShowWinWindow();
                 break;
         }
     }
@@ -46,8 +51,16 @@ public class MenuController : MonoBehaviour
 
     private void ShowLossWindow()
     {
-        LossCanvas.enabled = true;
-        Debug.Log("Хуйло");
+        GameOutcomeCanvas.enabled = true;
+        Description.text = "Проигрыш(";
+        LossScore.gameObject.SetActive(false);
+    }
+    
+    private void ShowWinWindow()
+    {
+        GameOutcomeCanvas.enabled = true;
+        LossScore.gameObject.SetActive(true);
+        Description.text = "Поздравляем, вы победили босса";
         LossScore.text = Globals.GameResources["honey"].Amount.ToString();
     }
     
@@ -63,6 +76,7 @@ public class MenuController : MonoBehaviour
 
     private void BeginGame()
     {
+        Globals.Reset();
         MenuCanvas.enabled = false;
         SceneManager.LoadScene("Something");
     }

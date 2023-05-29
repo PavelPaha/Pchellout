@@ -7,12 +7,6 @@ using UnityEngine.SceneManagement;
 public class HouseForBees: BasicBee
 {
     public GameObject Menu;
-    public void Loss()
-    {
-        Globals.GameOutcome = GameOutcome.Loss;
-        Health = Globals.MaxHiveHealth;
-        SceneManager.LoadScene("Menu");
-    }
 
     public void OnMouseDown()
     {

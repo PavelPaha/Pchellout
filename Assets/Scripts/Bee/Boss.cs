@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
@@ -8,11 +9,8 @@ namespace DefaultNamespace
     {
         public GameObject Child;
         float time = 0;
-        public float minDelay = 1f;
-        public float maxDelay = 5f;
-        
+
         private float delayTimer = 0f;
-        private Vector3 originalPosition;
         private Rigidbody2D rb;
 
 
@@ -20,7 +18,6 @@ namespace DefaultNamespace
 
         public void Awake()
         {
-            originalPosition = transform.position;
             GetComponent<Boss>().BeesSource = GameObject.Find("Hive");
             rb = GetComponent<Rigidbody2D>();
             var audioController = GameObject.Find("Audio");

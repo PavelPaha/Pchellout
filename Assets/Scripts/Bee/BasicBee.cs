@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -83,9 +85,18 @@ public class BasicBee : MonoBehaviour, IPointerEnterHandler
         if (Health <= 0)
         {
             Health = 0;
-            Globals.GameOutcome = GameOutcome.Loss;
+
             if (gameObject.GetComponent<HouseForBees>() != null)
-                gameObject.GetComponent<HouseForBees>().Loss();
+            {
+                Globals.GameOutcome = GameOutcome.Loss;
+                Health = Globals.MaxHiveHealth;
+                SceneManager.LoadScene("Menu");
+            }
+            else if (gameObject.GetComponent<Boss>() != null)
+            {
+                Globals.GameOutcome = GameOutcome.Win;
+                SceneManager.LoadScene("Menu");
+            }
             else
                 DestroyObject();
         }

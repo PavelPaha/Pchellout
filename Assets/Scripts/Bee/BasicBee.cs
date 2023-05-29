@@ -133,6 +133,5 @@ public class BasicBee : MonoBehaviour, IPointerEnterHandler
     public virtual void ShowName()
     {
         OnNotify?.Invoke(gameObject, gameObject.name);
-        Debug.Log("Пчела");
     }
 }

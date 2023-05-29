@@ -156,4 +156,9 @@ public class Extractor : BasicBee
                 Extractor._extractorState = new MovingToSpawn(Extractor);
         }
     }
+    
+    public override void ShowName()
+    {
+        OnNotify?.Invoke(gameObject, $"Сборщик мёда\n Здоровье - {Health}");
+    }
 }

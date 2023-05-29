@@ -119,7 +119,7 @@ namespace DefaultNamespace
 
         public override void ShowName()
         {
-            OnNotify?.Invoke(gameObject, $"Враг\n Сила - {Globals.BeeEnemyDamage}");
+            OnNotify?.Invoke(gameObject, $"Враг\n Здоровье - {Health}");
         }
     }
 }

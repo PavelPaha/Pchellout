@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ namespace Global
     public class HiveMenuInformationUpdater : MonoBehaviour
     {
         public static Action OnUpgradeHoney;
+        public static Action<GameObject, string> OnNotify; 
 
         public GameObject Hive;
 
@@ -37,7 +39,7 @@ namespace Global
 
             UpgradeDefendersButton.onClick.AddListener(() =>
             {
-                if (TryBuy(Globals.DefendersUpgradePrice))
+                if (DefendersBar.fillAmount < 1 && TryBuy(Globals.DefendersUpgradePrice))
                 {
                     Globals.CurrentDefenderUpgradeLevel = Math.Max(Globals.CurrentDefenderUpgradeLevel,
                         Globals.CurrentDefenderUpgradeLevel+1);
@@ -45,16 +47,24 @@ namespace Global
                     Globals.DefenderDamage += 20;
                     Globals.DefenderScale += 0.1f;
                 }
+                else
+                {
+                    OnNotify?.Invoke(UpgradeDefendersButton.gameObject, "Улучшено до максимума");
+                }
             });
 
             UpgradeHoneyStorageButton.onClick.AddListener(() =>
             {
-                if (TryBuy(Globals.HoneyStorageUpgradePrice))
+                if (HoneyStorageBar.fillAmount < 1 && TryBuy(Globals.HoneyStorageUpgradePrice))
                 {
                     Globals.CurrentStorageCapacity = Math.Min(
                         Globals.CurrentStorageCapacity + Globals.MaxHoneyStorageCapacity / 10,
                         Globals.MaxHoneyStorageCapacity);
                     HoneyStorageBar.fillAmount = (float)Globals.CurrentStorageCapacity / Globals.MaxHoneyStorageCapacity;
+                }
+                else
+                {
+                    OnNotify?.Invoke(UpgradeHoneyStorageButton.gameObject, "Улучшено до максимума");
                 }
             });
             
@@ -68,14 +78,22 @@ namespace Global
                         health + (int)(Globals.FixHiveCoeff * Globals.FixHivePrice),
                         Globals.MaxHiveHealth);
                 }
+                else
+                {
+                    OnNotify?.Invoke(FixHiveButton.gameObject, "Улучшено до максимума");
+                }
             });
             
             UpgradeProjectileButton.onClick.AddListener(() =>
             {
-                if (TryBuy(Globals.ProjectileUpgradePrice))
+                if (ProjectileBar.fillAmount < 1 && TryBuy(Globals.ProjectileUpgradePrice))
                 {
                     Globals.ProjectileDamage = Math.Min(Globals.MaxProjectileDamage, Globals.ProjectileDamage + 20);
                     ProjectileBar.fillAmount = (float)Globals.ProjectileDamage / Globals.MaxProjectileDamage;
+                }
+                else
+                {
+                    OnNotify?.Invoke(UpgradeProjectileButton.gameObject, "Улучшено до максимума");
                 }
             });
         }

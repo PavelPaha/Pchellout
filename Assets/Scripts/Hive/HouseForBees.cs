@@ -18,4 +18,9 @@ public class HouseForBees: BasicBee
     {
         Menu.SetActive(!Menu.activeSelf);
     }
+    
+    public override void ShowName()
+    {
+        OnNotify?.Invoke(gameObject, $"Улье. Здоровье - {Health}");
+    }
 }

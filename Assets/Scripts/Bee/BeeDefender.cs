@@ -78,5 +78,12 @@ namespace DefaultNamespace
                     break;
             }
         }
+        
+        public override void ShowName()
+        {
+            OnNotify?.Invoke(gameObject, $"Защитник.\n Сила - {Globals.BeeEnemyDamage}");
+        }
     }
+    
+    
 }

@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-public class BasicBee : MonoBehaviour
+public class BasicBee : MonoBehaviour, IPointerEnterHandler
 {
+    public static Action<GameObject, string> OnNotify;
+    
     public float scaleDuration = 1.0f;
     public float maxScale = 1.0f;
     public int Health = 100;
@@ -64,7 +67,7 @@ public class BasicBee : MonoBehaviour
         transform.localScale = _originalScale;
     }
 
-    // проходим цикл аним
+
     void Update()
     {
         transform.rotation = Quaternion.identity;
@@ -109,5 +112,16 @@ public class BasicBee : MonoBehaviour
         // var rb = GetComponent<Rigidbody2D>();
         // Vector3 normal = collision.contacts[0].normal;
         // rb.AddForce(normal * CollisionForce, ForceMode2D.Impulse);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ShowName();
+    }
+
+    public virtual void ShowName()
+    {
+        OnNotify?.Invoke(gameObject, gameObject.name);
+        Debug.Log("Пчела");
     }
 }

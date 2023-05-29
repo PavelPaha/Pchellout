@@ -71,4 +71,10 @@ public class Flower : BasicBee
 
         public override void ProduceNectar() { }
     }
+    
+    public override void ShowName()
+    {
+        OnNotify?.Invoke(gameObject, $"Цветок\n Нектар - {_inventory.NectarCount}");
+        Debug.Log("Цветок");
+    }
 }

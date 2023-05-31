@@ -14,7 +14,7 @@ public class Extractor : BasicBee
 
     public static Action OnResourcesUpdated;
 
-    public void Awake()
+    private void Awake()
     {
         spawnObject = GameObject.Find("Hive");
         _inventory = GetComponent<NectarInventory>();
@@ -33,8 +33,8 @@ public class Extractor : BasicBee
         _extractorState.MoveToTarget();
         _extractorState.MoveToSpawn();
         _extractorState.ExtractNectar();
-        
-        if (!Globals.InBounds_LowCondition(gameObject.transform.position))
+
+        if (!Globals.InBoundsLowCondition(gameObject.transform.position))
         {
             Vector2 direction = spawnObject.transform.position - transform.position;
             GetComponent<Rigidbody2D>().AddForce(direction.normalized * Time.deltaTime * 1000);
@@ -43,12 +43,12 @@ public class Extractor : BasicBee
 
     private void MoveToSpawn() => MoveToTarget(spawnObject);
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         DamageInCollisionWithEnemy(collision);
     }
 
-    public void OnCollisionStay2D(Collision2D collisionInfo)
+    private void OnCollisionStay2D(Collision2D collisionInfo)
     {
         DamageInCollisionWithEnemy(collisionInfo);
     }
@@ -65,7 +65,7 @@ public class Extractor : BasicBee
                 break;
         }
     }
-    
+
     private void UpdateTarget()
     {
         var potentialTargets = Enumerable
@@ -156,7 +156,7 @@ public class Extractor : BasicBee
                 Extractor._extractorState = new MovingToSpawn(Extractor);
         }
     }
-    
+
     public override void ShowName()
     {
         OnNotify?.Invoke(gameObject, $"Сборщик мёда\n Здоровье - {Health}");

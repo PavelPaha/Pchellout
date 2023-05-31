@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 7344379238393923637}
   m_Layer: 7
   m_Name: BeeEnemy 2
-  m_TagString: Enemy
+  m_TagString: HealthBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070126e1f609f7548ace9743d4c93417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bar: {fileID: 7344379239192980832}
-  Fill: 0
+  bar: {fileID: 7344379239192980832}
+  healthBar: {fileID: 7344379238214763172}
 --- !u!212 &7344379238393923628
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -324,6 +324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362e64a5283f4c088a1b0656bff5cdfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleDuration: 1
+  maxScale: 1
   Health: 100
   Speed: 2
   BeesSource: {fileID: 0}
@@ -386,6 +388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5803c18832526484492bd1d81b24e957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleDuration: 1
+  maxScale: 1
   Health: 100
   Speed: 3
 --- !u!1 &7344379239192980834

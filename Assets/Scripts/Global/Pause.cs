@@ -1,29 +1,27 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Global
 {
     public class Pause : MonoBehaviour
     {
-        public Button PauseButton;
-        public Button ContinueButton;
-        public Button ExitButton;
+        [SerializeField] private Button pauseButton;
+        [SerializeField] private Button continueButton;
+        [SerializeField] private Button exitButton;
+        [SerializeField] private Canvas pauseCanvas;
 
-        public Canvas PauseCanvas;
+        private float _timer;
 
-        private float timer = 0.0f;
-        private float delayTime = 1f;
+        private const float DelayTime = 1f;
 
         public void Start()
         {
-            PauseCanvas.enabled = false;
-            PauseButton.onClick.AddListener(() => { DoPause(); });
+            pauseCanvas.enabled = false;
+            pauseButton.onClick.AddListener(() => { DoPause(); });
 
-            ContinueButton.onClick.AddListener(() => { DoContinue(); });
+            continueButton.onClick.AddListener(() => { DoContinue(); });
 
-            ExitButton.onClick.AddListener(() =>
+            exitButton.onClick.AddListener(() =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
@@ -36,35 +34,32 @@ namespace Global
         private void DoContinue()
         {
             Globals.Pause = false;
-            PauseCanvas.enabled = false;
+            pauseCanvas.enabled = false;
             Time.timeScale = 1;
         }
 
         public void Update()
         {
-            timer += Time.deltaTime;
-            if (Input.GetKey(KeyCode.Escape))
+            _timer += Time.deltaTime;
+            if (Input.GetKey(KeyCode.Escape) && _timer >= DelayTime)
             {
-                if (timer >= delayTime)
+                _timer = 0;
+                Debug.Log($"Pause = {Globals.Pause}");
+                if (Globals.Pause)
                 {
-                    timer = 0;
-                    Debug.Log($"Pause = {Globals.Pause}");
-                    if (Globals.Pause)
-                    {
-                        Debug.Log("YES");
-                        DoContinue();
-                        Debug.Log("PIDAR");
-                    }
-                    else DoPause();
+                    Debug.Log("YES");
+                    DoContinue();
+                    Debug.Log("PIDAR");
                 }
+                else
+                    DoPause();
             }
-            
         }
 
         private void DoPause()
         {
             Globals.Pause = true;
-            PauseCanvas.enabled = true;
+            pauseCanvas.enabled = true;
             Time.timeScale = 0;
         }
     }

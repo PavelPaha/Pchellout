@@ -4016,10 +4016,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc59dfdd04a4389811c9772ab79c9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseButton: {fileID: 1465261676}
-  ContinueButton: {fileID: 1262655823}
-  ExitButton: {fileID: 1588930043}
-  PauseCanvas: {fileID: 487782511}
+  pauseButton: {fileID: 1465261676}
+  continueButton: {fileID: 1262655823}
+  exitButton: {fileID: 1588930043}
+  pauseCanvas: {fileID: 487782511}
 --- !u!82 &822083272
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9413,7 +9413,6 @@ GameObject:
   - component: {fileID: 2041337791}
   - component: {fileID: 2041337790}
   - component: {fileID: 2041337789}
-  - component: {fileID: 2041337795}
   - component: {fileID: 2041337796}
   m_Layer: 6
   m_Name: Hive
@@ -9451,7 +9450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070126e1f609f7548ace9743d4c93417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bar: {fileID: 334191328}
+  bar: {fileID: 334191328}
+  healthBar: {fileID: 1621960493}
 --- !u!58 &2041337791
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9548,18 +9548,6 @@ Transform:
   m_Father: {fileID: 953933758}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2041337795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041337788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f7c500f9c0465cb21ac8f7bf5117a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &2041337796
 AudioSource:
   m_ObjectHideFlags: 0

@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070126e1f609f7548ace9743d4c93417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bar: {fileID: 2823375915621313621}
-  Fill: 1
+  bar: {fileID: 2823375915621313621}
+  healthBar: {fileID: 2823375915807745273}
 --- !u!114 &2823375914930815025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,12 +65,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc857668c124422a4438423d70deb25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleDuration: 1
+  maxScale: 1
   Health: 5000
   Speed: 3
   BeesSource: {fileID: 0}
   Child: {fileID: 7344379238393923630, guid: 8966b302f3764164e939b1008ea5c3e3, type: 3}
-  minDelay: 1
-  maxDelay: 5
+  BackgroundBossSound: {fileID: 0}
 --- !u!50 &2823375914930815026
 Rigidbody2D:
   serializedVersion: 4
@@ -587,7 +588,7 @@ GameObject:
   - component: {fileID: 2823375915807745272}
   m_Layer: 7
   m_Name: HealthBar
-  m_TagString: Untagged
+  m_TagString: HealthBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

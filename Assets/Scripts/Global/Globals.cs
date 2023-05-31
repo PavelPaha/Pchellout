@@ -98,7 +98,7 @@ public static class Globals
         return position is { x: > -12, y: > -9 } and { x: < 12, y: < 4.5f };
     }
 
-    public static bool InBounds_LowCondition(Vector3 position)
+    public static bool InBoundsLowCondition(Vector3 position)
     {
         return false;
         return position is { x: > -12 and < 10, y: > -10 and < 2f };

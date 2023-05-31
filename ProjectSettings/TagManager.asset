@@ -13,6 +13,7 @@ TagManager:
   - Projectile
   - Boss
   - Bomb
+  - HealthBar
   layers:
   - Default
   - TransparentFX

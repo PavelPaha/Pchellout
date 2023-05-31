@@ -71,7 +71,7 @@ namespace DefaultNamespace
                 return;
             }
             
-            if (!Globals.InBounds_LowCondition(gameObject.transform.position))
+            if (!Globals.InBoundsLowCondition(gameObject.transform.position))
             {
                 Vector2 direction = BeesSource.transform.position - transform.position;
                 GetComponent<Rigidbody2D>().AddForce(direction.normalized * Time.deltaTime * 1000);

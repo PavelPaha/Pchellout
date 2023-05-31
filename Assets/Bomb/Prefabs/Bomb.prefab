@@ -430,7 +430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19741213a1471d946a76dd4348db7a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToExplode: 5
   explosion: {fileID: 5108249037260510907, guid: fc4827db65a925d478651db081652f62, type: 3}
 --- !u!114 &6493012080391050151
 MonoBehaviour:
@@ -444,5 +443,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5625c588f9d94b4aac4d59d2e853393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToExplode: 5
+  timeToExplode: 1
   timerBar: {fileID: 127303832635281541}

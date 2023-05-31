@@ -58,7 +58,7 @@ namespace DefaultNamespace
             force = direction.normalized * 1000 * Time.deltaTime;
             rb.AddForce(force);
 
-            if (!Globals.InBounds_LowCondition(gameObject.transform.position))
+            if (!Globals.InBoundsLowCondition(gameObject.transform.position))
             {
                 rb.AddForce(direction.normalized * Time.deltaTime * 80000);
             }

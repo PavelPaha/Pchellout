@@ -27,7 +27,7 @@ public class Notifier : MonoBehaviour
         Vector2 mousePos = Input.mousePosition;
 
         var worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        
+
         var rectTransform = infoPanel.GetComponent<RectTransform>();
         rectTransform.position = new Vector3(worldPos.x, worldPos.y, 0f);
         StartCoroutine(HidePanel(source));
@@ -38,10 +38,11 @@ public class Notifier : MonoBehaviour
         var elapsedTime = 0f;
         while (elapsedTime < 1)
         {
-            infoPanel.transform.position = source.transform.position + new Vector3(0,0.5f,0);
+            infoPanel.transform.position = source.transform.position + new Vector3(0, 0.5f, 0);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
         infoPanel.SetActive(false);
     }
 }

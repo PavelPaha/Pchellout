@@ -11,20 +11,22 @@ public class BuildingPlacer : MonoBehaviour
     public bool IsBuildingSelected => _placedBuilding != null;
     private Building _placedBuilding;
     private float _buildingToCameraDistance;
-    
-    
+
+
     void Update()
     {
         if (_placedBuilding == null)
         {
             return;
         }
+
         UpdateBuildingPosition();
         if (Input.GetMouseButtonDown(1))
         {
             CancelPlacedBuilding();
             return;
         }
+
         Globals.SelectBuildingMode = true;
         if ((InBounds() || _placedBuilding.Name == "Бомба") &&
             Globals.GameResources["honey"].Amount >= _placedBuilding.Cost)
@@ -105,12 +107,9 @@ public class BuildingPlacer : MonoBehaviour
         foreach (var component in _placedBuilding.BuildingObject.GetComponents<Component>())
         {
             var behaviour = component as Behaviour;
-            if (behaviour != null)
+            if (behaviour is not null && behaviour is not Animator && behaviour is not HealthBarController)
                 behaviour.enabled = !toFreeze;
         }
-
-        if (_placedBuilding.BuildingObject.TryGetComponent<Animator>(out var animator))
-            animator.enabled = true;
     }
 
     private bool InBounds()

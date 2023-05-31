@@ -77,6 +77,6 @@ public class MenuController : MonoBehaviour
     private void BeginGame()
     {
         MenuCanvas.enabled = false;
-        SceneManager.LoadScene("Something");
+        SceneManager.LoadScene("Education");
     }
 }

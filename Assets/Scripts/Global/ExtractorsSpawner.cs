@@ -1,7 +1,6 @@
 ﻿using System;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Global
@@ -22,18 +21,20 @@ namespace Global
         public void OnMouseDown()
         {
             if (Hive == null
-                || Goal.transform.childCount == 0
+                || Enumerable
+                    .Range(0, Goal.transform.childCount)
+                    .All(i => Goal.transform.GetChild(i).GetComponent<Flower>().lifeStep is LifeStep.Child)
                 || Globals.ExtractorPrice > Globals.GameResources["honey"].Amount)
                 return;
-            
+
             Vector3 hivePosition = Hive.transform.position;
             var bee = Instantiate(Bee, hivePosition, Quaternion.identity);
-            
+
             Globals.GameResources["honey"].Amount -= Globals.ExtractorPrice;
             OnBuy?.Invoke();
             bee.GetComponent<Extractor>().targetsParent = Goal;
             bee.GetComponent<Extractor>().spawnObject = Hive;
-            bee.transform.localScale = new Vector3(0.6f,0.6f,0.6f);
+            bee.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             bee.transform.SetParent(ParentForExtractors.transform);
         }
 

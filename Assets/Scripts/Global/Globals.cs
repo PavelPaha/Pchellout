@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public static class Globals
 {
+    public static Action OnUpgradedHoney;
+    
     public static bool CameraIsInHive = false;
 
     public static int ExtractorPrice = 2000;
@@ -25,11 +27,11 @@ public static class Globals
 
     public static int BossChildrenCount = 13;
 
-    public static int MaxHiveHealth = 30_000;
+    public static int MaxHiveHealth = 15_000;
 
-    public static int MaxHoneyStorageCapacity = 10_000_000;
-    public static int HoneyStorageUpgradePrice = 30_000;
-    public static int CurrentStorageCapacity = 1_000_000;
+    public static int MaxHoneyStorageCapacity = 1_000_000;
+    public static int HoneyStorageUpgradePrice = 20_000;
+    public static int CurrentStorageCapacity = 200_000;
 
     public static int MaxDefendersUpgrade = 5;
     public static int CurrentDefenderUpgradeLevel = 0;
@@ -42,7 +44,7 @@ public static class Globals
     public static float FixHiveCoeff = 0.05f;
 
     public static int MaxProjectileDamage = 100;
-    public static int ProjectileUpgradePrice = 5000;
+    public static int ProjectileUpgradePrice = 10000;
     public static int ProjectileDamage = 30;
 
     public static int BeeEnemyDamage = 21;
@@ -87,9 +89,9 @@ public static class Globals
 
     public static readonly AttackWave[] AttackWaves =
     {
-        new() { EnemyCount = 50, Speed = 5, Scale = 1f, SourceName = "1" },
-        new() { EnemyCount = 20, Speed = 5, Scale = 0.7f, BeeSpawnInterval = 0.5f, SourceName = "2" },
-        new() { EnemyCount = 180, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.3f, SourceName = "3" },
+        new() { EnemyCount = 50, Speed = 5, Scale = 0.7f, SourceName = "1" },
+        new() { EnemyCount = 20, Speed = 5, Scale = 1f, BeeSpawnInterval = 0.5f, SourceName = "2" },
+        new() { EnemyCount = 180, Speed = 5, Scale = 1.3f, BeeSpawnInterval = 0.3f, SourceName = "3" },
         new() { EnemyCount = 1, Speed = 5, Scale = 1, SourceName = "4" }
     };
 
@@ -109,6 +111,8 @@ public static class Globals
         GameResources["honey"].Amount = Math.Min(
             GameResources["honey"].Amount + value,
             CurrentStorageCapacity);
+        
+        OnUpgradedHoney?.Invoke();
     }
 
     public static void UpdateBuyPossibility(Button button, int price)

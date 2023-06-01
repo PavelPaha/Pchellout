@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0423\u043B\u044C\u0435"
+  m_text: "\u0423\u043B\u0435\u0439"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a4cd293abd94ea4c9b64406c92f58f2, type: 2}
   m_sharedMaterial: {fileID: -8311656053336145190, guid: 4a4cd293abd94ea4c9b64406c92f58f2, type: 2}
@@ -1478,8 +1478,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334317276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24, y: -15.1, z: 0}
-  m_LocalScale: {x: 54.8, y: 57.1, z: 56.399998}
+  m_LocalPosition: {x: 28.86, y: 14.83, z: 0}
+  m_LocalScale: {x: 57.869125, y: 48.703045, z: 56.399998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 500021659}
@@ -2358,7 +2358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.6, y: 0}
   m_SizeDelta: {x: 908, y: 510.99997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &500021660
@@ -5570,8 +5570,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -497.8, y: 261.5}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: -78.4, y: 23.000004}
+  m_SizeDelta: {x: 106.33, y: 106.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1262655823
 MonoBehaviour:
@@ -7003,8 +7003,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -421.9, y: 261.5}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 83, y: 23}
+  m_SizeDelta: {x: 106.33, y: 106.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1588930043
 MonoBehaviour:
@@ -9435,7 +9435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleDuration: 1
   maxScale: 1
-  Health: 10000
+  Health: 15000
   Speed: 0
   Menu: {fileID: 500021658}
 --- !u!114 &2041337790

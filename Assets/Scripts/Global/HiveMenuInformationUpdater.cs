@@ -42,7 +42,7 @@ namespace Global
                         Globals.CurrentDefenderUpgradeLevel+1);
                     DefendersBar.fillAmount = (float)Globals.CurrentDefenderUpgradeLevel / Globals.MaxDefendersUpgrade;
                     Globals.DefenderDamage += 20;
-                    Globals.DefenderScale += 0.1f;
+                    Globals.DefenderScale += 0.07f;
                 }
                 else
                 {

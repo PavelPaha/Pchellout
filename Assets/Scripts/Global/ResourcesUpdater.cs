@@ -20,6 +20,7 @@ namespace Global
             SpawnBee.OnBuy += UpdateResources;
             BuildingPlacer.OnBuy += UpdateResources;
             CannonController.OnBuy += UpdateResources;
+            Globals.OnUpgradedHoney += UpdateResources;
             UpdateResources();
         }
         

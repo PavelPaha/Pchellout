@@ -8,6 +8,11 @@ public class HouseForBees: BasicBee
 {
     public GameObject Menu;
 
+    public void Update()
+    {
+        Globals.AddHoney(1);
+    }
+
     public void OnMouseDown()
     {
         Menu.SetActive(!Menu.activeSelf);

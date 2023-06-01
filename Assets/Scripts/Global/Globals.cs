@@ -35,7 +35,7 @@ public static class Globals
 
     public static int MaxDefendersUpgrade = 5;
     public static int CurrentDefenderUpgradeLevel = 0;
-    public static int DefendersUpgradePrice = 50000;
+    public static int DefendersUpgradePrice = 10000;
     public static int DefenderPrice = 2000;
     public static int DefenderDamage = 23;
     public static float DefenderScale = 0.8f;
@@ -44,7 +44,7 @@ public static class Globals
     public static float FixHiveCoeff = 0.05f;
 
     public static int MaxProjectileDamage = 100;
-    public static int ProjectileUpgradePrice = 10000;
+    public static int ProjectileUpgradePrice = 7000;
     public static int ProjectileDamage = 30;
 
     public static int BeeEnemyDamage = 21;

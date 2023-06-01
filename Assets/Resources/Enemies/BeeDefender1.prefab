@@ -373,7 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleDuration: 1
   maxScale: 1
-  Health: 100
+  Health: 150
   Speed: 3
   BeesSource: {fileID: 0}
 --- !u!82 &1183522772900351636

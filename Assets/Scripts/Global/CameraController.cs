@@ -1,35 +1,36 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Global
 {
     public class CameraController : MonoBehaviour
     {
         public float targetAspectRatio = 16f / 9f;
+        private Camera _camera;
 
-        void Update()
+        public void Start()
         {
-            float windowAspect = (float)Screen.width / (float)Screen.height;
-            float scaleHeight = windowAspect / targetAspectRatio;
-            Camera camera = GetComponent<Camera>();
-
+            _camera = GetComponent<Camera>();
+            var windowAspect = (float)Screen.width / (float)Screen.height;
+            var scaleHeight = windowAspect / targetAspectRatio;
             if (scaleHeight < 1.0f)
             {
-                Rect rect = camera.rect;
+                Rect rect = _camera.rect;
                 rect.width = 1.0f;
                 rect.height = scaleHeight;
                 rect.x = 0;
                 rect.y = (1.0f - scaleHeight) / 2.0f;
-                camera.rect = rect;
+                _camera.rect = rect;
             }
             else
             {
                 float scaleWidth = 1.0f / scaleHeight;
-                Rect rect = camera.rect;
+                Rect rect = _camera.rect;
                 rect.width = scaleWidth;
                 rect.height = 1.0f;
                 rect.x = (1.0f - scaleWidth) / 2.0f;
                 rect.y = 0;
-                camera.rect = rect;
+                _camera.rect = rect;
             }
         }
     }

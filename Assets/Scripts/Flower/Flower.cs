@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum LifeStep
@@ -17,7 +18,7 @@ public class Flower : BasicBee
     private NectarInventory _inventory;
     private Animator _animator;
 
-    void Start()
+    private void Start()
     {
         lifeStep = LifeStep.Child;
         _initializationTime = Time.timeSinceLevelLoad;
@@ -26,11 +27,15 @@ public class Flower : BasicBee
         _animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void FixedUpdate()
+    {
+        _flowerState.ProduceNectar();
+    }
+
+    private void Update()
     {
         _timeSinceInitialization = Time.timeSinceLevelLoad - _initializationTime;
         UpdateLifePeriod();
-        _flowerState.ProduceNectar();
     }
 
 
@@ -45,11 +50,11 @@ public class Flower : BasicBee
 
     public abstract class FlowerState
     {
-        protected Flower _flower;
+        protected readonly Flower Flower;
 
         protected FlowerState(Flower flower)
         {
-            _flower = flower;
+            Flower = flower;
         }
 
         public abstract void ProduceNectar();
@@ -61,7 +66,7 @@ public class Flower : BasicBee
 
         public override void ProduceNectar()
         {
-            _flower._inventory.ProduceNectar();
+            Flower._inventory.ProduceNectar();
         }
     }
 
@@ -71,7 +76,7 @@ public class Flower : BasicBee
 
         public override void ProduceNectar() { }
     }
-    
+
     public override void ShowName()
     {
         OnNotify?.Invoke(gameObject, $"Цветок\n Нектар - {_inventory.NectarCount}");

@@ -254,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxNectarCount: 100000
   nectarCount: 0
-  productionRate: 5
+  productionRate: 20
   extractingRate: 0
 --- !u!95 &5446423613914113765
 Animator:

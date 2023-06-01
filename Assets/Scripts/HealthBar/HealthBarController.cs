@@ -11,8 +11,6 @@ public class HealthBarController : MonoBehaviour
 
     void Awake()
     {
-        if (!gameObject.CompareTag("Hive"))
-            healthBar.SetActive(false);
         _basicBee = GetComponent<BasicBee>();
         _maxHealth = _basicBee.Health;
     }
@@ -21,6 +19,6 @@ public class HealthBarController : MonoBehaviour
     {
         bar.fillAmount = _basicBee.Health / _maxHealth;
         if (!gameObject.CompareTag("Hive"))
-            healthBar.SetActive(Input.GetKey(KeyCode.LeftAlt));
+            healthBar.SetActive(!Input.GetKey(KeyCode.LeftAlt));
     }
 }

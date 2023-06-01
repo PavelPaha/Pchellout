@@ -10,7 +10,8 @@ public class HouseForBees: BasicBee
 
     public void Update()
     {
-        Globals.AddHoney(1);
+        if (Time.deltaTime > 0)
+            Globals.AddHoney(1);
     }
 
     public void OnMouseDown()
